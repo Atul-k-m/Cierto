@@ -131,20 +131,21 @@ curl -s http://localhost:8080/readyz
 
 ### Free, no card: Vercel + Upstash
 
-Vercel's Hobby plan and Upstash's free Redis both sign up with GitHub and need no payment card. Vercel's FastAPI preset runs `app.py` (the same app) as one function on Fluid compute: it scales out on its own and Vercel's edge routes and load-balances between instances, so shared state in Redis is required. Immutable assets carry `CDN-Cache-Control`, so the edge serves them after the first request. `vercel.json` pins the function to Mumbai (`bom1`); create the Redis database in the same region (`ap-south-1`).
+Vercel's Hobby plan and Upstash's free Redis both sign up with GitHub and need no payment card. `vercel.json` defines two services on one domain:
 
-```sh
-# 1. upstash.com → Create database (Redis, region ap-south-1, free) → copy the rediss:// URL
-# 2. from the repo root, with a finished build (engine: python -m wismo serve --build, or npm run build in both packages)
-npx vercel@latest login
-npx vercel@latest link                                   # create the project; accept the detected FastAPI preset
-npx vercel@latest env add GEMINI_API_KEY production      # paste when prompted; never in a file
-npx vercel@latest env add REDIS_URL production           # the rediss:// URL (or add Upstash from the Vercel Marketplace, which sets KV_URL)
-npx vercel@latest env add GEMINI_MODEL production        # gemini-3.8-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite
-npx vercel@latest deploy --prod
-```
+| Service | Root | What it is | Public paths |
+|---|---|---|---|
+| `web` | `apps/web` | the prerendered site plus the browser SDK (`/sdk/*`), static on Vercel's CDN | everything not below |
+| `api` | `.` (`app.py`) | the FastAPI engine as a Fluid-compute function, pinned to Mumbai (`bom1`) | `/v1/*`, `/healthz`, `/readyz` |
 
-`SITE_URL` defaults to the production domain Vercel assigns (`VERCEL_PROJECT_PRODUCTION_URL`); set it only for a custom domain. The upload includes the finished `apps/web/dist` and `packages/cierto-js/dist`, so `deploy/vercel/build.sh` skips the Node build; a Git-connected project (no dist in the repo) builds both on Vercel. Upstash's free plan counts every command, and one demo viewer costs roughly 100 commands a minute while the demo page polls, so the free allowance covers dozens of demo hours a month, not thousands.
+The site calls the API from the browser on the same origin, so no service calls another server-side and there are no bindings. The function scales out on its own and Vercel's edge spreads requests across instances, so shared state in Redis is required (create it in `ap-south-1`, next to the function). Absolute URLs in the site are fixed at build time from `SITE_URL`, or from the production domain Vercel assigns.
+
+1. upstash.com → Create database (Redis, `ap-south-1`, free) → copy the `rediss://` URL.
+2. vercel.com → Add New Project → import the GitHub repo; it reads `vercel.json`.
+3. Project → Settings → Environment Variables (Production): `GEMINI_API_KEY`, `REDIS_URL` (or add Upstash from the Vercel Marketplace, which sets `KV_URL`), `GEMINI_MODEL=gemini-3.8-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite`, and `SITE_URL` only for a custom domain.
+4. Deploy. Every push to `main` redeploys.
+
+Upstash's free plan counts every command, and one demo viewer costs roughly 100 commands a minute while the demo page polls, so the free allowance covers dozens of demo hours a month, not thousands.
 
 ### Cloud Run (needs `gcloud` logged in and a project with billing)
 

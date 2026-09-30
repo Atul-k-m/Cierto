@@ -317,11 +317,11 @@ def healthz() -> dict:
 
 @router.get("/readyz", include_in_schema=False)
 def readyz(request: Request) -> JSONResponse:
-    """Readiness: the web build is there and the session store answers."""
+    """Readiness: the web build is there (not on Vercel, where the "web" service serves it) and the store answers."""
     backend = request.app.state.backend
     web_ok = (request.app.state.web.root / "index.html").is_file()
     store_ok = backend.ping()
-    ok = web_ok and store_ok
+    ok = (web_ok or bool(os.environ.get("VERCEL"))) and store_ok
     return JSONResponse({"status": "ready" if ok else "unready", "web": web_ok,
                          "store": {"kind": backend.kind, "ok": store_ok}, "instance": SERVED_BY},
                         status_code=200 if ok else 503, headers={"cache-control": "no-store"})

@@ -29,7 +29,13 @@ const entryFiles = chunks('index.html')
 const modulepreload = (page) => [...chunks(`src/site/pages/${SRC[page]}.tsx`)].filter((f) => !entryFiles.has(f))
   .map((f) => `<link rel="modulepreload" crossorigin href="/${f}" />`).join('\n    ')
 
-const write = (rel, body) => { const f = join(dist, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, body) }
+// Served by a server (python -m wismo serve, Cloud Run), __SITE_URL__ is swapped per request. Served straight from a
+// CDN (Vercel's "web" service), nothing swaps it, so fix it here when the address is known at build time.
+const SITE = process.env.SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')
+const write = (rel, body) => {
+  const f = join(dist, rel); mkdirSync(dirname(f), { recursive: true })
+  writeFileSync(f, SITE ? body.replaceAll('__SITE_URL__', SITE.replace(/\/+$/, '')) : body)
+}
 const attr = (r) => ` data-page="${r.page}"${r.slug ? ` data-slug="${r.slug}"` : ''}`
 
 async function page(r, file) {

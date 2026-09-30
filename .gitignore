@@ -10,3 +10,7 @@ deploy/**/.env
 *.env.local
 
 apps/web/dist-ssr/
+
+# third-party screenshots and scraped reviews: kept locally, not published
+.impeccable/refs/
+data/reviews/
