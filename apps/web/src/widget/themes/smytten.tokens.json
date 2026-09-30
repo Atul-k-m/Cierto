@@ -1,0 +1,27 @@
+{
+  "$description": "Smytten-style skin for <wismo-order>. Sampled from Smytten's App Store screenshots (.impeccable/refs).",
+  "font": {
+    "body": { "$type": "fontFamily", "$value": "\"Poppins\", system-ui, sans-serif" }
+  },
+  "color": {
+    "ink": { "$type": "color", "$value": "#0d1929" },
+    "muted": { "$type": "color", "$value": "#566076" },
+    "surface": { "$type": "color", "$value": "#ffffff" },
+    "surface-2": { "$type": "color", "$value": "#f3f6fc" },
+    "line": { "$type": "color", "$value": "#e1e7f1" },
+    "action": { "$type": "color", "$value": "#2f6fbd" },
+    "action-ink": { "$type": "color", "$value": "#ffffff" },
+    "action-strong": { "$type": "color", "$value": "#245a9c" },
+    "ok": { "$type": "color", "$value": "#1d7f46" },
+    "ok-soft": { "$type": "color", "$value": "#e7f6ed" },
+    "check": { "$type": "color", "$value": "#8a5300" },
+    "check-soft": { "$type": "color", "$value": "#fff3dc" },
+    "alert": { "$type": "color", "$value": "#b0241c" },
+    "alert-soft": { "$type": "color", "$value": "#fdebea" },
+    "focus": { "$type": "color", "$value": "#2f6fbd" }
+  },
+  "radius": {
+    "surface": { "$type": "dimension", "$value": "14px" },
+    "control": { "$type": "dimension", "$value": "999px" }
+  }
+}

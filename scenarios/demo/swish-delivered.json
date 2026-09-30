@@ -1,0 +1,25 @@
+{
+  "id": "demo-swish-delivered",
+  "title": "Ten-minute meal marked delivered before it reached the door",
+  "cause": "delivered_not_received",
+  "complaints": ["docs/research/wismo-swish.md (not received / marked delivered)", "Swish App Store review, Sep 2026 (report window consumed by a stale delivered mark)", "Voxya #204812 (Instamart, marked delivered without OTP)"],
+  "note": "Demo timeline built from the cited public reviews; kitchen, rider, times and amounts are illustrative.",
+  "tenant": { "id": "swish-demo", "name": "Swish (concept demo)", "vertical": "quick" },
+  "order_ref": "SWH-40193877",
+  "start": "2025-12-24T13:51:00+05:30",
+  "events": [
+    { "at": "+0m", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 228, "payment": "prepaid_upi", "account_phone_last4": "2946",
+                "kitchen": "Chef Manjunath & team", "area": "HSR Layout", "items": ["Chole kachori chaat", "Classic cold coffee"],
+                "rider": "Anubhav", "title": "Chole kachori chaat + cold coffee" } },
+    { "at": "+0m", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 228 } },
+    { "at": "+0m", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arriving in 12 minutes", "due_by": "2025-12-24T14:03:00+05:30", "kind": "checkout" } },
+    { "at": "+1m", "type": "shipment.status", "status": "pending", "substatus": "pending.preparing", "asserted_by": "rider" },
+    { "at": "+4m", "type": "shipment.status", "status": "pending", "substatus": "pending.agent_assigned", "asserted_by": "rider",
+      "data": { "rider": "Anubhav" } },
+    { "at": "+7m", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up", "asserted_by": "rider" },
+    { "at": "+11m", "type": "shipment.status", "status": "delivered", "substatus": "delivered.delivered", "asserted_by": "rider",
+      "proof": { "otp_verified": false } }
+  ]
+}

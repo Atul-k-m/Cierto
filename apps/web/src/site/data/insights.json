@@ -1,0 +1,1690 @@
+{
+ "compare": {
+  "headline": [
+   {
+    "brand": "Smytten",
+    "delivery": "courier",
+    "reviews": 5450,
+    "wismo_all": 6.1,
+    "low_n": 4848,
+    "wismo_low": 24.7,
+    "posts": 216,
+    "wismo_posts": 34.3
+   },
+   {
+    "brand": "Swish",
+    "delivery": "hyperlocal",
+    "reviews": 2734,
+    "wismo_all": 5.6,
+    "low_n": 1311,
+    "wismo_low": 10.4,
+    "posts": null,
+    "wismo_posts": null
+   },
+   {
+    "brand": "Zomato",
+    "delivery": "hyperlocal",
+    "reviews": 5500,
+    "wismo_all": 3.6,
+    "low_n": 4682,
+    "wismo_low": 12.3,
+    "posts": 61,
+    "wismo_posts": 24.6
+   }
+  ],
+  "hypotheses": [
+   {
+    "name": "Poor or vague \"where is my order\" answers",
+    "values": [
+     5.2,
+     5.2,
+     3.1
+    ],
+    "verdicts": [
+     "moderate",
+     "moderate",
+     "weak"
+    ]
+   },
+   {
+    "name": "Trackers stale, vague or wrong",
+    "values": [
+     4.8,
+     2.6,
+     1.0
+    ],
+    "verdicts": [
+     "weak",
+     "weak",
+     "rare"
+    ]
+   },
+   {
+    "name": "Rider stuck / not moving",
+    "values": [
+     0.9,
+     11.7,
+     2.0
+    ],
+    "verdicts": [
+     "rare",
+     "moderate",
+     "weak"
+    ]
+   },
+   {
+    "name": "Traffic delays and ETA slips",
+    "values": [
+     47.3,
+     71.4,
+     76.0
+    ],
+    "verdicts": [
+     "strong",
+     "strong",
+     "strong"
+    ]
+   },
+   {
+    "name": "Multiple / batched orders",
+    "values": [
+     3.6,
+     0.6,
+     7.7
+    ],
+    "verdicts": [
+     "weak",
+     "rare",
+     "moderate"
+    ]
+   },
+   {
+    "name": "Bad address resolution",
+    "values": [
+     1.2,
+     5.8,
+     2.6
+    ],
+    "verdicts": [
+     "rare",
+     "moderate",
+     "weak"
+    ]
+   },
+   {
+    "name": "\"Delivered\" but not received",
+    "values": [
+     13.3,
+     6.5,
+     7.1
+    ],
+    "verdicts": [
+     "moderate",
+     "moderate",
+     "moderate"
+    ]
+   },
+   {
+    "name": "Support loops / unreachable",
+    "values": [
+     23.3,
+     16.2,
+     16.8
+    ],
+    "verdicts": [
+     "strong",
+     "strong",
+     "strong"
+    ]
+   }
+  ],
+  "mix": [
+   {
+    "name": "Tracker stale, vague or wrong",
+    "group": "WISMO",
+    "wismo": [
+     4.8,
+     2.6,
+     1.0
+    ],
+    "low": [
+     1.3,
+     0.2,
+     0.1
+    ]
+   },
+   {
+    "name": "ETA slip / late delivery",
+    "group": "WISMO",
+    "wismo": [
+     47.3,
+     69.5,
+     74.0
+    ],
+    "low": [
+     8.7,
+     7.2,
+     9.0
+    ]
+   },
+   {
+    "name": "Rider / parcel stuck, not moving",
+    "group": "WISMO",
+    "wismo": [
+     0.9,
+     11.7,
+     2.0
+    ],
+    "low": [
+     0.1,
+     1.4,
+     0.2
+    ]
+   },
+   {
+    "name": "Traffic / weather / demand excuse",
+    "group": "WISMO",
+    "wismo": [
+     0.3,
+     4.5,
+     2.6
+    ],
+    "low": [
+     0.1,
+     0.4,
+     0.2
+    ]
+   },
+   {
+    "name": "Multiple / batched orders",
+    "group": "WISMO",
+    "wismo": [
+     3.6,
+     0.6,
+     7.7
+    ],
+    "low": [
+     0.6,
+     0.1,
+     0.8
+    ]
+   },
+   {
+    "name": "Address / location resolution",
+    "group": "WISMO",
+    "wismo": [
+     1.2,
+     5.8,
+     2.6
+    ],
+    "low": [
+     0.4,
+     0.5,
+     0.6
+    ]
+   },
+   {
+    "name": "Marked delivered, not received",
+    "group": "WISMO",
+    "wismo": [
+     13.3,
+     6.5,
+     7.1
+    ],
+    "low": [
+     7.2,
+     0.8,
+     1.1
+    ]
+   },
+   {
+    "name": "Not received / where is my order",
+    "group": "WISMO",
+    "wismo": [
+     46.1,
+     14.3,
+     13.3
+    ],
+    "low": [
+     9.4,
+     1.6,
+     1.6
+    ]
+   },
+   {
+    "name": "No proactive update",
+    "group": "cross-cutting",
+    "wismo": [
+     3.3,
+     2.6,
+     0.5
+    ],
+    "low": [
+     2.1,
+     1.1,
+     0.4
+    ]
+   },
+   {
+    "name": "Support unreachable / bot loop",
+    "group": "cross-cutting",
+    "wismo": [
+     23.3,
+     16.2,
+     16.8
+    ],
+    "low": [
+     16.2,
+     8.2,
+     10.4
+    ]
+   },
+   {
+    "name": "Vague / scripted answer",
+    "group": "cross-cutting",
+    "wismo": [
+     5.2,
+     5.2,
+     3.1
+    ],
+    "low": [
+     2.0,
+     1.7,
+     1.3
+    ]
+   },
+   {
+    "name": "Partial / missing item",
+    "group": "adjacent",
+    "wismo": [
+     4.5,
+     1.3,
+     3.6
+    ],
+    "low": [
+     4.0,
+     1.5,
+     1.6
+    ]
+   },
+   {
+    "name": "Rider behaviour / asked to pick up",
+    "group": "adjacent",
+    "wismo": [
+     0.3,
+     5.2,
+     1.5
+    ],
+    "low": [
+     0.5,
+     1.7,
+     1.1
+    ]
+   },
+   {
+    "name": "Cancelled by platform / restaurant",
+    "group": "adjacent",
+    "wismo": [
+     3.3,
+     6.5,
+     4.1
+    ],
+    "low": [
+     2.7,
+     2.4,
+     1.5
+    ]
+   },
+   {
+    "name": "Refund stuck / not received",
+    "group": "adjacent",
+    "wismo": [
+     8.8,
+     2.6,
+     5.1
+    ],
+    "low": [
+     6.8,
+     2.3,
+     2.8
+    ]
+   }
+  ],
+  "support": [
+   {
+    "brand": "Smytten",
+    "pool": 1313,
+    "also_support": 31.0,
+    "dnr_support": 42.7,
+    "late_support": 27.5
+   },
+   {
+    "brand": "Swish",
+    "pool": 154,
+    "also_support": 19.5,
+    "dnr_support": 20.0,
+    "late_support": 14.0
+   },
+   {
+    "brand": "Zomato",
+    "pool": 610,
+    "also_support": 22.3,
+    "dnr_support": 39.6,
+    "late_support": 19.4
+   }
+  ],
+  "precision": [
+   {
+    "brand": "Smytten",
+    "v2": 87.0
+   },
+   {
+    "brand": "Swish",
+    "v2": 87.0
+   },
+   {
+    "brand": "Zomato",
+    "v2": 93.0
+   }
+  ]
+ },
+ "brands": {
+  "smytten": {
+   "slug": "smytten",
+   "headline": [
+    "6.1% of app-store reviews (all ratings, n=5,450) are WISMO-related (95% CI 5.5–6.7%).",
+    "Among 1–2★ app reviews (n=4,848) the share is 24.7%.",
+    "Among complaint-board posts (n=216) it is 34.3%.",
+    "Largest WISMO issues among WISMO reviews: eta slip / late delivery (47.3%), not received / where is my order (46.1%), marked delivered, not received (13.3%).",
+    "31.5% of WISMO app reviews (all pulls) also report a support failure (unreachable, bot loop or a vague/scripted answer).",
+    "Classifier check on a fresh hand-labelled holdout (n=40): WISMO-flag precision 87% (26/30); 3 of 10 sampled 1–2★/complaint rows it called non-WISMO were in fact WISMO, so WISMO shares are lower bounds (section 8)."
+   ],
+   "sources": [
+    [
+     "Source",
+     "Status",
+     "Kind",
+     "Rows",
+     "Date range",
+     "1–2★",
+     "WISMO",
+     "Detail"
+    ],
+    [
+     "google_play",
+     "ok",
+     "app_review",
+     "8,327",
+     "2022-05-09 → 2026-09-28",
+     "4,600",
+     "1,165",
+     "app_id=com.app.smytten, lang=en, country=in; pulls: newest=5000, low_1=3000, low_2=1600"
+    ],
+    [
+     "app_store",
+     "ok",
+     "app_review",
+     "450",
+     "2025-04-27 → 2026-09-27",
+     "248",
+     "74",
+     "app_id=1100171914, storefront=in, pages with data=9, feed last page=10, empty/failed pages after retries=[5]"
+    ],
+    [
+     "consumercomplaints",
+     "ok",
+     "complaint_site",
+     "216",
+     "2023-01-01 → 2026-08-16",
+     "–",
+     "74",
+     "slug=smytten-b115980, listing pages=14, detail pages=5, min_date=2023-01-01, older rows dropped=64"
+    ],
+    [
+     "manual_research",
+     "ok",
+     "curated",
+     "196",
+     "2019-09-11 → 2026-09-10",
+     "–",
+     "81",
+     "data/complaints.json: 196 rows kept, 8 marked duplicate dropped"
+    ],
+    [
+     "trustpilot",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt: 'User-agent: * / Disallow: /' (only named search bots allowed); pages also return HTTP 403 to non-browser clients"
+    ],
+    [
+     "mouthshut",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt disallows ClaudeBot site-wide (and Content-Signal ai-train=no); not fetched"
+    ],
+    [
+     "reddit",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt disallows this path (Disallow: / for all agents); API requires OAuth login"
+    ]
+   ],
+   "categories": [
+    {
+     "name": "Not received / where is my order",
+     "group": "WISMO",
+     "all": 2.8,
+     "wismo": 46.1,
+     "low": 9.4
+    },
+    {
+     "name": "ETA slip / late delivery",
+     "group": "WISMO",
+     "all": 2.9,
+     "wismo": 47.3,
+     "low": 8.7
+    },
+    {
+     "name": "Marked delivered, not received",
+     "group": "WISMO",
+     "all": 0.8,
+     "wismo": 13.3,
+     "low": 7.2
+    },
+    {
+     "name": "Tracker stale, vague or wrong",
+     "group": "WISMO",
+     "all": 0.3,
+     "wismo": 4.8,
+     "low": 1.3
+    },
+    {
+     "name": "Multiple / batched orders",
+     "group": "WISMO",
+     "all": 0.2,
+     "wismo": 3.6,
+     "low": 0.6
+    },
+    {
+     "name": "Address / location resolution",
+     "group": "WISMO",
+     "all": 0.1,
+     "wismo": 1.2,
+     "low": 0.4
+    },
+    {
+     "name": "Traffic / weather / demand excuse",
+     "group": "WISMO",
+     "all": 0.0,
+     "wismo": 0.3,
+     "low": 0.1
+    },
+    {
+     "name": "Rider / parcel stuck, not moving",
+     "group": "WISMO",
+     "all": 0.1,
+     "wismo": 0.9,
+     "low": 0.1
+    },
+    {
+     "name": "Support unreachable / bot loop",
+     "group": "cross-cutting",
+     "all": 4.4,
+     "wismo": 23.3,
+     "low": 16.2
+    },
+    {
+     "name": "Refund stuck / not received",
+     "group": "adjacent",
+     "all": 2.1,
+     "wismo": 8.8,
+     "low": 6.8
+    },
+    {
+     "name": "Vague / scripted answer",
+     "group": "cross-cutting",
+     "all": 0.7,
+     "wismo": 5.2,
+     "low": 2.0
+    },
+    {
+     "name": "No proactive update",
+     "group": "cross-cutting",
+     "all": 0.7,
+     "wismo": 3.3,
+     "low": 2.1
+    },
+    {
+     "name": "Partial / missing item",
+     "group": "adjacent",
+     "all": 1.4,
+     "wismo": 4.5,
+     "low": 4.0
+    },
+    {
+     "name": "Cancelled by platform / restaurant",
+     "group": "adjacent",
+     "all": 0.6,
+     "wismo": 3.3,
+     "low": 2.7
+    },
+    {
+     "name": "Rider behaviour / asked to pick up",
+     "group": "adjacent",
+     "all": 0.2,
+     "wismo": 0.3,
+     "low": 0.5
+    },
+    {
+     "name": "Other / non-WISMO",
+     "group": "derived",
+     "all": 93.9,
+     "wismo": null,
+     "low": 75.3
+    }
+   ],
+   "trend": [
+    {
+     "month": "2025-08 (partial)",
+     "n": 187,
+     "wismo": 18.2
+    },
+    {
+     "month": "2025-09",
+     "n": 225,
+     "wismo": 14.2
+    },
+    {
+     "month": "2025-10",
+     "n": 212,
+     "wismo": 20.3
+    },
+    {
+     "month": "2025-11",
+     "n": 242,
+     "wismo": 18.6
+    },
+    {
+     "month": "2025-12",
+     "n": 614,
+     "wismo": 51.8
+    },
+    {
+     "month": "2026-01",
+     "n": 545,
+     "wismo": 49.9
+    },
+    {
+     "month": "2026-02",
+     "n": 150,
+     "wismo": 19.3
+    },
+    {
+     "month": "2026-03",
+     "n": 153,
+     "wismo": 15.7
+    },
+    {
+     "month": "2026-04",
+     "n": 227,
+     "wismo": 15.4
+    },
+    {
+     "month": "2026-05",
+     "n": 177,
+     "wismo": 12.4
+    },
+    {
+     "month": "2026-06",
+     "n": 159,
+     "wismo": 22.0
+    },
+    {
+     "month": "2026-07",
+     "n": 146,
+     "wismo": 13.0
+    },
+    {
+     "month": "2026-08",
+     "n": 147,
+     "wismo": 23.8
+    },
+    {
+     "month": "2026-09",
+     "n": 89,
+     "wismo": 18.0
+    }
+   ],
+   "quotes": {
+    "Not received / where is my order": [
+     {
+      "text": "fraud application the product not delivered to you after you paid the money",
+      "meta": "1★ · google_play · 2026-03-09",
+      "id": "gp:87a1f8aa-ce69-423b-9d3f-c17ef353ef5b",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=87a1f8aa-ce69-423b-9d3f-c17ef353ef5b"
+     },
+     {
+      "text": "Trail order #[number] not received. Hii I had placed order on smytten on 6 may 2023 but still I have not received the order. Status had not changed since 10 may 2023. Try to talk to them through email but that has not helped at all. So request you to get…",
+      "meta": "consumercomplaints · 2023-05-12",
+      "id": "cc:3429133",
+      "url": "https://www.consumercomplaints.in/smytten-b115980/page/6#cl3429133"
+     },
+     {
+      "text": "Order missing. Firstly I lost trust on this app. I order trial pack on 18 Dec 2025 and it should be delivered to me on 23 Dec 2025. Till now I didn’t received my order . And I kept mail to this Smytten they are not responding and I want to raise a ticket…",
+      "meta": "1★ · app_store · 2026-01-06",
+      "id": "as:13602108936",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     }
+    ],
+    "ETA slip / late delivery": [
+     {
+      "text": "There is no delivery on time and you can't cancel the order once placed...even the customer support is not helping. My money is stuck with them for a week now.",
+      "meta": "1★ · google_play · 2026-02-19",
+      "id": "gp:c008ba7c-0d47-4291-a871-1b8485519586",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=c008ba7c-0d47-4291-a871-1b8485519586"
+     },
+     {
+      "text": "… These guys don’t care one bit about the customer. Eating this food makes will definitely make any one sick. It took 45 minutes to get past their useless AI Chat Bot to an agent claiming to be “human” who was just as useless as the Chat Bot. Please don’t…",
+      "meta": "1★ · app_store · 2026-05-15",
+      "id": "as:14066796850",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     },
+     {
+      "text": "Delay & Partial Delivery of Order #4806132 Urgent Assistance Required.",
+      "meta": "consumercomplaints · 2025-12-30",
+      "id": "cc:3538375",
+      "url": "https://www.consumercomplaints.in/smytten-delay-partial-delivery-of-order-4806132-urgent-assistance-required-c3538375"
+     }
+    ],
+    "Marked delivered, not received": [
+     {
+      "text": "I did not receive my order and this is showing that and delivered and it's pre paid my 600 is not refundable now soo please I request you give 50 rupees but don't make it pre paid😭😭😭😭😭😭😭😭😭",
+      "meta": "1★ · google_play · 2026-01-03",
+      "id": "gp:4cdb1dc1-775b-4f78-b6ca-a0e1c20320df",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=4cdb1dc1-775b-4f78-b6ca-a0e1c20320df"
+     },
+     {
+      "text": "Bad app. Hi guys there are now doing frauds …don’t buy anything from this app…. they have marked my order as delivered but I didn’t received any order…. when i raised d complaint no one has listened my… my money got wasted",
+      "meta": "1★ · app_store · 2025-12-27",
+      "id": "as:13561393425",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     },
+     {
+      "text": "The tracking status shows that the parcel has been delivered",
+      "meta": "manual research (IndiaCustomerCare (comments)) · 2025-12-24",
+      "id": "mr:IC-213268",
+      "url": "https://www.indiacustomercare.com/smytten-customer-care-no#comment-213268"
+     }
+    ],
+    "Tracker stale, vague or wrong": [
+     {
+      "text": "… I have sent complaint mail to their customer care email, but doesn't seem like they care. Be careful with your money. Undelivered package order id is [number]. Update on 28 Aug: Not delivered yet, still shows 'will be delivered by 21st'",
+      "meta": "1★ · google_play · 2025-08-28",
+      "id": "gp:f1219613-2272-49b0-b3a9-20016a63878c",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=f1219613-2272-49b0-b3a9-20016a63878c"
+     },
+     {
+      "text": "Such a big disappointment. Very poor service, i ordered 3 kajal, & some trial products neither kajal delivered nor trial products, i paid whole amount already, app shows out for delivery order for 3-4days still didn't received a single order, no customer…",
+      "meta": "1★ · app_store · 2025-10-15",
+      "id": "as:13269902075",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     },
+     {
+      "text": "their app has not updated the order status",
+      "meta": "manual research (Voxya) · 2026-01-06",
+      "id": "mr:VX-07",
+      "url": "https://voxya.com/consumer-complaints/refund-pending-due-to-incorrect-order-status-/256565"
+     }
+    ],
+    "Multiple / batched orders": [
+     {
+      "text": "… nothing changed even after several emails and contacting the agent on the app... one of my items is still not dispatched and one is not being delivered and the problem is not on my end. The team is at the end of the issue because the number given to the…",
+      "meta": "1★ · google_play · 2026-01-13",
+      "id": "gp:0e183a8c-972a-4d26-bdad-b99626b7195d",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=0e183a8c-972a-4d26-bdad-b99626b7195d"
+     },
+     {
+      "text": "… I have ordered items and there were my 3 packages from which one is delivered late and one is marked delivered but it did not arrived and the third one package is showing estimated delivery date which is already gone but no delivery parter called me and…",
+      "meta": "1★ · app_store · 2026-01-02",
+      "id": "as:13585187201",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     },
+     {
+      "text": "… I've placed an order on 13th April, 2023. Order id: #2857445. I've ordered total 4 items from smytten shop, it was PREPAID and they were divided into 2 shipments, each shipment had 2 products. One shipment was delivered rightly. But the other shipment…",
+      "meta": "consumercomplaints · 2023-04-19",
+      "id": "cc:3418550",
+      "url": "https://www.consumercomplaints.in/smytten-b115980/page/8#cl3418550"
+     }
+    ],
+    "Address / location resolution": [
+     {
+      "text": "i please two order parcel tracking show rech at my local areas but then send other location and other and other after one month says parcel received back to smytten so we give refund so it significant give discount for collect money form customer use for…",
+      "meta": "1★ · google_play · 2025-09-29",
+      "id": "gp:55fca77d-f081-4c12-b618-b4d082ceb2d3",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=55fca77d-f081-4c12-b618-b4d082ceb2d3"
+     },
+     {
+      "text": "Order delayed (unable to locate my location).",
+      "meta": "consumercomplaints · 2023-05-06",
+      "id": "cc:3426571",
+      "url": "https://www.consumercomplaints.in/smytten-b115980/page/7#cl3426571"
+     },
+     {
+      "text": "just state that your address is wrong",
+      "meta": "manual research (IndiaCustomerCare (comments)) · 2025-12-26",
+      "id": "mr:IC-213295",
+      "url": "https://www.indiacustomercare.com/smytten-customer-care-no#comment-213295"
+     }
+    ],
+    "Support unreachable / bot loop (WISMO reviews only)": [
+     {
+      "text": "it's worst experience with smytten, I'm yet to receive my prepaid order which should be delivered yesterday, there's no any customer care number to reach and complain",
+      "meta": "1★ · google_play · 2026-09-07",
+      "id": "gp:8236a5c6-a332-45fb-bfb0-64a9edb75fe7",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=8236a5c6-a332-45fb-bfb0-64a9edb75fe7"
+     },
+     {
+      "text": "Bad app. Hi guys there are now doing frauds …don’t buy anything from this app…. they have marked my order as delivered but I didn’t received any order…. when i raised d complaint no one has listened my… my money got wasted",
+      "meta": "1★ · app_store · 2025-12-27",
+      "id": "as:13561393425",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     },
+     {
+      "text": "… Stop cheating customers I ordered guess night deodorant on 8th april 2023, but till now 1st may 2023, product not delivered.in product details it shows delivered. I mailed many times for this issue on [email] but there is no answer from smytten. After…",
+      "meta": "consumercomplaints · 2023-05-10",
+      "id": "cc:3428229",
+      "url": "https://www.consumercomplaints.in/smytten-b115980/page/7#cl3428229"
+     }
+    ],
+    "Vague / scripted answer (WISMO reviews only)": [
+     {
+      "text": "I have ordered somw product from Smytten thoroug online payment and it's been more than 9 days and still didn't get the parcel from your service. And if i go to the help section there is just an AI robo who just apologize but not response well and provide…",
+      "meta": "1★ · google_play · 2025-11-03",
+      "id": "gp:272a77c5-33e8-4e42-b4b4-633ed3936b46",
+      "url": "https://play.google.com/store/apps/details?id=com.app.smytten&reviewId=272a77c5-33e8-4e42-b4b4-633ed3936b46"
+     },
+     {
+      "text": "… At last when I tried cancelling the order app is not allowing to cancel the product stating tech error in the request. When I try to raise concern it gives automated response. …",
+      "meta": "1★ · app_store · 2025-12-23",
+      "id": "as:13547231397",
+      "url": "https://apps.apple.com/in/app/id1100171914?see-all=reviews"
+     },
+     {
+      "text": "… I ordered trial pack on 20 April onwards which has to deliver by 24 April . At first the delivery agent called and said your order will delivered by tomorrow as he said he is not able to deliver the order today. But then he called next day and again said…",
+      "meta": "consumercomplaints · 2023-04-27",
+      "id": "cc:3422391",
+      "url": "https://www.consumercomplaints.in/smytten-b115980/page/7#cl3422391"
+     }
+    ]
+   }
+  },
+  "swish": {
+   "slug": "swish",
+   "headline": [
+    "5.6% of app-store reviews (all ratings, n=2,734) are WISMO-related (95% CI 4.8–6.6%).",
+    "Among 1–2★ app reviews (n=1,311) the share is 10.4%.",
+    "Largest WISMO issues among WISMO reviews: eta slip / late delivery (69.5%), not received / where is my order (14.3%), rider / parcel stuck, not moving (11.7%).",
+    "20.7% of WISMO app reviews (all pulls) also report a support failure (unreachable, bot loop or a vague/scripted answer).",
+    "Classifier check on a fresh hand-labelled holdout (n=40): WISMO-flag precision 87% (26/30); 0 of 10 sampled 1–2★/complaint rows it called non-WISMO were in fact WISMO, so WISMO shares are lower bounds (section 8)."
+   ],
+   "sources": [
+    [
+     "Source",
+     "Status",
+     "Kind",
+     "Rows",
+     "Date range",
+     "1–2★",
+     "WISMO",
+     "Detail"
+    ],
+    [
+     "google_play",
+     "ok",
+     "app_review",
+     "2,315",
+     "2024-07-17 → 2026-09-29",
+     "1,056",
+     "102",
+     "app_id=com.swishapp, lang=en, country=in; pulls: newest=2315, low_1=976, low_2=80"
+    ],
+    [
+     "app_store",
+     "ok",
+     "app_review",
+     "419",
+     "2024-09-03 → 2026-09-27",
+     "255",
+     "52",
+     "app_id=6504881715, storefront=in, pages with data=9, feed last page=9"
+    ],
+    [
+     "consumercomplaints",
+     "not_configured",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "no page for this brand on this source"
+    ],
+    [
+     "trustpilot",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt: 'User-agent: * / Disallow: /' (only named search bots allowed); pages also return HTTP 403 to non-browser clients"
+    ],
+    [
+     "mouthshut",
+     "not_configured",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "no page for this brand on this source"
+    ],
+    [
+     "reddit",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt disallows this path (Disallow: / for all agents); API requires OAuth login"
+    ]
+   ],
+   "categories": [
+    {
+     "name": "ETA slip / late delivery",
+     "group": "WISMO",
+     "all": 3.9,
+     "wismo": 69.5,
+     "low": 7.2
+    },
+    {
+     "name": "Not received / where is my order",
+     "group": "WISMO",
+     "all": 0.8,
+     "wismo": 14.3,
+     "low": 1.6
+    },
+    {
+     "name": "Rider / parcel stuck, not moving",
+     "group": "WISMO",
+     "all": 0.7,
+     "wismo": 11.7,
+     "low": 1.4
+    },
+    {
+     "name": "Marked delivered, not received",
+     "group": "WISMO",
+     "all": 0.4,
+     "wismo": 6.5,
+     "low": 0.8
+    },
+    {
+     "name": "Address / location resolution",
+     "group": "WISMO",
+     "all": 0.3,
+     "wismo": 5.8,
+     "low": 0.5
+    },
+    {
+     "name": "Traffic / weather / demand excuse",
+     "group": "WISMO",
+     "all": 0.3,
+     "wismo": 4.5,
+     "low": 0.4
+    },
+    {
+     "name": "Tracker stale, vague or wrong",
+     "group": "WISMO",
+     "all": 0.1,
+     "wismo": 2.6,
+     "low": 0.2
+    },
+    {
+     "name": "Multiple / batched orders",
+     "group": "WISMO",
+     "all": 0.0,
+     "wismo": 0.6,
+     "low": 0.1
+    },
+    {
+     "name": "Support unreachable / bot loop",
+     "group": "cross-cutting",
+     "all": 4.1,
+     "wismo": 16.2,
+     "low": 8.2
+    },
+    {
+     "name": "Cancelled by platform / restaurant",
+     "group": "adjacent",
+     "all": 1.2,
+     "wismo": 6.5,
+     "low": 2.4
+    },
+    {
+     "name": "Vague / scripted answer",
+     "group": "cross-cutting",
+     "all": 0.8,
+     "wismo": 5.2,
+     "low": 1.7
+    },
+    {
+     "name": "Rider behaviour / asked to pick up",
+     "group": "adjacent",
+     "all": 0.9,
+     "wismo": 5.2,
+     "low": 1.7
+    },
+    {
+     "name": "No proactive update",
+     "group": "cross-cutting",
+     "all": 0.5,
+     "wismo": 2.6,
+     "low": 1.1
+    },
+    {
+     "name": "Refund stuck / not received",
+     "group": "adjacent",
+     "all": 1.1,
+     "wismo": 2.6,
+     "low": 2.3
+    },
+    {
+     "name": "Partial / missing item",
+     "group": "adjacent",
+     "all": 0.8,
+     "wismo": 1.3,
+     "low": 1.5
+    },
+    {
+     "name": "Other / non-WISMO",
+     "group": "derived",
+     "all": 94.4,
+     "wismo": null,
+     "low": 89.6
+    }
+   ],
+   "trend": [
+    {
+     "month": "2024-08",
+     "n": 6,
+     "wismo": 0.0
+    },
+    {
+     "month": "2024-09",
+     "n": 2,
+     "wismo": 0.0
+    },
+    {
+     "month": "2024-10",
+     "n": 8,
+     "wismo": 12.5
+    },
+    {
+     "month": "2024-11",
+     "n": 20,
+     "wismo": 20.0
+    },
+    {
+     "month": "2024-12",
+     "n": 25,
+     "wismo": 8.0
+    },
+    {
+     "month": "2025-01",
+     "n": 23,
+     "wismo": 0.0
+    },
+    {
+     "month": "2025-02",
+     "n": 29,
+     "wismo": 0.0
+    },
+    {
+     "month": "2025-03",
+     "n": 27,
+     "wismo": 7.4
+    },
+    {
+     "month": "2025-04",
+     "n": 25,
+     "wismo": 8.0
+    },
+    {
+     "month": "2025-05",
+     "n": 33,
+     "wismo": 3.0
+    },
+    {
+     "month": "2025-06",
+     "n": 21,
+     "wismo": 4.8
+    },
+    {
+     "month": "2025-07",
+     "n": 29,
+     "wismo": 13.8
+    },
+    {
+     "month": "2025-08",
+     "n": 31,
+     "wismo": 6.5
+    },
+    {
+     "month": "2025-09",
+     "n": 29,
+     "wismo": 0.0
+    },
+    {
+     "month": "2025-10",
+     "n": 20,
+     "wismo": 0.0
+    },
+    {
+     "month": "2025-11",
+     "n": 32,
+     "wismo": 12.5
+    },
+    {
+     "month": "2025-12",
+     "n": 28,
+     "wismo": 3.6
+    },
+    {
+     "month": "2026-01",
+     "n": 24,
+     "wismo": 16.7
+    },
+    {
+     "month": "2026-02",
+     "n": 46,
+     "wismo": 6.5
+    },
+    {
+     "month": "2026-03",
+     "n": 69,
+     "wismo": 8.7
+    },
+    {
+     "month": "2026-04",
+     "n": 81,
+     "wismo": 14.8
+    },
+    {
+     "month": "2026-05",
+     "n": 78,
+     "wismo": 12.8
+    },
+    {
+     "month": "2026-06",
+     "n": 56,
+     "wismo": 3.6
+    },
+    {
+     "month": "2026-07",
+     "n": 90,
+     "wismo": 8.9
+    },
+    {
+     "month": "2026-08",
+     "n": 119,
+     "wismo": 9.2
+    },
+    {
+     "month": "2026-09",
+     "n": 105,
+     "wismo": 6.7
+    }
+   ],
+   "quotes": {
+    "ETA slip / late delivery": [
+     {
+      "text": "first time user, ordered for my kid, waited 50 minutes, no movement, they seemed more than happy to cancel in a giffy. looks like they never had the intention to deliver the order in the first place. not ordering ever again",
+      "meta": "1★ · google_play · 2026-05-23",
+      "id": "gp:a911ee78-513a-4988-9bc2-11d73cb7143e",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=a911ee78-513a-4988-9bc2-11d73cb7143e"
+     },
+     {
+      "text": "Worst app. This is the worst app that you can use to order your food. I have placed order twice on the app every time. My food is delivered after an hour on top of that. The app reflects fake locations of the driver making you think that your order has…",
+      "meta": "1★ · app_store · 2026-05-06",
+      "id": "as:14034858563",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "very bad experience with timely delivery, shows 10 to 15 minutes but my order was delayed beyond an hour, without letting me cancel it",
+      "meta": "1★ · google_play · 2026-09-13",
+      "id": "gp:bb1d8ead-ea20-4903-b7da-2bb0de0de188",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=bb1d8ead-ea20-4903-b7da-2bb0de0de188"
+     }
+    ],
+    "Not received / where is my order": [
+     {
+      "text": "ordered at 8pm, now its 10...till order not reached...no customer support..! worst service",
+      "meta": "1★ · google_play · 2025-03-22",
+      "id": "gp:a2d24a9b-7a14-4a83-87f9-5e68c3067b59",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=a2d24a9b-7a14-4a83-87f9-5e68c3067b59"
+     },
+     {
+      "text": "Not delivered on time. I will order my food my order is not delivered by hour",
+      "meta": "1★ · app_store · 2026-08-05",
+      "id": "as:14393671916",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "Poor experience on this app... Food has not been delivered even in 90 mins. Food has been prepared but there is no delivery partner. There is no option to cancel the order as well.",
+      "meta": "1★ · google_play · 2026-03-25",
+      "id": "gp:41965892-1863-4642-be72-35f511531f3d",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=41965892-1863-4642-be72-35f511531f3d"
+     }
+    ],
+    "Rider / parcel stuck, not moving": [
+     {
+      "text": "They advertise 10 mins delivery. I placed an order, Waited for 30 mins, no delivery partner was assigned and then upon my request, they cancelled the order. Why advertise something which you can't even fulfill. Just a marketing gimmick. Packing already…",
+      "meta": "1★ · google_play · 2026-04-07",
+      "id": "gp:a405fedb-1c58-4528-a30c-bd6a7d278077",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=a405fedb-1c58-4528-a30c-bd6a7d278077"
+     },
+     {
+      "text": "… There was a slight drizzle due to which the delivery guy said that the food will be delayed which is understandable. But for the past half an hour the delivery guy is not even moving from the kitchen. He has my food that I have already paid for and he…",
+      "meta": "1★ · app_store · 2026-05-26",
+      "id": "as:14108816451",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "Poor experience on this app... Food has not been delivered even in 90 mins. Food has been prepared but there is no delivery partner. There is no option to cancel the order as well.",
+      "meta": "1★ · google_play · 2026-03-25",
+      "id": "gp:41965892-1863-4642-be72-35f511531f3d",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=41965892-1863-4642-be72-35f511531f3d"
+     }
+    ],
+    "Marked delivered, not received": [
+     {
+      "text": "Pathetic app....I have ordered 2 bowls and the delivery guy dropped both of it saying he had a accident.. he even gaved me and went and these guys marked as delivered....at such initial level you guys are cheating... pathetic",
+      "meta": "1★ · google_play · 2024-11-28",
+      "id": "gp:d7246285-c2f7-450b-bd89-f6d85e4ec45b",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=d7246285-c2f7-450b-bd89-f6d85e4ec45b"
+     },
+     {
+      "text": "Worst customer service ever. I didn’t get item out of my order list so I didn’t accept the order but delivery person marked as delivered and insisted me get help in the app. I contacted customer service and wasted my time as they are asking me to wait for…",
+      "meta": "1★ · app_store · 2026-05-19",
+      "id": "as:14082691850",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "worst app ever - bunch of frauds never ever use this app - they never deliver the order and mark it as delivered and there is no customer support - money is gone now ! you will be stuck - please avoid this fraud app",
+      "meta": "1★ · google_play · 2026-08-13",
+      "id": "gp:c0eac127-1fee-4999-8784-2c6ebaf0232f",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=c0eac127-1fee-4999-8784-2c6ebaf0232f"
+     }
+    ],
+    "Address / location resolution": [
+     {
+      "text": "location markers are incorrect",
+      "meta": "1★ · google_play · 2026-04-14",
+      "id": "gp:549dcea5-aa6d-44a4-956d-5bf6bcaa6035",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=549dcea5-aa6d-44a4-956d-5bf6bcaa6035"
+     },
+     {
+      "text": "Delivery boys are not aware of location and when they cant find they speak like rowdy in Bangalore. Today 1st order i did and disappointed with delivery experience! …",
+      "meta": "1★ · app_store · 2025-04-03",
+      "id": "as:12498803822",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "i ordered food but they ordered at the wrong location very very bad and no refund got yet",
+      "meta": "1★ · google_play · 2026-08-14",
+      "id": "gp:02f208bc-e793-4ae9-8da5-b5dae3c2831d",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=02f208bc-e793-4ae9-8da5-b5dae3c2831d"
+     }
+    ],
+    "Traffic / weather / demand excuse": [
+     {
+      "text": "… Makes no sense if I have to wait for 45 mins for my food, I will prefer swiggy zomato then. Defies the complete purpose of 10 minute delivery. Customer experience very weak every-time same automated answers regarding surge of orders. Majority of times…",
+      "meta": "2★ · app_store · 2026-04-08",
+      "id": "as:13936455024",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "App promises to deliver food under 10 mins but surprisingly it will wait till rain starts and will inform you after 30 mins of placing your order that they won't be able to deliver food \"Due to Rain\". Stupid Business model and support team, they are only…",
+      "meta": "1★ · google_play · 2026-05-26",
+      "id": "gp:cd02b6ef-c8be-43f9-9a45-8b2d889f13da",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=cd02b6ef-c8be-43f9-9a45-8b2d889f13da"
+     },
+     {
+      "text": "False Promise of 10 mins delivery. They do not have enough delivery partners to make delivery in 10 mins. I placed my order and after 20 mins it still says no delivery partner assigned. Customer care says due to sudden order spike which there was no…",
+      "meta": "1★ · app_store · 2026-04-12",
+      "id": "as:13949880315",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     }
+    ],
+    "Support unreachable / bot loop (WISMO reviews only)": [
+     {
+      "text": "They tell 10 min and its been 1 hour i am still waiting. Ordered at 7:33 pm and even after 1 hour no delivery partner assigned customer care is not helping they just repeating the same line again and again",
+      "meta": "1★ · app_store · 2026-05-14",
+      "id": "as:14063828528",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "No customer service. They delivered the wrong order but when trying to complain no one is there to answer you on their WhatsApp channel. Also, did not get the food in 10minutes.",
+      "meta": "1★ · google_play · 2024-11-28",
+      "id": "gp:7eff9f0e-626f-4c89-9583-70e3807aea06",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=7eff9f0e-626f-4c89-9583-70e3807aea06"
+     },
+     {
+      "text": "… I understand delivery Bike can breakdown, but the least I expect is that I can see where the Rider actually is. What they show is just a projection of where the Rider would be or should be. Again horrible food quality to and pretty much no support to…",
+      "meta": "1★ · app_store · 2026-05-06",
+      "id": "as:14034858563",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     }
+    ],
+    "Vague / scripted answer (WISMO reviews only)": [
+     {
+      "text": "… The support agent was named Partha. Horrible experience. He kept apologising and repeating his pre-rehearsed response which didn’t help anyone at all. Just wasted my time. It is 10:30 in the night, all shops are closed and I’m sick (hence I ordered from…",
+      "meta": "1★ · app_store · 2026-05-26",
+      "id": "as:14108816451",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     },
+     {
+      "text": "This is one of the worst experiences I’ve had with any delivery app. I waited almost 40 minutes and still didn’t receive my order. After all that delay, when I tried to escalate the issue, they simply cancelled the order without any proper explanation.…",
+      "meta": "1★ · google_play · 2026-04-27",
+      "id": "gp:187272f9-2888-469e-8143-6d33523555b8",
+      "url": "https://play.google.com/store/apps/details?id=com.swishapp&reviewId=187272f9-2888-469e-8143-6d33523555b8"
+     },
+     {
+      "text": "They tell 10 min and its been 1 hour i am still waiting. Ordered at 7:33 pm and even after 1 hour no delivery partner assigned customer care is not helping they just repeating the same line again and again",
+      "meta": "1★ · app_store · 2026-05-14",
+      "id": "as:14063828528",
+      "url": "https://apps.apple.com/in/app/id6504881715?see-all=reviews"
+     }
+    ]
+   }
+  },
+  "zomato": {
+   "slug": "zomato",
+   "headline": [
+    "3.6% of app-store reviews (all ratings, n=5,500) are WISMO-related (95% CI 3.1–4.1%).",
+    "Among 1–2★ app reviews (n=4,682) the share is 12.3%.",
+    "Among complaint-board posts (n=61) it is 24.6%.",
+    "Largest WISMO issues among WISMO reviews: eta slip / late delivery (74.0%), not received / where is my order (13.3%), multiple / batched orders (7.7%).",
+    "21.7% of WISMO app reviews (all pulls) also report a support failure (unreachable, bot loop or a vague/scripted answer).",
+    "Classifier check on a fresh hand-labelled holdout (n=40): WISMO-flag precision 93% (28/30); 1 of 10 sampled 1–2★/complaint rows it called non-WISMO were in fact WISMO, so WISMO shares are lower bounds (section 8)."
+   ],
+   "sources": [
+    [
+     "Source",
+     "Status",
+     "Kind",
+     "Rows",
+     "Date range",
+     "1–2★",
+     "WISMO",
+     "Detail"
+    ],
+    [
+     "google_play",
+     "ok",
+     "app_review",
+     "8,377",
+     "2026-06-29 → 2026-09-29",
+     "4,600",
+     "568",
+     "app_id=com.application.zomato, lang=en, country=in; pulls: newest=5000, low_1=3000, low_2=1600"
+    ],
+    [
+     "app_store",
+     "ok",
+     "app_review",
+     "500",
+     "2026-09-25 → 2026-09-28",
+     "82",
+     "27",
+     "app_id=434613896, storefront=in, pages with data=10, feed last page=10"
+    ],
+    [
+     "consumercomplaints",
+     "ok",
+     "complaint_site",
+     "61",
+     "2023-02-08 → 2026-08-25",
+     "–",
+     "15",
+     "slug=zomato-b115724, listing pages=6, detail pages=25, min_date=2023-01-01, older rows dropped=59"
+    ],
+    [
+     "trustpilot",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt: 'User-agent: * / Disallow: /' (only named search bots allowed); pages also return HTTP 403 to non-browser clients"
+    ],
+    [
+     "mouthshut",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt disallows ClaudeBot site-wide (and Content-Signal ai-train=no); not fetched"
+    ],
+    [
+     "reddit",
+     "skipped",
+     "–",
+     "0",
+     "–",
+     "–",
+     "0",
+     "robots.txt disallows this path (Disallow: / for all agents); API requires OAuth login"
+    ]
+   ],
+   "categories": [
+    {
+     "name": "ETA slip / late delivery",
+     "group": "WISMO",
+     "all": 2.6,
+     "wismo": 74.0,
+     "low": 9.0
+    },
+    {
+     "name": "Not received / where is my order",
+     "group": "WISMO",
+     "all": 0.5,
+     "wismo": 13.3,
+     "low": 1.6
+    },
+    {
+     "name": "Marked delivered, not received",
+     "group": "WISMO",
+     "all": 0.3,
+     "wismo": 7.1,
+     "low": 1.1
+    },
+    {
+     "name": "Multiple / batched orders",
+     "group": "WISMO",
+     "all": 0.3,
+     "wismo": 7.7,
+     "low": 0.8
+    },
+    {
+     "name": "Address / location resolution",
+     "group": "WISMO",
+     "all": 0.1,
+     "wismo": 2.6,
+     "low": 0.6
+    },
+    {
+     "name": "Traffic / weather / demand excuse",
+     "group": "WISMO",
+     "all": 0.1,
+     "wismo": 2.6,
+     "low": 0.2
+    },
+    {
+     "name": "Rider / parcel stuck, not moving",
+     "group": "WISMO",
+     "all": 0.1,
+     "wismo": 2.0,
+     "low": 0.2
+    },
+    {
+     "name": "Tracker stale, vague or wrong",
+     "group": "WISMO",
+     "all": 0.0,
+     "wismo": 1.0,
+     "low": 0.1
+    },
+    {
+     "name": "Support unreachable / bot loop",
+     "group": "cross-cutting",
+     "all": 3.0,
+     "wismo": 16.8,
+     "low": 10.4
+    },
+    {
+     "name": "Refund stuck / not received",
+     "group": "adjacent",
+     "all": 0.8,
+     "wismo": 5.1,
+     "low": 2.8
+    },
+    {
+     "name": "Cancelled by platform / restaurant",
+     "group": "adjacent",
+     "all": 0.6,
+     "wismo": 4.1,
+     "low": 1.5
+    },
+    {
+     "name": "Vague / scripted answer",
+     "group": "cross-cutting",
+     "all": 0.4,
+     "wismo": 3.1,
+     "low": 1.3
+    },
+    {
+     "name": "Partial / missing item",
+     "group": "adjacent",
+     "all": 0.5,
+     "wismo": 3.6,
+     "low": 1.6
+    },
+    {
+     "name": "Rider behaviour / asked to pick up",
+     "group": "adjacent",
+     "all": 0.3,
+     "wismo": 1.5,
+     "low": 1.1
+    },
+    {
+     "name": "No proactive update",
+     "group": "cross-cutting",
+     "all": 0.1,
+     "wismo": 0.5,
+     "low": 0.4
+    },
+    {
+     "name": "Other / non-WISMO",
+     "group": "derived",
+     "all": 96.4,
+     "wismo": null,
+     "low": 87.7
+    }
+   ],
+   "trend": [
+    {
+     "month": "2026-09 (partial)",
+     "n": 3385,
+     "wismo": 13.9
+    }
+   ],
+   "quotes": {
+    "ETA slip / late delivery": [
+     {
+      "text": "if you're a gold member your delivery is free but your order will be delayed 30 mins and above as they'll assign another delivery to the partner. the worst app. deleting the app which is of no use and their customer care bot is really a dumb",
+      "meta": "1★ · google_play · 2026-09-12",
+      "id": "gp:06a83330-6e26-4029-bf79-03a102d3c50b",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=06a83330-6e26-4029-bf79-03a102d3c50b"
+     },
+     {
+      "text": "… It appears that Zomato is taking advantage of its limited competition in the city, while customers are left with no choice but to tolerate poor service. Tonight, an order placed at 2:30 AM was delivered at 3:34 AM — more than an hour late — and the food…",
+      "meta": "1★ · app_store · 2026-09-26",
+      "id": "as:14597305727",
+      "url": "https://apps.apple.com/in/app/id434613896?see-all=reviews"
+     },
+     {
+      "text": "Refund for order: [number]. Hi team, Zomato have very unprofessional services. I had placed order on their website which took almost an hour to reach me. I ordered this and informed delivery boy to deliver this order without making calls as i might be on…",
+      "meta": "consumercomplaints · 2025-03-14",
+      "id": "cc:3526110",
+      "url": "https://www.consumercomplaints.in/zomato-refund-for-order-6687880506-c3526110"
+     }
+    ],
+    "Not received / where is my order": [
+     {
+      "text": "there delivery partner never reach restaurant to pick order and when you complaint service agent also wastes your time in last after 2 and more hours they told they have cancelled the order. service are becoming worse now days.",
+      "meta": "1★ · google_play · 2026-09-13",
+      "id": "gp:c9d7db0d-a2bc-42d5-a1e4-4257f4ab0980",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=c9d7db0d-a2bc-42d5-a1e4-4257f4ab0980"
+     },
+     {
+      "text": "Cancelled order by zomato. My order (ORDER ID [protected]) was cancelled due to a location mismatch, even though I had entered the correct address and the delivery partner did not reach out properly. I did not receive my order, but the amount of Rs 635 has…",
+      "meta": "consumercomplaints · 2025-11-13",
+      "id": "cc:3536906",
+      "url": "https://www.consumercomplaints.in/zomato-cancelled-order-by-zomato-c3536906"
+     },
+     {
+      "text": "… I ordered for Someone yesterday night, it took 2 hours until they marked on app, that the food was delivered (which was estimated at time of Order 45-50 minutes), when i asked the recipient in morning, he said order was not received… Shame on these…",
+      "meta": "1★ · app_store · 2026-09-27",
+      "id": "as:14599950802",
+      "url": "https://apps.apple.com/in/app/id434613896?see-all=reviews"
+     }
+    ],
+    "Marked delivered, not received": [
+     {
+      "text": "the service from zomato was good until a recent food order I made which was around 2k+ the delivery person reached close to my destination and accidentally clicked delivered but I didn't receive the food he had no way of contacting me directly on top of…",
+      "meta": "1★ · google_play · 2026-09-28",
+      "id": "gp:1e94e30b-5464-472e-b446-fad1cda5cff1",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=1e94e30b-5464-472e-b446-fad1cda5cff1"
+     },
+     {
+      "text": "Online scam of delivery partner not delivering the order. Dear Zomato, i have placed an order with you on March 18 th, 2.02 pm, order id -[protected] from the shop Ceylon parota, the expected order time was 30 mins, but the delivery partner delivered it…",
+      "meta": "consumercomplaints · 2023-03-19",
+      "id": "cc:3403580",
+      "url": "https://www.consumercomplaints.in/zomato-online-scam-of-delivery-partner-not-delivering-the-order-c3403580"
+     },
+     {
+      "text": "I ordered food at 9:26 pm, order was marked delivered at 10:23 pm. Tried calling the delivery partner, the person who answered the call said he is not a delivery partner. Contacted support, after 15 minutes and post their \"out of world\" investigation, they…",
+      "meta": "1★ · google_play · 2026-09-07",
+      "id": "gp:fd83e8c1-1d58-4289-a0a4-42f5cf0a7f8d",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=fd83e8c1-1d58-4289-a0a4-42f5cf0a7f8d"
+     }
+    ],
+    "Multiple / batched orders": [
+     {
+      "text": "if you're a gold member your delivery is free but your order will be delayed 30 mins and above as they'll assign another delivery to the partner. the worst app. deleting the app which is of no use and their customer care bot is really a dumb",
+      "meta": "1★ · google_play · 2026-09-12",
+      "id": "gp:06a83330-6e26-4029-bf79-03a102d3c50b",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=06a83330-6e26-4029-bf79-03a102d3c50b"
+     },
+     {
+      "text": "Multiple deliveries. Multiple time the ly clubs orders which eventually delay orders. Very bad service from zomato. not recommended",
+      "meta": "1★ · app_store · 2026-09-27",
+      "id": "as:14600058385",
+      "url": "https://apps.apple.com/in/app/id434613896?see-all=reviews"
+     },
+     {
+      "text": "Their policy of delivering multiple orders at a single time is not making me happy at all. I changed my review of 2018 of 5 to 1 Star due to this issue of them.",
+      "meta": "1★ · google_play · 2026-09-21",
+      "id": "gp:ccd52666-74ae-43fd-abd0-873dfc993360",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=ccd52666-74ae-43fd-abd0-873dfc993360"
+     }
+    ],
+    "Address / location resolution": [
+     {
+      "text": "I placed an order for a dosa, but the delivery person couldn't find the location. Even after I sent the location, he asked me to cancel the order, so I ended up going without food. Now, Zomato is refusing to provide Cash on Delivery (COD) service to me.…",
+      "meta": "2★ · google_play · 2026-07-31",
+      "id": "gp:ac9ddfa5-7163-485d-807e-f91b0d242e27",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=ac9ddfa5-7163-485d-807e-f91b0d242e27"
+     },
+     {
+      "text": "… If my address is wrong or i denied order they can cancel order but when address is right just bcuz i havent picked call they cant cancel order and charge complete amount. Also when i texted delivery boy already with alternate no. And details. …",
+      "meta": "consumercomplaints · 2025-03-14",
+      "id": "cc:3526110",
+      "url": "https://www.consumercomplaints.in/zomato-refund-for-order-6687880506-c3526110"
+     },
+     {
+      "text": "Very disappointing experience. My order was not delivered to me and was apparently delivered to another location. The delivery partner uploaded a photo as proof, but I never received my order. When the delivery partner called, he simply said that the…",
+      "meta": "1★ · google_play · 2026-09-27",
+      "id": "gp:ff33cf67-6bc9-42b3-be9c-71f566de5684",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=ff33cf67-6bc9-42b3-be9c-71f566de5684"
+     }
+    ],
+    "Traffic / weather / demand excuse": [
+     {
+      "text": "fraud people ..I ordered and it was 45min on time suddenly he got some other order and waited for pickup and it got delayed by 35 min .asking support they told traffic but the delivery guy told that some other order is not ready ..food got cold and I…",
+      "meta": "1★ · google_play · 2026-09-06",
+      "id": "gp:9eed2e5a-f050-41f5-a37d-fba20171971a",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=9eed2e5a-f050-41f5-a37d-fba20171971a"
+     },
+     {
+      "text": "bad experience with customer care and food quality was worst after complaining they are saying that due to temperature, weather etc food quality become worst. I ordered chicken biryani and when I opened it I got worst basmati rice in it which was already…",
+      "meta": "2★ · google_play · 2026-08-06",
+      "id": "gp:e96e9a90-2414-484c-81da-87289a4498a3",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=e96e9a90-2414-484c-81da-87289a4498a3"
+     },
+     {
+      "text": "This is a worst delivery app. The issue is not with delivery, boys. it's with assigning deliveries always been delaying by assigning 2 to 3 orders at a time to a delivery by delivering But they were saying like due to high demand they just wanted to save…",
+      "meta": "1★ · google_play · 2026-09-24",
+      "id": "gp:27d5c78a-371a-4cdf-b055-13a3218d9f98",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=27d5c78a-371a-4cdf-b055-13a3218d9f98"
+     }
+    ],
+    "Support unreachable / bot loop (WISMO reviews only)": [
+     {
+      "text": "… An order placed at 7:00 PM was still stuck at the restaurant at 7:53 PM, with delivery pushed back to 8:25 PM. The support chat was useless, taking 5 minutes just to check the status only to give a generic \"running late\" excuse. Waiting nearly an hour…",
+      "meta": "1★ · google_play · 2026-09-16",
+      "id": "gp:1fd56f28-b94c-4d32-8953-065289c8bef9",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=1fd56f28-b94c-4d32-8953-065289c8bef9"
+     },
+     {
+      "text": "Worst service. Zomato is very worst in customer service. Even for their delay and their mistakes also they don’t compensate. Swiggy is far better.",
+      "meta": "1★ · app_store · 2026-09-26",
+      "id": "as:14594850301",
+      "url": "https://apps.apple.com/in/app/id434613896?see-all=reviews"
+     },
+     {
+      "text": "… I did not receive my order, but the amount of Rs 635 has also not been refunded. Your agent refused to help in this matter by saying that food got wasted and delivery person's time was wasted as well but I also suffered a huge loss. …",
+      "meta": "consumercomplaints · 2025-11-13",
+      "id": "cc:3536906",
+      "url": "https://www.consumercomplaints.in/zomato-cancelled-order-by-zomato-c3536906"
+     }
+    ],
+    "Vague / scripted answer (WISMO reviews only)": [
+     {
+      "text": "Please do not use the app. Your order will be delayed always. they have no answers and just ask you to wait",
+      "meta": "1★ · google_play · 2026-09-21",
+      "id": "gp:79be6a5d-b39c-4dec-8bec-1525cd43d5be",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=79be6a5d-b39c-4dec-8bec-1525cd43d5be"
+     },
+     {
+      "text": "… As the restaurant from where the order is placed comes under zomato. Receiving rancid food is like you haven't order anything. But they don't look into this matter instead fighting with me and dropping the same mail again and again, also in addition to…",
+      "meta": "consumercomplaints · 2024-01-22",
+      "id": "cc:3495470",
+      "url": "https://www.consumercomplaints.in/zomato-full-amount-not-refunded-even-after-delivering-rancid-food-c3495470"
+     },
+     {
+      "text": "… My ₹514 order was marked as delivered, but I never received it. The delivery photo shows it left near someone else’s gate. When I called the delivery partner, he disconnected the call instead of explaining. Support simply asked me to email and wait 24…",
+      "meta": "1★ · google_play · 2026-09-09",
+      "id": "gp:56c5f522-42e4-4869-9e61-a6de69e65611",
+      "url": "https://play.google.com/store/apps/details?id=com.application.zomato&reviewId=56c5f522-42e4-4869-9e61-a6de69e65611"
+     }
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,60 @@
+{"id": "gp:9dfbb650-12c5-46db-849c-0dc3b08fd30d", "wismo": false, "categories": [], "note": "cart bug after changing address: app bug, not delivery location"}
+{"id": "gp:02f208bc-e793-4ae9-8da5-b5dae3c2831d", "wismo": true, "categories": ["address_location", "refund_stuck"], "note": ""}
+{"id": "as:14082691850", "wismo": true, "categories": ["delivered_not_received", "partial_missing_item", "support_unreachable_loop", "vague_support_answer"], "note": ""}
+{"id": "gp:079e3b80-43ec-4954-9692-942015e416bd", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:14034858563", "wismo": true, "categories": ["eta_slip_late", "tracking_stale_wrong", "support_unreachable_loop"], "note": "'fake locations of the driver' = wrong tracker; 'delivered after an hour' = late"}
+{"id": "gp:39a00211-8c8e-4194-a457-02f96b6f7c86", "wismo": true, "categories": ["eta_slip_late"], "note": "waited 15 min for order confirmation; 'roaming' = app spinner, not rider"}
+{"id": "as:13949880315", "wismo": true, "categories": ["rider_stuck", "eta_slip_late", "traffic_weather_excuse"], "note": "'no delivery partner assigned' after 20 min; support blamed 'order spike'"}
+{"id": "gp:41965892-1863-4642-be72-35f511531f3d", "wismo": true, "categories": ["order_not_delivered", "eta_slip_late", "rider_stuck"], "note": ""}
+{"id": "as:14108816451", "wismo": true, "categories": ["eta_slip_late", "traffic_weather_excuse", "rider_stuck", "rider_behaviour", "support_unreachable_loop", "vague_support_answer"], "note": "refund was given ('ending up refunding'): refund hit is false; rider 'not even moving from the kitchen'"}
+{"id": "gp:bfb29d6f-973f-48d9-bb67-804f4542f56d", "wismo": true, "categories": ["order_not_delivered", "support_unreachable_loop", "refund_stuck"], "note": "'waited over 2 hours' was for support, not the food"}
+{"id": "gp:9b9e01cd-ee68-4951-8314-64dd4defdcc1", "wismo": false, "categories": [], "note": "serviceability check, not address resolution"}
+{"id": "gp:3a3235c7-af45-476e-bb4d-b6f88c05c260", "wismo": false, "categories": [], "note": "'closed ... due to a surge' = can't-order message, not a delay excuse"}
+{"id": "gp:57d066b7-4ce4-4f36-abd6-d822e2d8f2ab", "wismo": false, "categories": [], "note": "'Always shows Surge or Prepared yet no driver available' read as the pre-order unavailability state"}
+{"id": "as:13830671401", "wismo": true, "categories": ["eta_slip_late", "rider_behaviour"], "note": ""}
+{"id": "gp:83ea8972-eb45-4cde-acec-ba096aafa6b7", "wismo": true, "categories": ["eta_slip_late", "cancelled_by_platform", "rider_behaviour"], "note": ""}
+{"id": "gp:eea4306f-1586-4eb8-bce9-c632ffe8ea70", "wismo": false, "categories": [], "note": "'high demand' for a dish = availability, not a delay excuse"}
+{"id": "gp:5d84a0dc-e8f0-49fe-ba1b-d576928c2b73", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:14431037719", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:7eff9f0e-626f-4c89-9583-70e3807aea06", "wismo": true, "categories": ["support_unreachable_loop", "eta_slip_late"], "note": "'did not get the food in 10 minutes' = late, not undelivered"}
+{"id": "gp:0b285372-aac8-4dff-a6ca-34f41865a3a7", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:38c3c213-c0c9-4bdb-af44-c14cf1000224", "wismo": true, "categories": ["eta_slip_late"], "note": "'promise of quick delivery ... the day never came' = never fast, not undelivered"}
+{"id": "gp:a911ee78-513a-4988-9bc2-11d73cb7143e", "wismo": true, "categories": ["eta_slip_late", "rider_stuck", "cancelled_by_platform"], "note": ""}
+{"id": "gp:b32d5bc3-0efc-405b-bde7-3ea7ce64aa51", "wismo": false, "categories": ["support_unreachable_loop"], "note": "'doesnt got the same food' = wrong item, not undelivered"}
+{"id": "as:14393671916", "wismo": true, "categories": ["eta_slip_late", "order_not_delivered"], "note": ""}
+{"id": "as:14309848768", "wismo": false, "categories": [], "note": "'priorities in the wrong place' idiom"}
+{"id": "gp:6034f1d8-f3b1-479b-9da1-195b7b6ad6f1", "wismo": false, "categories": ["partial_missing_item", "support_unreachable_loop"], "note": "some items never delivered = partial"}
+{"id": "gp:b46273fe-2de6-4e20-8511-d67ab6dd2386", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:13842966037", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:549dcea5-aa6d-44a4-956d-5bf6bcaa6035", "wismo": true, "categories": ["address_location"], "note": ""}
+{"id": "gp:cd02b6ef-c8be-43f9-9a45-8b2d889f13da", "wismo": true, "categories": ["traffic_weather_excuse", "proactive_comms_missing", "cancelled_by_platform", "support_unreachable_loop"], "note": ""}
+{"id": "gp:930c928f-4572-4505-a33b-65c6a5e47a54", "wismo": true, "categories": ["eta_slip_late", "proactive_comms_missing"], "note": ""}
+{"id": "as:14540160808", "wismo": true, "categories": ["eta_slip_late", "support_unreachable_loop"], "note": ""}
+{"id": "gp:616139fa-a4e8-4b99-b69b-6b43a844641d", "wismo": false, "categories": ["support_unreachable_loop"], "note": "'didnt got the free item' = promo item, not an order"}
+{"id": "gp:46bcf9f6-999c-4dd7-9334-ad08d022efb6", "wismo": true, "categories": ["eta_slip_late", "traffic_weather_excuse"], "note": ""}
+{"id": "as:13936455024", "wismo": true, "categories": ["rider_stuck", "eta_slip_late", "cancelled_by_platform", "vague_support_answer", "traffic_weather_excuse"], "note": ""}
+{"id": "gp:89745be0-d5f0-42b9-8535-3bcecc027b73", "wismo": true, "categories": ["eta_slip_late", "support_unreachable_loop"], "note": ""}
+{"id": "as:14386810973", "wismo": true, "categories": ["tracking_stale_wrong", "support_unreachable_loop"], "note": "'fake ETA' is a tracker problem, not a support answer"}
+{"id": "gp:6080e56d-c9d4-4b6b-ba0e-fedc4072359d", "wismo": true, "categories": ["eta_slip_late", "tracking_stale_wrong"], "note": ""}
+{"id": "gp:ed65b924-3c97-4df0-a19c-fe94eed36966", "wismo": true, "categories": ["eta_slip_late"], "note": "'they said it will come by 10 min' is the product promise, not a support reply"}
+{"id": "gp:0f0169de-5db1-433a-a6ea-1cbb86e7b988", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:13220451432", "wismo": false, "categories": [], "note": "location cache bug (serviceability)"}
+{"id": "as:14461377932", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:61347254-d07f-4831-a095-02af9310e790", "wismo": false, "categories": [], "note": "'surge' + 'peak hours' = can't order"}
+{"id": "gp:d7246285-c2f7-450b-bd89-f6d85e4ec45b", "wismo": true, "categories": ["delivered_not_received", "rider_behaviour"], "note": ""}
+{"id": "gp:1f627c26-e7dc-4988-abda-31b7b380d43a", "wismo": false, "categories": [], "note": "waiting for the surge/break to end before ordering"}
+{"id": "gp:32c1d844-5c82-495c-bd01-d70949d854b7", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:256c00f7-be05-4e0c-a0e2-d98b21defaad", "wismo": false, "categories": [], "note": ""}
+{"id": "as:14298190433", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:b3ac719b-18b5-4809-98f5-d111766f4787", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:62bf108a-76b4-4837-93ad-7a97cfb679c6", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:b36b84e0-9382-4ace-bbb1-7c4adcc188e9", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:4244be10-93f7-4a71-821e-48bfce5402b6", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:da55fbba-934c-4e2b-9852-cf2288c85540", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:d6715db4-0076-4549-90f0-fe4181a9cca2", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:41fc1ba1-0c6d-4df0-9afc-40266bda266e", "wismo": false, "categories": ["support_unreachable_loop"], "note": ""}
+{"id": "as:13812754505", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:407edd4b-826f-40a2-b115-53b4c2602994", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:4f5154c7-1668-48e8-b359-ab578741ae36", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:c53bc1c7-31c5-42ab-a3e1-e40f6abe8111", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:a3726749-3378-4647-b510-dde91e439a07", "wismo": false, "categories": [], "note": ""}

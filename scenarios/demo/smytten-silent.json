@@ -1,0 +1,31 @@
+{
+  "id": "demo-smytten-silent",
+  "title": "No scan for three days after the Bhiwandi hub; the shopper asks and a refund clock starts",
+  "cause": "courier_silent",
+  "complaints": ["docs/research/wismo-smytten.md (eta slip / late delivery: 47.3%; trackers stale, vague or wrong: 4.8% of Smytten WISMO reviews)",
+                 "VX-02", "IC-210937"],
+  "note": "Demo timeline built from the cited review evidence; hub, times and amounts are illustrative. The shopper's report is scripted (the complaints are shoppers asking exactly this); Cierto's answer, trace and refund deadline come from the resolver under Smytten's policy.",
+  "tenant": { "id": "smytten-demo", "name": "Smytten (concept demo)", "vertical": "parcel" },
+  "order_ref": "SMY-4818440",
+  "start": "2025-12-17T20:05:00+05:30",
+  "events": [
+    { "at": "+0h", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 549, "payment": "prepaid_upi", "account_phone_last4": "2946",
+                "items": ["Minimalist 2% salicylic acid serum 30 ml"], "title": "Minimalist 2% salicylic acid serum",
+                "customer": { "ref": "cus_demo_smytten_3", "account_age_days": 700, "orders_90d": 5, "remedies_90d": 0 } } },
+    { "at": "+0h", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 549, "method": "upi" } },
+    { "at": "+0h1m", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arrives by Tue, 23 Dec", "due_by": "2025-12-23T23:59:00+05:30", "kind": "checkout" } },
+    { "at": "+18h", "type": "shipment.status", "status": "packed", "substatus": "packed.packed", "asserted_by": "merchant",
+      "shipment_ref": "AWB-1432899310", "data": { "consignee_phone_last4": "2946" } },
+    { "at": "+1d22h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432899310", "raw": { "carrier": "Delhivery", "code": "UD", "message": "Shipment picked up" },
+      "location": { "city": "Gurugram", "pincode": "122001" } },
+    { "at": "+3d14h35m", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.hub_scan", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432899310", "raw": { "carrier": "Delhivery", "code": "UD", "message": "In transit" },
+      "location": { "city": "Bhiwandi", "pincode": "421302" } }
+  ],
+  "script": [
+    { "at": "+6d17h35m", "action": "report_not_received", "locale": "en-IN" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "VX-07",
+  "title": "Cancelled at the doorstep, app still says Shipped, refund never starts, chatbot loops",
+  "complaints": ["VX-07"],
+  "note": "Timeline synthesized from the complaint summary; dates, times and amounts are illustrative.",
+  "tenant": { "id": "smytten-demo", "name": "Smytten (concept demo)", "vertical": "parcel" },
+  "order_ref": "SMY-DEMO-VX07",
+  "start": "2025-12-27T18:40:00+05:30",
+  "events": [
+    { "at": "+0h", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 799, "payment": "prepaid_card", "account_phone_last4": "5521" } },
+    { "at": "+0h", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 799, "method": "card" } },
+    { "at": "+0h1m", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arrives by Fri, 2 Jan", "due_by": "2026-01-02T23:59:00+05:30", "kind": "checkout" } },
+    { "at": "+0d20h", "type": "shipment.status", "status": "packed", "substatus": "packed.packed",
+      "asserted_by": "merchant", "shipment_ref": "AWB-DEMO-2", "data": { "consignee_phone_last4": "5521" } },
+    { "at": "+1d1h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up",
+      "asserted_by": "merchant", "shipment_ref": "AWB-DEMO-2", "raw": { "message": "Shipped" } },
+    { "at": "+1d2h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up",
+      "asserted_by": "carrier", "shipment_ref": "AWB-DEMO-2", "raw": { "carrier": "delhivery", "code": "UD", "message": "Shipment picked up" } },
+    { "at": "+3d9h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.hub_scan",
+      "asserted_by": "carrier", "shipment_ref": "AWB-DEMO-2", "raw": { "carrier": "delhivery", "code": "UD", "message": "In transit" } },
+    { "at": "+5d14h", "type": "shipment.status", "status": "out_for_delivery", "substatus": "out_for_delivery.out_for_delivery",
+      "asserted_by": "carrier", "shipment_ref": "AWB-DEMO-2", "raw": { "carrier": "delhivery", "code": "OFD", "message": "Out for delivery" } },
+    { "at": "+5d18h50m", "type": "shipment.status", "status": "cancelled", "substatus": "cancelled.doorstep_rejected",
+      "asserted_by": "carrier", "shipment_ref": "AWB-DEMO-2",
+      "raw": { "carrier": "delhivery", "code": "RT", "message": "Cancelled by consignee using cancellation code" } },
+    { "at": "+6d15h", "type": "customer.contacted", "asserted_by": "customer", "data": { "channel": "chatbot", "replied": false } },
+    { "at": "+7d12h", "type": "customer.contacted", "asserted_by": "customer", "data": { "channel": "chatbot", "replied": false } },
+    { "at": "+8d11h", "type": "customer.contacted", "asserted_by": "customer", "data": { "channel": "email", "replied": false } }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "demo-smytten-ok",
+  "title": "A delivery that went right",
+  "complaints": ["none (healthy contrast)"],
+  "note": "Synthetic healthy order for contrast.",
+  "tenant": { "id": "smytten-demo", "name": "Smytten (concept demo)", "vertical": "parcel" },
+  "order_ref": "SMY-4798021",
+  "start": "2025-12-11T10:20:00+05:30",
+  "events": [
+    { "at": "+0h", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 299, "payment": "prepaid_upi", "account_phone_last4": "2946",
+                "items": ["Plum vitamin C face wash 15 ml", "Mamaearth onion shampoo 30 ml"], "title": "Hair & face trial · 2 minis" } },
+    { "at": "+0h", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 299 } },
+    { "at": "+0h1m", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arrives by Tue, 16 Dec", "due_by": "2025-12-16T23:59:00+05:30", "kind": "checkout" } },
+    { "at": "+0d20h", "type": "shipment.status", "status": "packed", "substatus": "packed.packed", "asserted_by": "merchant",
+      "shipment_ref": "AWB-1432701122", "data": { "consignee_phone_last4": "2946" } },
+    { "at": "+1d2h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432701122", "raw": { "carrier": "Delhivery", "code": "UD" } },
+    { "at": "+2d20h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.at_destination_hub", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432701122", "raw": { "carrier": "Delhivery", "code": "UD" } },
+    { "at": "+3d23h", "type": "shipment.status", "status": "out_for_delivery", "substatus": "out_for_delivery.out_for_delivery", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432701122", "raw": { "carrier": "Delhivery", "code": "OFD" } },
+    { "at": "+4d3h", "type": "shipment.status", "status": "delivered", "substatus": "delivered.delivered", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432701122", "raw": { "carrier": "Delhivery", "code": "DL" }, "proof": { "otp_verified": true } }
+  ]
+}

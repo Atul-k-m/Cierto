@@ -1,0 +1,11 @@
+{
+ "brand": "swish",
+ "tag": "B",
+ "seed": 20260930,
+ "n": 40,
+ "neg_pool": "low",
+ "pos_pool": 123,
+ "neg_pool_size": 1086,
+ "k_pos": 30,
+ "k_neg": 10
+}

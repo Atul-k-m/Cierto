@@ -1,0 +1,28 @@
+{
+  "id": "demo-zomato-delivered",
+  "title": "Meal marked delivered with no OTP and no food at the door",
+  "cause": "delivered_not_received",
+  "complaints": ["docs/research/wismo-zomato.md (not received / marked delivered)", "Voxya #204812 (Instamart, marked delivered without OTP)", "Startuppedia/X, Jan 2026 (Zomato marked delivered with no food; users ask for an OTP)"],
+  "note": "Demo timeline built from the cited public complaints; restaurant, rider, times and amounts are illustrative.",
+  "tenant": { "id": "zomato-demo", "name": "Zomato (concept demo)", "vertical": "quick" },
+  "order_ref": "ZMT-7729381044",
+  "start": "2025-12-24T13:25:00+05:30",
+  "events": [
+    { "at": "+0m", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 412, "payment": "prepaid_upi", "account_phone_last4": "2946",
+                "restaurant": "Burger Singh", "area": "Laxmi Nagar", "items": ["Punjabi Tadka burger", "Masala fries", "Cold coffee"],
+                "rider": "Imran", "title": "Burger Singh · 3 items" } },
+    { "at": "+0m", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 412 } },
+    { "at": "+0m", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arriving by 2:05 pm", "due_by": "2025-12-24T14:05:00+05:30", "kind": "checkout" } },
+    { "at": "+1m", "type": "shipment.status", "status": "pending", "substatus": "pending.preparing", "asserted_by": "rider" },
+    { "at": "+9m", "type": "shipment.status", "status": "pending", "substatus": "pending.agent_assigned", "asserted_by": "rider",
+      "data": { "rider": "Imran" } },
+    { "at": "+23m", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up", "asserted_by": "rider" },
+    { "at": "+27m", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.en_route", "asserted_by": "rider" },
+    { "at": "+31m", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.en_route", "asserted_by": "rider" },
+    { "at": "+35m", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.en_route", "asserted_by": "rider" },
+    { "at": "+37m", "type": "shipment.status", "status": "delivered", "substatus": "delivered.delivered", "asserted_by": "rider",
+      "proof": { "otp_verified": false } }
+  ]
+}

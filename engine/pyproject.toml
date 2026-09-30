@@ -1,0 +1,27 @@
+[project]
+name = "wismo"
+version = "0.1.0"
+description = "Order-truth engine for intelligent WISMO (proof of concept)"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "httpx>=0.27",             # Gemini over REST, outgoing webhooks
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2", "pgserver>=0.1"]   # the Postgres event log (replay --postgres, store tests)
+redis = ["redis>=5"]       # shared sessions and counters when REDIS_URL is set (any Redis, incl. Upstash rediss://)
+dev = ["pytest>=8", "psycopg[binary]>=3.2", "pgserver>=0.1", "redis>=5", "fakeredis>=2.20"]
+llm = ["anthropic>=1.9"]   # optional: the resolver rephrases its messages with Claude when ANTHROPIC_API_KEY is set
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wismo"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

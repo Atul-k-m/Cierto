@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T19:00:00+05:30",
+  "title": "Design System: Intelligent WISMO",
+  "extensions": {
+    "colorMeta": {
+      "cloud-field": { "role": "neutral", "displayName": "Cloud Field", "canonical": "#fbfcfd", "tonalRamp": ["oklch(15% 0.003 247)", "oklch(27% 0.003 247)", "oklch(39% 0.003 247)", "oklch(51% 0.003 247)", "oklch(63% 0.003 247)", "oklch(75% 0.003 247)", "oklch(88% 0.003 247)", "oklch(99% 0.002 247)"] },
+      "slate-ink": { "role": "primary", "displayName": "Slate Ink", "canonical": "#2e3440", "tonalRamp": ["oklch(15% 0.02 264)", "oklch(25% 0.022 264)", "oklch(32% 0.022 264)", "oklch(45% 0.022 264)", "oklch(58% 0.02 264)", "oklch(71% 0.016 264)", "oklch(84% 0.01 264)", "oklch(95% 0.005 264)"] },
+      "slate-ink-deep": { "role": "primary", "displayName": "Slate Ink Deep", "canonical": "#1f242d" },
+      "slate-soft": { "role": "neutral", "displayName": "Slate Soft", "canonical": "#545e6d", "tonalRamp": ["oklch(15% 0.02 260)", "oklch(27% 0.024 260)", "oklch(39% 0.025 260)", "oklch(47% 0.025 260)", "oklch(60% 0.022 260)", "oklch(72% 0.018 260)", "oklch(85% 0.01 260)", "oklch(95% 0.005 260)"] },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "rgb(46 52 64 / .12)" },
+      "paper-white": { "role": "neutral", "displayName": "Paper White", "canonical": "#ffffff" },
+      "proof-mint": { "role": "tertiary", "displayName": "Proof Mint", "canonical": "#2aa27a", "tonalRamp": ["oklch(20% 0.05 163)", "oklch(30% 0.08 163)", "oklch(42% 0.1 163)", "oklch(52% 0.12 163)", "oklch(62% 0.13 163)", "oklch(74% 0.11 163)", "oklch(86% 0.07 163)", "oklch(95% 0.03 163)"] },
+      "proof-rose": { "role": "tertiary", "displayName": "Proof Rose", "canonical": "#d9577d", "tonalRamp": ["oklch(20% 0.06 5)", "oklch(30% 0.1 5)", "oklch(42% 0.14 5)", "oklch(52% 0.16 5)", "oklch(63% 0.16 5)", "oklch(74% 0.12 5)", "oklch(86% 0.07 5)", "oklch(95% 0.03 5)"] },
+      "proof-violet": { "role": "tertiary", "displayName": "Proof Violet", "canonical": "#6f58e0", "tonalRamp": ["oklch(20% 0.08 285)", "oklch(30% 0.13 285)", "oklch(42% 0.18 285)", "oklch(55% 0.2 285)", "oklch(64% 0.17 285)", "oklch(75% 0.12 285)", "oklch(86% 0.07 285)", "oklch(95% 0.03 285)"] },
+      "focus-violet": { "role": "tertiary", "displayName": "Focus Violet", "canonical": "#5b47c9" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The virtual clock; tabular figures." },
+      "headline": { "displayName": "Headline", "purpose": "The page question." },
+      "lede": { "displayName": "Lede", "purpose": "One or two sentences under the headline, max 72ch, slate soft." },
+      "title": { "displayName": "Title", "purpose": "Caption titles, section heads, timeline step labels." },
+      "body": { "displayName": "Body", "purpose": "Feed messages." },
+      "label": { "displayName": "Label", "purpose": "Metadata, times, sources, text buttons; slate soft." },
+      "code": { "displayName": "Mono", "purpose": "Engine rule identifiers only." }
+    },
+    "shadows": [
+      { "name": "device-lift", "value": "0 1px 2px rgb(46 52 64 / .05), 0 40px 70px -40px rgb(46 52 64 / .35)", "purpose": "The observed object's frame only." },
+      { "name": "proof-fringe", "value": "filter: blur(7px); opacity: .55", "purpose": "Blurred copy of the forming or vivid proof band behind the crisp band." }
+    ],
+    "motion": [
+      { "name": "ease-house", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Every authored transition, platform and widget." },
+      { "name": "edge-arrive", "value": ".9s ease-house; scale .985 to 1, opacity .5 to 1", "purpose": "One arrival per proof-edge state change." },
+      { "name": "edge-travel", "value": "3.6s linear infinite; --edge-angle 0 to 360deg", "purpose": "The forming shimmer; the only loop." },
+      { "name": "state-hover", "value": ".3s ease-house on background-color and border-color", "purpose": "Platform control hovers." },
+      { "name": "widget-settle", "value": ".5s ease-house; translateY(6px) to none", "purpose": "Widget headline/question on state change." }
+    ],
+    "breakpoints": [
+      { "name": "stack-feed", "value": "1280px" },
+      { "name": "single-object", "value": "860px" }
+    ],
+    "proofEdge": {
+      "states": {
+        "absent": "1px hairline band, no fringe",
+        "forming": "3px conic(from --edge-angle, transparent 0 18%, mint 34%, rose 56%, violet 78%, transparent 94%), travelling, with fringe",
+        "vivid": "3px conic(from 200deg, mint, rose, violet, mint), still, with fringe",
+        "dispersed": "3px repeating-conic(from 12deg, rose 0 7deg, gap 7-13deg, violet 13-18deg, gap 18-26deg), no fringe"
+      },
+      "geometry": "ring inset 7px outside the device, radius 54px; device radius 47px, padding 9px; screen radius 38px"
+    },
+    "widgetContract": {
+      "element": "<wismo-order session order variant=\"orders-row|tracking-card|after-delivered\" theme api>",
+      "format": "DTCG *.tokens.json, flattened to --w-<path> on :host",
+      "requiredTokens": {
+        "font.body": "--w-font-body",
+        "color.ink": "--w-color-ink",
+        "color.muted": "--w-color-muted",
+        "color.surface": "--w-color-surface",
+        "color.surface-2": "--w-color-surface-2",
+        "color.line": "--w-color-line",
+        "color.action": "--w-color-action",
+        "color.action-ink": "--w-color-action-ink",
+        "color.action-strong": "--w-color-action-strong",
+        "color.ok": "--w-color-ok",
+        "color.ok-soft": "--w-color-ok-soft",
+        "color.check": "--w-color-check",
+        "color.check-soft": "--w-color-check-soft",
+        "color.alert": "--w-color-alert",
+        "color.alert-soft": "--w-color-alert-soft",
+        "color.focus": "--w-color-focus",
+        "radius.surface": "--w-radius-surface",
+        "radius.control": "--w-radius-control"
+      },
+      "exampleThemes": [
+        "apps/web/src/widget/themes/smytten.tokens.json",
+        "apps/web/src/widget/themes/zomato.tokens.json",
+        "apps/web/src/widget/themes/swish.tokens.json"
+      ],
+      "note": "Example themes are third-party look-alikes for the demo, not the project's identity."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Trigger",
+      "kind": "button",
+      "refersTo": "button-trigger",
+      "description": "The one filled control in view; label over tabular time.",
+      "html": "<button class=\"ds-trigger\"><span class=\"ds-trigger-label\">Courier marks delivered, no OTP</span><span class=\"ds-trigger-time\">2:02 pm</span></button>",
+      "css": ".ds-trigger { display: grid; gap: 2px; min-height: 56px; padding: 8px 12px; border-radius: 12px; border: 1px solid transparent; background: #2e3440; color: #fff; text-align: left; cursor: pointer; font-family: 'Source Sans 3', system-ui, sans-serif; transition: background-color .3s cubic-bezier(.16,1,.3,1); } .ds-trigger:hover { background: #1f242d; } .ds-trigger:focus-visible { outline: 1.5px solid #5b47c9; outline-offset: 3px; } .ds-trigger-label { font-size: 15px; font-weight: 600; line-height: 1.25; } .ds-trigger-time { font-size: 13px; color: rgb(255 255 255 / .75); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Timeline Step",
+      "kind": "button",
+      "refersTo": "beat-step",
+      "description": "Unfilled step; hairline on hover; current step takes a white fill.",
+      "html": "<div class=\"ds-beats\"><button class=\"ds-beat ds-reached\"><span class=\"ds-beat-label\">Riders out</span><span class=\"ds-beat-time\">1:59 pm</span></button><button class=\"ds-beat ds-current\" aria-current=\"step\"><span class=\"ds-beat-label\">Courier marks delivered</span><span class=\"ds-beat-time\">2:02 pm</span></button><button class=\"ds-beat\"><span class=\"ds-beat-label\">Next day</span><span class=\"ds-beat-time\">Thu 25 Dec</span></button></div>",
+      "css": ".ds-beats { display: flex; gap: 4px; padding: 10px 0 4px; border-top: 1px solid rgb(46 52 64 / .12); font-family: 'Source Sans 3', system-ui, sans-serif; } .ds-beat { display: grid; gap: 2px; min-height: 56px; padding: 8px 12px; border-radius: 12px; border: 1px solid transparent; background: none; color: #2e3440; text-align: left; cursor: pointer; transition: background-color .3s cubic-bezier(.16,1,.3,1), border-color .3s cubic-bezier(.16,1,.3,1); } .ds-beat:hover { border-color: rgb(46 52 64 / .12); } .ds-beat:focus-visible { outline: 1.5px solid #5b47c9; outline-offset: 3px; } .ds-beat-label { font-size: 15px; font-weight: 600; line-height: 1.25; white-space: nowrap; } .ds-beat-time { font-size: 13px; color: #545e6d; font-variant-numeric: tabular-nums; } .ds-reached { color: #545e6d; } .ds-reached .ds-beat-label { font-weight: 400; } .ds-current { background: #fff; border-color: rgb(46 52 64 / .12); color: #2e3440; }"
+    },
+    {
+      "name": "Secondary Pill",
+      "kind": "button",
+      "refersTo": "button-next",
+      "description": "White pill with hairline border; border goes ink on hover.",
+      "html": "<button class=\"ds-pill\">Next</button>",
+      "css": ".ds-pill { min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid rgb(46 52 64 / .12); background: #fff; color: #2e3440; font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: border-color .3s cubic-bezier(.16,1,.3,1); } .ds-pill:hover { border-color: #2e3440; } .ds-pill:focus-visible { outline: 1.5px solid #5b47c9; outline-offset: 3px; } .ds-pill:disabled { opacity: .5; cursor: default; }"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "text-button",
+      "description": "Unfilled, hairline-underlined utility action.",
+      "html": "<button class=\"ds-text-btn\">Restart demo</button>",
+      "css": ".ds-text-btn { padding: 6px 0; border: 0; background: none; color: #545e6d; font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 14px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgb(46 52 64 / .12); } .ds-text-btn:hover { color: #2e3440; text-decoration-color: currentColor; } .ds-text-btn:focus-visible { outline: 1.5px solid #5b47c9; outline-offset: 3px; border-radius: 6px; }"
+    },
+    {
+      "name": "Proof Edge",
+      "kind": "custom",
+      "refersTo": "device-frame",
+      "description": "Signature: a spectral ring around the observed object whose state is the delivery's proof (shown vivid, with words).",
+      "html": "<figure class=\"ds-obs\"><div class=\"ds-edge\"><span class=\"ds-ring ds-glow\"></span><span class=\"ds-ring\"></span><div class=\"ds-device\"><div class=\"ds-screen\"></div></div></div><figcaption><span class=\"ds-cap-title\">Swish · After delivery</span><span class=\"ds-cap-words\">Delivery confirmed</span></figcaption></figure>",
+      "css": ".ds-obs { margin: 0; width: 200px; display: grid; gap: 10px; font-family: 'Source Sans 3', system-ui, sans-serif; color: #2e3440; } .ds-edge { position: relative; padding: 7px; border-radius: 54px; } .ds-ring { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; animation: ds-arrive .9s cubic-bezier(.16,1,.3,1); } .ds-ring::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px; background: conic-gradient(from 200deg, #2aa27a, #d9577d, #6f58e0, #2aa27a); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); } .ds-glow { filter: blur(7px); opacity: .55; } .ds-device { border-radius: 47px; padding: 9px; background: #fff; border: 1px solid rgb(46 52 64 / .12); box-shadow: 0 1px 2px rgb(46 52 64 / .05), 0 40px 70px -40px rgb(46 52 64 / .35); } .ds-screen { height: 300px; border-radius: 38px; background: #f4f4f2; } figcaption { display: grid; gap: 2px; padding: 0 10px; } .ds-cap-title { font-size: 16px; font-weight: 600; } .ds-cap-words { font-size: 14px; color: #545e6d; } @keyframes ds-arrive { from { transform: scale(.985); opacity: .5; } to { transform: none; opacity: 1; } } @media (prefers-reduced-motion: reduce) { .ds-ring { animation: none; } }"
+    },
+    {
+      "name": "Feed Entry",
+      "kind": "card",
+      "refersTo": "typography.body",
+      "description": "Plain-text log entry separated by a hairline rule; no box.",
+      "html": "<ol class=\"ds-feed\"><li><p class=\"ds-meta\">Wed 24 Dec, 2:02 pm · Zomato</p><p class=\"ds-msg\">The customer says the order did not arrive, though it was marked delivered.</p><p class=\"ds-rule\"><code>delivery_disputed</code> · holder: carrier</p></li></ol>",
+      "css": ".ds-feed { margin: 0; padding: 0; list-style: none; display: grid; gap: 18px; max-width: 300px; font-family: 'Source Sans 3', system-ui, sans-serif; color: #2e3440; } .ds-feed li { display: grid; gap: 3px; padding-top: 14px; border-top: 1px solid rgb(46 52 64 / .12); } .ds-feed p { margin: 0; } .ds-meta { font-size: 13px; color: #545e6d; font-variant-numeric: tabular-nums; } .ds-msg { font-size: 15px; line-height: 1.4; } .ds-rule { font-size: 12.5px; color: #545e6d; } .ds-rule code { font-family: ui-monospace, 'SF Mono', Consolas, monospace; font-size: .92em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Iridescent Cloud Edge",
+    "overview": "A quiet observatory. The field is cloud-white, the type is slate and light, margins are wide, and nothing is filled. The one exception is the single primary control. Colour appears in one place only: a thin spectral edge around the thing being observed, and the edge's state is the delivery's proof. With no proof there is no colour. When the courier claims delivery, the colour starts forming. A confirmation makes it vivid and still, and a dispute breaks it apart.\n\nThe world is meant to be looked through, not at. Chrome recedes to hairlines so the observed content (the phones in the launcher, and later an order, a case or a lane) does the talking. Density is low in the stage and moderate in the side feed, which reads as a plain-text log and not as a card grid. The owner rejected the category default of a dashboard made of cards and metric tiles.\n\nMotion follows the same restraint. Each state change gets one authored arrival on an exponential ease-out. The forming shimmer is the only loop. Hovers change colour or border, never position.",
+    "keyCharacteristics": [
+      "Cloud-white field, slate ink, a single light humanist sans (Source Sans 3 at 300/400/600).",
+      "Chromatic colour exists only as the proof edge (mint, rose, violet) and the focus ring.",
+      "Four edge states (absent, forming, vivid, dispersed), always paired with words.",
+      "Hairline dividers, no card fills, one filled control per view.",
+      "Times and counts set in tabular figures."
+    ],
+    "rules": [
+      { "name": "The Proof-Only Colour Rule", "body": "Mint, rose and violet appear only in the proof edge. Text, fills, icons and charts stay achromatic. The focus ring is the one exception.", "section": "colors" },
+      { "name": "The Words-With-Edge Rule", "body": "Every edge state is also written out in the caption (\"Not delivered yet\", \"Courier says delivered · unproven\", \"Delivery confirmed\", \"Customer disputes delivery\"). The uncertain states (forming and dispersed) are set in 600 ink. The edge is `aria-hidden`, so the words carry the status.", "section": "colors" },
+      { "name": "The Light Voice Rule", "body": "Large type is always 300 and emphasis is always 600. The platform never uses 700 or heavier.", "section": "typography" },
+      { "name": "The Tabular Time Rule", "body": "Every clock, timestamp and step time uses `font-variant-numeric: tabular-nums`, in IST and Indian English formatting.", "section": "typography" },
+      { "name": "The Hairline Rule", "body": "Dividers and resting borders are 1px `hairline`. Feed entries, the timeline and the header are separated by rules, not boxes.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep chromatic colour inside the proof edge. The focus ring is the one exception.",
+      "Do pair every edge state with its written status in the caption.",
+      "Do allow one filled control per view (slate ink, 12px corners) and keep everything else unfilled or hairline.",
+      "Do set large type at 300 and emphasis at 600 in Source Sans 3, with tabular figures for every time.",
+      "Do give each state change one arrival on `cubic-bezier(.16, 1, .3, 1)`, and honour `prefers-reduced-motion`.",
+      "Do theme the widget only through the `--w-*` contract, so each host gets a new token file and never a fork."
+    ],
+    "donts": [
+      "Don't colour text, icons, fills or data with mint, rose or violet.",
+      "Don't build platform surfaces as dashboards of cards and metric tiles. Use hairline-separated lists and plain text.",
+      "Don't add shadows beyond the device lift, and don't box feed or list entries.",
+      "Don't give the widget its own colours, face or radii, or let the platform palette leak into it.",
+      "Don't treat a host replica's palette (Smytten, Zomato or Swish) as this project's identity."
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+ "street-cart": {
+  "pexels_id": "28505628",
+  "url": "https://www.pexels.com/photo/28505628/",
+  "licence": "Pexels License",
+  "treatment": "grayscale gradient-map ink->paper (and ink->accent) + grain, apps/web: build step documented in .impeccable/refs/v3/photos/provenance.json"
+ },
+ "courier-box": {
+  "pexels_id": "13432255",
+  "url": "https://www.pexels.com/photo/13432255/",
+  "licence": "Pexels License",
+  "treatment": "grayscale gradient-map ink->paper (and ink->accent) + grain, apps/web: build step documented in .impeccable/refs/v3/photos/provenance.json"
+ },
+ "cyclist": {
+  "pexels_id": "8931721",
+  "url": "https://www.pexels.com/photo/8931721/",
+  "licence": "Pexels License",
+  "treatment": "grayscale gradient-map ink->paper (and ink->accent) + grain, apps/web: build step documented in .impeccable/refs/v3/photos/provenance.json"
+ },
+ "courier-portrait": {
+  "pexels_id": "8931690",
+  "url": "https://www.pexels.com/photo/8931690/",
+  "licence": "Pexels License",
+  "treatment": "grayscale gradient-map ink->paper (and ink->accent) + grain, apps/web: build step documented in .impeccable/refs/v3/photos/provenance.json"
+ }
+}

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.impeccable/review/
+.impeccable/mocks/
+research/.venv/
+
+engine/.env
+deploy/.env
+deploy/**/.env
+*.env.local
+
+apps/web/dist-ssr/

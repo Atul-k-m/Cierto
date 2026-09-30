@@ -1,0 +1,95 @@
+{
+ "brand": "smytten",
+ "tag": "B",
+ "taxonomy_version": 2,
+ "n_labelled": 40,
+ "wismo_flag": {
+  "precision": 0.867,
+  "predicted": 30,
+  "correct": 26,
+  "false_negatives_all": 3,
+  "in_sample_recall": 0.897,
+  "missed_in_negative_stratum": 3,
+  "negative_stratum_n": 10,
+  "negative_stratum_miss_rate": 0.3
+ },
+ "categories": {
+  "eta_slip_late": {
+   "predicted": 12,
+   "correct": 11,
+   "precision": 0.917,
+   "gold": 14,
+   "in_sample_recall": 0.786
+  },
+  "support_unreachable_loop": {
+   "predicted": 10,
+   "correct": 10,
+   "precision": 1.0,
+   "gold": 18,
+   "in_sample_recall": 0.556
+  },
+  "order_not_delivered": {
+   "predicted": 9,
+   "correct": 8,
+   "precision": 0.889,
+   "gold": 13,
+   "in_sample_recall": 0.615
+  },
+  "delivered_not_received": {
+   "predicted": 6,
+   "correct": 5,
+   "precision": 0.833,
+   "gold": 5,
+   "in_sample_recall": 1.0
+  },
+  "partial_missing_item": {
+   "predicted": 3,
+   "correct": 3,
+   "precision": 1.0,
+   "gold": 3,
+   "in_sample_recall": 1.0
+  },
+  "vague_support_answer": {
+   "predicted": 3,
+   "correct": 2,
+   "precision": 0.667,
+   "gold": 4,
+   "in_sample_recall": 0.5
+  },
+  "tracking_stale_wrong": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 5,
+   "in_sample_recall": 0.4
+  },
+  "multiple_batched_orders": {
+   "predicted": 2,
+   "correct": 1,
+   "precision": 0.5,
+   "gold": 1,
+   "in_sample_recall": 1.0
+  },
+  "proactive_comms_missing": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "refund_stuck": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 5,
+   "in_sample_recall": 0.4
+  },
+  "cancelled_by_platform": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 1,
+   "in_sample_recall": 1.0
+  }
+ }
+}

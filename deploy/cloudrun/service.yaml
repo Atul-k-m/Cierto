@@ -1,0 +1,76 @@
+# Cloud Run service (Knative serving v1). deploy.sh fills the ${...} placeholders and runs
+#   gcloud run services replace <rendered.yaml> --region ${REGION}
+# Cloud Run's front end is the load balancer: it spreads requests across instances with no session affinity,
+# which is fine because no instance holds a session only it can serve (REDIS_URL shares them).
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ${SERVICE}
+  labels:
+    cloud.googleapis.com/location: ${REGION}
+  annotations:
+    run.googleapis.com/ingress: all
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"                 # scale to zero: free when idle
+        autoscaling.knative.dev/maxScale: "${MAX_INSTANCES}"   # 4 with REDIS_URL; 1 without (per-instance state)
+        run.googleapis.com/cpu-throttling: "true"             # CPU only while serving: request-based billing
+        run.googleapis.com/startup-cpu-boost: "true"          # faster cold starts
+        run.googleapis.com/sessionAffinity: "false"           # not needed: any instance serves any session
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 60
+      serviceAccountName: ${RUNTIME_SA}
+      containers:
+        - image: ${IMAGE}
+          ports:
+            - name: http1
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          env:
+            - name: TRUSTED_PROXY_HOPS
+              value: "1"                                       # Cloud Run's front end appends the client IP
+            - name: FORWARDED_ALLOW_IPS
+              value: "*"
+            - name: LOG_FORMAT
+              value: json
+            - name: SITE_URL                                   # SITE_URL_LINE (removed when SITE_URL is empty)
+              value: ${SITE_URL}                               # SITE_URL_LINE
+            - name: GOOGLE_CLOUD_PROJECT
+              value: ${PROJECT_ID}                             # lets access logs link to Cloud Trace
+            # BEGIN GEMINI (removed when there is no Gemini secret: answers come from the templates)
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ${GEMINI_SECRET}
+                  key: latest
+            # END GEMINI
+            # BEGIN REDIS (removed when there is no Redis secret)
+            - name: REDIS_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ${REDIS_SECRET}
+                  key: latest
+            # END REDIS
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 1
+            timeoutSeconds: 1
+            failureThreshold: 30
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3
+  traffic:
+    - percent: 100
+      latestRevision: true

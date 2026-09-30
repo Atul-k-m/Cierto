@@ -1,0 +1,25 @@
+# Build context for the Dockerfile: sources only. Builds, installs, secrets and raw research data stay out.
+.git
+.gitignore
+**/node_modules
+**/dist
+**/dist-ssr
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.ruff_cache
+**/.DS_Store
+
+# secrets: never in an image layer
+**/.env
+**/.env.*
+!**/.env.example
+deploy
+
+# not needed to build the site or run the engine
+.impeccable
+data
+research
+engine/.pgdata
+engine/tests

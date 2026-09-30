@@ -1,0 +1,47 @@
+{
+ "google_play": {
+  "status": "ok",
+  "detail": "app_id=com.application.zomato, lang=en, country=in; pulls: newest=5000, low_1=3000, low_2=1600",
+  "at": "2026-09-29T22:53:50+00:00",
+  "rows": 8377,
+  "requests": 0,
+  "date_min": "2026-06-29",
+  "date_max": "2026-09-29"
+ },
+ "app_store": {
+  "status": "ok",
+  "detail": "app_id=434613896, storefront=in, pages with data=10, feed last page=10",
+  "at": "2026-09-29T22:54:04+00:00",
+  "rows": 500,
+  "requests": 10,
+  "date_min": "2026-09-25",
+  "date_max": "2026-09-28"
+ },
+ "consumercomplaints": {
+  "status": "ok",
+  "detail": "slug=zomato-b115724, listing pages=6, detail pages=25, min_date=2023-01-01, older rows dropped=59",
+  "at": "2026-09-29T22:55:22+00:00",
+  "rows": 61,
+  "requests": 32,
+  "date_min": "2023-02-08",
+  "date_max": "2026-08-25"
+ },
+ "trustpilot": {
+  "status": "skipped",
+  "detail": "robots.txt: 'User-agent: * / Disallow: /' (only named search bots allowed); pages also return HTTP 403 to non-browser clients",
+  "at": "2026-09-29T22:55:22+00:00",
+  "requests": 1
+ },
+ "mouthshut": {
+  "status": "skipped",
+  "detail": "robots.txt disallows ClaudeBot site-wide (and Content-Signal ai-train=no); not fetched",
+  "at": "2026-09-29T22:55:23+00:00",
+  "requests": 1
+ },
+ "reddit": {
+  "status": "skipped",
+  "detail": "robots.txt disallows this path (Disallow: / for all agents); API requires OAuth login",
+  "at": "2026-09-29T22:55:23+00:00",
+  "requests": 1
+ }
+}

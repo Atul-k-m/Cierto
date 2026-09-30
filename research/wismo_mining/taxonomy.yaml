@@ -1,0 +1,572 @@
+# WISMO issue taxonomy.
+#
+# How matching works (see classify.py):
+#   * Text is normalised: lower-cased, curly quotes straightened, APOSTROPHES REMOVED
+#     (didn't -> didnt, can't -> cant), line breaks turned into sentence breaks,
+#     "10min" -> "10 min", and the `normalize` spelling fixes below applied.
+#   * Each category has `patterns` (Python regex, case-insensitive). {MACROS} from
+#     `vocab` are expanded first. A category fires when any pattern matches.
+#   * `exclude` patterns cancel any pattern match whose span they overlap
+#     ("no delay" cancels the "delay" hit, "I cancelled" cancels a cancel hit).
+#   * `suppressed_by`: drop this category when one of the listed ones fired
+#     (so "shows delivered, not received" is not double-counted as plain not-received).
+#   * A review is WISMO-related when any category with `wismo: true` fires.
+#     Cross-cutting categories (support, proactive comms) and adjacent ones (refunds,
+#     missing items) are counted but do not make a review WISMO by themselves.
+#   * `other_non_wismo` is derived: every review that is not WISMO-related.
+#
+# Adding a category = add a block here and re-run `classify`. Every hit stores the
+# matched phrase and pattern index, so each label is explainable.
+
+version: 2
+strip_quotes: true   # v2: drop " “ ” so quoted statuses (shows "Delivered") match
+
+normalize:        # applied as whole-word regex replacements after lower-casing
+  recieved: received
+  recieve: receive
+  recived: received
+  receieved: received
+  recevied: received
+  deliverd: delivered
+  delieverd: delivered
+  delievered: delivered
+  dilivered: delivered
+  deliverred: delivered
+  delivred: delivered
+  delivary: delivery
+  dilivery: delivery
+  delievery: delivery
+  deliverey: delivery
+  delivey: delivery
+  devlivery: delivery
+  delevery: delivery
+  dilevery: delivery
+  delivry: delivery
+  delhivery boy: delivery boy
+  zomoto: zomato
+  soppert: support
+  suppert: support
+  leet: late
+  deleved: delivered
+  delevered: delivered
+  dilevered: delivered
+  cancle: cancel
+  adress: address
+  addres: address
+  custmer: customer
+  costumer: customer
+  coustomer: customer
+  suport: support
+  traking: tracking
+  trackng: tracking
+  wating: waiting
+  pakage: package
+  packege: package
+  refunf: refund
+  refound: refund
+  cancled: cancelled
+  canceld: cancelled
+  cancelld: cancelled
+  cancell: cancel
+  ordr: order
+  oder: order
+  orer: order
+  locaton: location
+  loaction: location
+  mins: min
+  minutes: min
+  minute: min
+  hrs: hr
+  hours: hr
+  hour: hr
+
+vocab:
+  NEG: '(?:not|never|didnt|did not|havent|have not|hasnt|has not|dont|do not|doesnt|does not|wasnt|was not|werent|were not|isnt|is not|arent|wont|still not|yet to|not yet)'
+  ORDER: '(?:order|orders|parcel|parcels|package|packages|packet|shipment|delivery|food|meal|item|items|product|products|box|kit|sample|samples|stuff|trial|trials|consignment)'
+  RIDER: '(?:rider|riders|delivery ?(?:boy|boys|guy|guys|man|men|partner|partners|person|persons|people|executive|executives|exec|agent|agents|valet|associate|staff)|valet|driver|courier ?(?:boy|guy|man|person|partner|agent)|deliveryman|dp)'
+  SUPPORT: '(?:customer (?:support|care|service|services|executive|executives|agent|agents|team)|support(?: team)?|care team|helpline|help ?desk|help ?cent(?:er|re)|chat ?support|live chat|chat|agents?|executives?)'
+  TIMEAMT: '(?:\d+(?:\.\d+)?|an?|one|two|three|four|five|six|few|several|many|couple of)'
+  HINEG: '(?:nahi|nahin|nhi|ni|nai)'
+
+categories:
+
+  # ------------------------------------------------------------------ WISMO core
+  - id: tracking_stale_wrong
+    label: Tracker stale, vague or wrong
+    group: wismo_core
+    wismo: true
+    hypothesis: trackers that are stale, vague or wrong
+    definition: >-
+      The tracker, order status or map shows stale, missing, vague or incorrect
+      information: status not updating, no tracking at all, tracking link or AWB not
+      working, wrong status or location, or the tracker contradicting reality.
+    patterns:
+      - '\btrack(?:ing|er)\b[^.!?]{0,40}\b(?:not|never|isnt|doesnt|does not|didnt|wrong|incorrect|inaccurate|fake|useless|stuck|same|stale|misleading|false|broken|nahi|nhi|frozen|shows nothing)\b'
+      - '\b(?:no|without|zero|poor|bad|worst|useless|fake|wrong|inaccurate|incorrect|misleading|pathetic|horrible|terrible)\s+(?:live\s+|real[- ]?time\s+|order\s+)?track(?:ing|er)\b'
+      - '\bstatus\b[^.!?]{0,30}\b(?:not|never|isnt|no)\s+(?:been\s+|getting\s+|even\s+)?updat'
+      - '\bnot\s+(?:been\s+|getting\s+)?updat(?:ed|ing)\b[^.!?]{0,30}\b(?:status|tracking|tracker|location|map)\b'
+      - '\b(?:same|wrong|incorrect|false|fake|misleading|old|stale)\s+(?:status|eta|update|updates|tracking info)\b'
+      - '\bstill\s+(?:show|shows|showing)\s+(?:as\s+)?(?:shipped|dispatched|in[- ]?transit|processing|packed|out for delivery|preparing|order placed|confirmed|pending)'
+      - '\b(?:status|tracking|app|it)\s+(?:shows?|showing|says|said)\s+(?:as\s+)?(?:shipped|dispatched|in[- ]?transit|processing|out for delivery|preparing|packed)\b[^.!?]{0,40}\b(?:since|for|but|days|still)\b'
+      - '\b(?:map|gps|live location)\b[^.!?]{0,30}\b(?:not (?:updat|show|work|mov)|doesnt (?:updat|show|work)|wrong|incorrect|frozen|stuck)'
+      - '\b(?:awb|tracking (?:id|link|number|no|details|url|page))\b[^.!?]{0,40}\b(?:not|invalid|doesnt|does not|wrong|never|isnt|no)\b'
+      - '\bno\s+(?:tracking|tracking (?:id|link|number|details|info|information|update|updates))\b'
+      - '\b(?:cant|cannot|couldnt|could not|unable to|not able to|no way to)\s+track\b'
+      - '\btracking\s+(?:is\s+|was\s+)?(?:a\s+)?(?:joke|mess|pathetic|worst|bad|poor|terrible|useless|horrible|inaccurate|confusing|unclear|vague)\b'
+      - '\b(?:app|status|tracker|tracking|it)\s+(?:still\s+)?(?:shows?|showing|showed|says|said)\s+(?:as\s+)?(?:on time|on-time|arriving soon|arriving in \d+|few min)\b'
+      - '\btracking\s+{HINEG}\b'
+      - '\bstatus\s+(?:update\s+)?{HINEG}\s+(?:ho|hua|hota|dikha)'
+      - '\b(?:no|without|zero)\s+(?:proper|real|accurate|correct|reliable|live|real[- ]?time)\s+(?:live\s+)?track(?:ing|er)\b'
+      - '\b(?:fake|false|wrong|incorrect|misleading)\s+(?:eta|etas|rider location|driver location|locations?\s+of\s+(?:the\s+)?{RIDER})\b'
+      - '\bstill\s+(?:shows?|showing|says)\s+(?:it\s+)?(?:will be delivered|arriving|expected)\b'
+    exclude:
+      - '\b(?:good|great|nice|excellent|accurate|smooth|easy|awesome|amazing|perfect|best)\s+(?:live\s+)?tracking\b'
+      - '\btracking\s+(?:is|was)\s+(?:good|great|accurate|nice|excellent|smooth|perfect|awesome)\b'
+
+  - id: eta_slip_late
+    label: ETA slip / late delivery
+    group: wismo_core
+    wismo: true
+    hypothesis: traffic delays and ETA slips
+    definition: >-
+      Delivery arrived late or not by the promised time, took far longer than
+      promised, the ETA or delivery date kept moving, or the order was not yet
+      shipped/dispatched days after ordering.
+    patterns:
+      - '\b(?:very|too|so|extremely|always|really|super|quite|bit|little|hr|min|day|days|week|weeks|hella|damn|horribly|terribly|pathetically)\s+(?:much\s+)?late\b'
+      - '\blate\s+(?:delivery|deliveries|delivered|arrival|by|order|orders)\b'
+      - '\b(?:delivered|arrived|came|comes|come|reached|reaches|delivery (?:was|is)|order (?:was|is|came))\s+(?:very\s+|too\s+|so\s+|really\s+|always\s+|extremely\s+)?late\b'
+      - '\bdelay(?:ed|s|ing)?\b'
+      - '\b(?:took|takes|take|taking|taken|waited|waiting|wait|waits)\s+(?:for\s+)?(?:more than\s+|over\s+|almost\s+|nearly\s+|around\s+|about\s+|like\s+|an extra\s+)?{TIMEAMT}\+?\s*(?:and a half\s+)?(?:hr|day|days|week|weeks)\b'
+      - '\b(?:took|takes|taking|taken|waited|waiting|delivered in|came in|arrived in|reached in|delivered after|came after|arrived after)\s+(?:for\s+)?(?:more than\s+|over\s+|almost\s+|nearly\s+|around\s+|about\s+)?(?:[3-9]\d|\d{3})\s*min\b'
+      - '\b(?:10|ten|15|fifteen|20|twenty)[- ]?min\b[^.!?]{0,60}\b(?:took|takes|taking|came|arrived|reached|delivered|comes|waited|waiting)\s+(?:in\s+|after\s+|for\s+)?(?:more than\s+|over\s+|almost\s+|nearly\s+)?(?:[2-9]\d|\d{3}|an?|one|two)\s*(?:min|hr)\b'
+      - '\b(?:not|never|isnt|wasnt|arent|no longer|hardly|rarely|barely|nowhere near)\s+(?:\w+\s+){0,4}(?:10|ten|15|fifteen)[- ]?min\b'
+      - '\b(?:eta|delivery time|estimated time|arrival time|time)\s+(?:keeps?\s+|kept\s+|keeps on\s+|keep on\s+|is\s+|was\s+|got\s+|gets\s+)?(?:increasing|increased|changing|changed|extending|extended|going up|resetting|getting extended|getting increased)\b'
+      - '\b(?:extending|extended|extends|increasing|increased|increases|changing|changed|pushed|pushing)\s+(?:the\s+)?(?:delivery\s+|estimated\s+)?(?:time|eta|date)\b'
+      - '\b(?:still|yet)\s+(?:not\s+)?(?:shipped|dispatched)\b'
+      - '\b(?:not|never)\s+(?:yet\s+|even\s+)?(?:been\s+)?(?:shipped|dispatched)\b'
+      - '\b(?:never|not|no|isnt|wasnt|rarely|hardly|arent|werent)\s+(?:\w+\s+){0,2}(?:on|in)\s+time\b'
+      - '\b(?:delivery|expected|promised|estimated|shipping)\s+date\b[^.!?]{0,40}\b(?:changed|changes|changing|extended|postponed|passed|over|crossed|missed|keeps|moved|pushed|going back|shifting|shifted)\b'
+      - '\b(?:days|weeks)\s+(?:have\s+|has\s+)?(?:passed|gone)\b'
+      - '\b(?:bahut|bohot|bohut|boht|bhut|itna|kaafi|kafi|bht)\s+(?:late|der|time\s+(?:laga|lagta|lag))\b'
+      - '\bder\s+se\b'
+      - '\blate\s+(?:aaya|aya|aata|ata|aati|ati|hota|hua|hui|deliver)\b'
+      - '\b(?:\d+|ek|do|teen|dedh|dhai)\s+(?:ghanta|ghante)\b'
+      - '\btime\s+(?:pe|par)\s+(?:bhi\s+)?{HINEG}\b'
+      - '\b(?:delivery|shipping|waiting|arrival)\s+time\s+(?:is\s+|was\s+)?(?:very\s+|too\s+|so\s+|really\s+)?(?:much|long|high|slow|lengthy)\b'
+      - '\b(?:much\s+)?later\s+than\s+(?:expected|promised|estimated|committed|the\s+(?:eta|promised|expected|estimated))'
+      - '\b(?:delivered|arrived|came|reached)\s+(?:only\s+)?after\s+(?:more than\s+|over\s+|almost\s+|nearly\s+)?{TIMEAMT}\s*(?:and a half\s+)?(?:hr|day|days)\b'
+      - '\b(?:not|never)\s+(?:been\s+)?(?:delivered|arrived|came|reached)\s+(?:even\s+)?(?:in|after|within)\s+(?:\d+|an?)\s*(?:min|hr|days?)\b'
+      - '\b(?:tak(?:e|es|ing)|took|taken)\s+(?:a\s+lot\s+of|too\s+much|so\s+much|very\s+long|too\s+long|so\s+long|forever|ages|eternity)\b'
+      - '\b(?:false|fake)\s+(?:promise|claim)\w*\s+of\s+(?:10|ten|15|fifteen)\b'
+    exclude:
+      - '\b(?:no|without|zero|never|not|nor|wasnt|isnt|no any|minimal|little|hardly any|slight|small|minor)\s+(?:any\s+|a\s+|single\s+)?(?:delay|delays|delayed|late)\b'
+      - '\blate\s+(?:night|nights|evening|hours|hr|at night)\b'
+      - '\b(?:refund|refunds|payment|response|reply|replies|responding)\s+(?:is\s+|was\s+|got\s+)?delay\w*\b'
+      - '\bdelay\w*\s+(?:in\s+|of\s+)?(?:the\s+|my\s+|our\s+|a\s+)?(?:refund|refunds|response|reply|responding|payment|money|cashback)\b'
+      - '\b(?:even|also|open|available|order)\s+(?:till\s+|until\s+)?late\b'
+      - '\bslight(?:ly)?\s+delay\w*\b'
+      - '\b(?:ask\w*|told|tell\w*|said|says)\s+(?:me\s+|us\s+)?to\s+(?:\w+\s+){0,6}wait\s+(?:for\s+)?(?:another\s+)?(?:\d+|24|48|72)\s*(?:hr|days?|min)\b'
+      - '\b(?:contacted|contacting|called|calling|chatted|chatting|reached out)\s+(?:\w+\s+){0,4}(?:and\s+)?(?:waited|waiting|wait)\s+(?:for\s+)?(?:over\s+|more than\s+|almost\s+)?(?:\d+|an?)\s*(?:min|hr)\b'
+      - '\b(?:loading|slow to load|connection|network|server|lagg?\w*)\b[^.!?]{0,40}\bdelay\w*'
+      - '\bdelay\w*\s+(?:due to|in|while)\s+(?:poor\s+|bad\s+|slow\s+)?(?:connection|network|loading|app|server|login|otp)\b'
+      - '\bwait\w*\b[^.!?]{0,60}\b(?:surge|break|kitchen clean\w*|cleanup)\b'
+      - '\bwait\w*\s+(?:for\s+)?(?:a\s+day\s+)?(?:\w+\s+){0,3}(?:for\s+)?(?:a\s+|my\s+|the\s+)?refund\b'
+
+  - id: rider_stuck
+    label: Rider / parcel stuck, not moving
+    group: wismo_core
+    wismo: true
+    hypothesis: a delivery rider stuck or not moving
+    definition: >-
+      The rider or parcel is not progressing: rider stationary on the map, roaming
+      or going the wrong way, not yet picked up or not assigned, stuck at the
+      restaurant, or (for courier brands) the parcel stuck at a hub or in transit.
+    patterns:
+      - '\b{RIDER}\b[^.!?]{0,50}\b(?:not moving|not even moving|isnt moving|isnt even moving|wasnt moving|didnt move|stuck|standing still|roaming|wandering|circling|stationary|idle|roaming|wandering|going (?:in )?(?:the )?(?:wrong|opposite|other) (?:way|direction|side)|went (?:in )?(?:the )?(?:wrong|opposite|other) (?:way|direction)|same (?:place|location|spot|position))'
+      - '\b(?:not moving|stuck|stationary|standing)\b[^.!?]{0,30}\b(?:same|one)\s+(?:place|location|spot|position|point)\b'
+      - '\b(?:stuck|standing|waiting|parked|sitting)\s+(?:at|in|on)\s+(?:the\s+)?(?:same\s+)?(?:place|location|spot|restaurant|store|kitchen|outlet|hub|warehouse|facility|transit|sorting|centre|center)\b'
+      - '\bstuck\s+(?:in\s+transit|at\s+(?:the\s+)?(?:hub|warehouse|facility|courier|origin|destination|sorting))\b'
+      - '\b(?:map|location)\s+(?:shows|showing|showed)\s+(?:the\s+)?{RIDER}\b[^.!?]{0,40}\b(?:same|stuck|not|standing|far|opposite|away)'
+      - '\b{RIDER}\b[^.!?]{0,30}\b(?:not|never|didnt|did not|hasnt|has not|havent)\s+(?:yet\s+|even\s+)?(?:picked|pick|started|left|moved|move)\b'
+      - '\bno\s+{RIDER}\s+(?:was\s+|is\s+)?(?:assigned|available|allotted|allocated)\b'
+      - '\b{RIDER}\s+(?:was\s+|is\s+)?(?:not|never|wasnt|isnt)\s+(?:yet\s+)?(?:assigned|allotted|allocated|available)\b'
+      - '\b(?:assign|assigning|searching for|looking for|finding|waiting for)\s+(?:a\s+)?{RIDER}\b'
+      - '\b(?:ek hi|same|usi)\s+jagah\b'
+      - '\b(?:hil|chal|move)\s+{HINEG}\s+(?:raha|rha|rahi)\b'
+      - '\b{RIDER}\s+(?:ruka|ruk|khada)\b'
+      - '\b(?:there is|theres|there was|there are|dont have|do not have|didnt have|not enough|no enough|shortage of)\s+(?:no\s+|enough\s+|any\s+)?{RIDER}'
+      - '\bno\s+movement\b'
+      - '\b(?:roaming|wandering|circling)\s+(?:around|here and there|in the area|in circles)\b'
+    exclude:
+      - '\b(?:pick|picked|picking|lift|lifted|answer|answered|attend|attended)\s+(?:up\s+)?(?:my\s+|the\s+|our\s+|any\s+|his\s+)?(?:calls?|phone|phones)\b'
+      - '\bsurge\b[^.!?]{0,40}\bno\s+{RIDER}|\bno\s+{RIDER}[^.!?]{0,40}\bsurge\b'
+
+  - id: traffic_weather_excuse
+    label: Traffic / weather / demand excuse
+    group: wismo_core
+    wismo: true
+    hypothesis: traffic delays and ETA slips
+    definition: >-
+      The delay is attributed (by the platform, rider or shopper) to traffic, rain,
+      weather, high demand, surge or peak hours.
+    patterns:
+      - '\btraffic\b'
+      - '\b(?:rain|rains|rained|raining|rainy|rainfall|downpour|flood|floods|flooding|waterlogging|water logging|storm|weather|baarish|barish|barsat)\b'
+      - '\b(?:due to|because of|citing|cited|blamed?|blaming|excuse of|reason(?: given)?(?: was| is)?|said)\s+(?:the\s+|a\s+|high\s+|heavy\s+|sudden\s+)*(?:surge|demand|rush|peak|order spike|spike)\b'
+      - '\b(?:surge|high demand|heavy demand|rush|peak hr|peak time|order spike)\b[^.!?]{0,40}\b(?:delay\w*|late|longer|extra time|wait\w*)\b'
+    exclude:
+      - '\bsurge\s+(?:fee|fees|charge|charges|pricing|price|prices|amount)\b'
+      - '\b(?:rain|weather|bad weather)\s+(?:fee|fees|charge|charges|surcharge)\b'
+      - '\b(?:even\s+(?:in|during)\s+(?:the\s+)?(?:rain|heavy rain|rains|traffic)|despite\s+(?:the\s+)?(?:rain|heavy rain|rains|traffic))\b'
+      - '\b(?:no|not|without|zero|less|little)\s+(?:much\s+|any\s+)?traffic\b'
+      - '\b(?:closed|close|shut|not accepting|cant order|cannot order|unable to order|not able to order|couldnt order|break|unserviceable|out of stock)\b[^.!?]{0,60}\bsurge\b'
+      - '\bexperiencing\s+(?:a\s+)?surge\b'
+
+  - id: multiple_batched_orders
+    label: Multiple / batched orders
+    group: wismo_core
+    wismo: true
+    hypothesis: multiple or batched orders confusing tracking
+    definition: >-
+      Confusion from more than one order or shipment: the rider delivering other
+      orders first (batching), split or separate shipments, one of several orders
+      missing or tracked inconsistently.
+    patterns:
+      - '\b{RIDER}\b[^.!?]{0,60}\b(?:another|other|multiple|two|2|many|3|three)\s+(?:orders?|deliveries|customers|pickups?)\b'
+      - '\b(?:deliver(?:ing|ed|s)?|pick(?:ing|ed)?\s+up|went to deliver|going to deliver|delivers|completing|completed|finish(?:ing|ed)?)\s+(?:an?\s+)?(?:other|another|someone elses|other peoples|multiple)\s+(?:orders?|deliveries|food|customers?)\b'
+      - '\b(?:batch|batched|batching|clubbed|clubbing|clubs orders|stacked orders|order stacking|multi[- ]?order(?:ing)?|pooled)\b'
+      - '\b(?:paired|pairing|combined|grouped)\s+with\s+(?:an?\s+)?(?:other|another|different)\s+(?:orders?|deliveries|customers?)\b'
+      - '\b(?:assign\w*|allot\w*|allocat\w*|gives?|given)\s+(?:\w+\s+){0,2}(?:\d+|two|three|four|multiple|many)\s+(?:to\s+\d+\s+)?(?:orders|deliveries)\b'
+      - '\b(?:split|separate|separately|multiple|different|two|2)\s+(?:shipments?|packages?|parcels?|boxes|deliveries|awbs?|tracking ids?)\b'
+      - '\b(?:one|1)\s+of\s+(?:my|the)\s+(?:\w+\s+)?(?:orders|parcels|packages|shipments)\b'
+      - '\b(?:both|two|2|three|3|multiple)\s+(?:of\s+)?(?:my\s+|the\s+)?(?:orders|parcels|packages|shipments)\b[^.!?]{0,40}\b(?:not|never|only|one|track|status|missing|cancel)'
+      - '\bplaced\s+(?:two|2|three|3|multiple|several)\s+(?:separate\s+)?orders\b'
+      - '\b(?:first|before)\s+(?:delivering|deliver|dropping|drop)\s+(?:an?\s+)?(?:other|another|someone)'
+      - '\b(?:assign\w*|allot\w*|allocat\w*|gives?|given)\s+(?:an?other|more|extra|multiple)\s+(?:orders?|deliveries|delivery)\b'
+      - '\b(?:one|some)\s+of\s+(?:my|the)\s+(?:items|products)\b[^.!?]{0,40}\b(?:not|still|yet|separately|dispatched|shipped)\b'
+      - '\b(?:another|other|second|separate)\s+shipment\b'
+      - '\b(?:pick\w*\s+up|pickup|deliver\w*)\s+(?:\w+\s+){0,2}someone\s*elses\s+(?:order|food)\b'
+    exclude:
+      - '\b(?:last|previous|past|recent|next|first|few)\s+(?:\d+|two|three|four|five|few|couple of|many)\s+(?:orders|deliveries|parcels)\b'
+
+  - id: address_location
+    label: Address / location resolution
+    group: wismo_core
+    wismo: true
+    hypothesis: bad address resolution (rider can't find the place, calls, wrong pin)
+    definition: >-
+      Rider or courier can't find the address, wrong pin or GPS location, repeated
+      calls asking for directions or live location, delivery to a wrong address,
+      address or landmark ignored, or the shopper unable to change the address.
+    patterns:
+      - '\b(?:wrong|incorrect|different|another|other)\s+(?:location|address|pin|pincode|pin code|place|house|building|flat|apartment|gate|society|block|floor)\b'
+      - '\b(?:location|address|pin|pincode|pin code|gps|place|house|home|building|flat|landmark|gate)\b[^.!?]{0,30}\b(?:not found|cant find|cannot find|couldnt find|could not find|unable to (?:find|locate)|not able to (?:find|locate)|wrong|incorrect|inaccurate|messed|mismatch)\b'
+      - '\b(?:cant|cannot|couldnt|could not|unable to|not able to|didnt|did not|doesnt|does not|failed to)\s+(?:find|locate|trace)\s+(?:my\s+|the\s+|our\s+)?(?:location|address|house|home|place|building|flat|apartment|society|gate|door)\b'
+      - '\b(?:location|address)\s+(?:pin|pointer|marker)\b'
+      - '\bpin\s+(?:location|drop|point)\b'
+      - '\b{RIDER}\b[^.!?]{0,40}\b(?:called|calls|calling|keeps calling|kept calling|call)\b[^.!?]{0,40}\b(?:location|address|directions?|landmark|where)\b'
+      - '\b(?:gps|google maps?|map)\b[^.!?]{0,30}\b(?:wrong|incorrect|inaccurate|shows? wrong|misled|misleading)\b'
+      - '\b(?:location|address|ghar|jagah|pata)\s+{HINEG}\s+(?:mil|mila|mili|milta|pata)'
+      - '\b(?:galat|wrong)\s+(?:location|address|jagah|ghar|pata)\b'
+      - '\b(?:location|address)\s+(?:puch|pooch|puchh|pooch)'
+      - '\b(?:cant|cannot|couldnt|could not|unable to|not able to|no option to|not allowed to|doesnt let|didnt let|wont let)\s+(?:\w+\s+){0,2}(?:change|update|edit|modify|correct)\s+(?:the\s+|my\s+)?(?:delivery\s+|shipping\s+)?(?:address|location)\b'
+      - '\b(?:change|changing|update|edit|modify|correct)\s+(?:the\s+|my\s+)?(?:delivery|shipping)\s+(?:address|location)\b'
+      - '\b{RIDER}\b[^.!?]{0,40}\b(?:asked|asking|asks|kept asking|keeps asking)\s+(?:me\s+)?(?:for\s+)?(?:my\s+|the\s+|exact\s+)*(?:live\s+location|location|address|directions?|landmark|way)\b'
+      - '\b(?:share|send|sent|sharing)\s+(?:my\s+|the\s+)?live\s+location\b'
+      - '\bdelivered\s+to\s+(?:the\s+|a\s+)?(?:wrong|another|different|other)\s+(?:address|location|house|flat|gate|door|place|building)\b'
+    exclude:
+      - '\b(?:not\s+(?:available|serviceable|delivering|deliverable)|unavailable|doesnt deliver|does not deliver|dont deliver|not deliver)\s+(?:\w+\s+){0,2}(?:in|to|at)\s+(?:my|our|this|the)\s+(?:location|area|address|pincode|pin code|city|place)\b'
+      - '\b(?:another|other|different)\s+(?:place|location)\s+(?:to order|for food|to eat)\b'
+      - '\b(?:priorit\w+|focus)\b[^.!?]{0,20}\bwrong\s+place\b'
+      - '\b{RIDER}\s+(?:\w+\s+){0,3}at\s+(?:a\s+)?(?:\w+\s+)?different\s+location\b'
+
+  - id: delivered_not_received
+    label: Marked delivered, not received
+    group: wismo_core
+    wismo: true
+    hypothesis: '"delivered" shown but not received'
+    definition: >-
+      The app, SMS or courier says the order was delivered, but the shopper did not
+      receive it (fake delivery, delivered to someone else, marked delivered early).
+    patterns:
+      - '\b(?:marked|marking|mark|marks)\s+(?:it\s+|the\s+order\s+|my\s+order\s+|order\s+|as\s+)?(?:as\s+)?delivered\b'
+      - '\b(?:shows?|showing|showed|shown|says|saying|said|status)\s+(?:as\s+|it\s+as\s+|it\s+|that\s+|the\s+order\s+(?:is\s+|was\s+|as\s+)?|order\s+(?:is\s+|was\s+|as\s+)?|my\s+order\s+(?:is\s+|was\s+|as\s+|has\s+been\s+)?)?(?:is\s+|was\s+|has\s+been\s+|been\s+|it\s+is\s+|it\s+was\s+)?delivered\b[^.!?]{0,80}\b(?:but|not|never|didnt|havent|no one|nobody|without|fake|yet|still)\b'
+      - '\b(?:not|never|didnt|did not|havent|have not|no)\s+(?:\w+\s+){0,3}(?:received|receive|got|get|came|arrived|delivered)\b[^.!?]{0,60}\b(?:shows?|showing|showed|shown|marked|says|said|status|updated|mentioned|claims?)\b[^.!?]{0,25}\bdelivered\b'
+      - '\bfake\s+(?:delivery|delivered|deliveries|status)\b'
+      - '\bfalsely\s+(?:marked|delivered|showing|shown)\b'
+      - '\bdelivered\b[^.!?]{0,40}\b(?:but|though|however|yet)\b[^.!?]{0,40}\b(?:not|never|didnt|did not|havent|have not|no)\s+(?:\w+\s+){0,2}(?:received|receive|got|get|arrived|come|came|reached)'
+      - '\bwithout\s+(?:actually\s+)?deliver(?:ing|y)\b'
+      - '\bdelivered\s+to\s+(?:someone|somebody|some\s+one|some\s+other|another\s+person|wrong\s+person)\b'
+      - '\bdelivered\s+(?:dikha|dikhaya|dikhra|dikh|show|bata|bta)\s*(?:raha|rha|diya|dia|kar|ho|rahe)?'
+      - '\bdeliver\s+(?:kar|kr)\s+(?:diya|dia)\b[^.!?]{0,30}\b{HINEG}\s+(?:mila|aaya|aya)'
+      - '\b(?:app|status|tracking|it|website|sms|message|they|order)\s+(?:still\s+|now\s+)?(?:shows?|showing|showed|says|saying|said|mentions?|claims?|claiming|updated|marked)\s+(?:that\s+)?(?:the\s+|my\s+|our\s+)?(?:order|product|parcel|package|it|food|items?)?\s*(?:is\s+|was\s+|has\s+been\s+|have\s+been\s+|had\s+been\s+|as\s+)*delivered\b(?!\s+(?:in|within|on time|before|early|quickly|fast|by))'
+      - '\bstatus\s+(?:changed|updated|turned|went)\s+(?:to\s+)?delivered\b'
+      - '\b(?:saying|says|said|claim\w*)\s+(?:that\s+)?(?:its\s+|it\s+is\s+|it\s+was\s+|we\s+|they\s+|he\s+|the order\s+)?(?:have\s+|has\s+|had\s+)?(?:been\s+)?delivered\b(?!\s+(?:in|within|on time|soon|by))'
+      - '\bdelivered\s+to\s+(?:the\s+|a\s+)?(?:wrong|another|different|other)\s+(?:address|location|house|flat|gate|door|person|place)\b'
+    exclude:
+      - '\b(?:will|would|shall|going to|to)\s+be\s+delivered\b'
+      - '\bexpected\s+to\s+be\s+delivered\b'
+
+  - id: order_not_delivered
+    label: Not received / where is my order
+    group: wismo_core
+    wismo: true
+    hypothesis: poor or vague "where is my order" answers (the underlying question)
+    definition: >-
+      The order has not arrived (yet) or never arrived and the shopper is asking
+      where it is: still waiting, never came, rider never showed, courier fake
+      attempt or returned to origin. No "delivered" status is claimed.
+    suppressed_by: [delivered_not_received]
+    patterns:
+      - '\b{NEG}\s+(?:yet\s+|even\s+)?(?:been\s+)?(?:receive|received|get|got|gotten)\s+(?:my\s+|the\s+|our\s+|any\s+|this\s+|an?\s+|that\s+)?(?:\w+\s+)?{ORDER}\b'
+      - '\b{ORDER}\s+(?:was\s+|is\s+|has\s+|have\s+|had\s+|were\s+)?(?:still\s+)?(?:not|never)\s+(?:yet\s+)?(?:been\s+)?(?:delivered|received|arrived|came|come|reached)\b'
+      - '\b{ORDER}\s+(?:didnt|did not|doesnt|does not|hasnt|has not|havent|never|still hasnt|still didnt)\s+(?:yet\s+|even\s+)?(?:arrive|come|reach|get delivered|delivered|show up|turn up)\b'
+      - '\bwhere\s+is\s+(?:my|the|our)\s+(?:order|parcel|package|food|delivery|shipment|product|products|box)\b'
+      - '\bstill\s+(?:waiting|awaiting)\s+(?:for\s+)?(?:my\s+|the\s+|our\s+)?(?:\w+\s+)?(?:order|parcel|package|delivery|food|product|products|shipment|box)\b'
+      - '\b{RIDER}\s+(?:never|didnt|did not|hasnt|has not|not)\s+(?:\w+\s+)?(?:came|come|arrive|arrived|show(?:ed)? up|turn(?:ed)? up|deliver|delivered|reach|reached)\b'
+      - '\b(?:fake|false|failed|unsuccessful)\s+(?:delivery\s+)?attempts?\b'
+      - '\bdelivery\s+attempt(?:ed)?\b[^.!?]{0,40}\b(?:fake|false|without|never|but|no)\b'
+      - '\b(?:rto|returned\s+to\s+(?:origin|seller|sender|warehouse)|return(?:ed)?\s+to\s+origin)\b'
+      - '\bcustomer\s+(?:not\s+available|unavailable|refused)\b'
+      - '\b(?:order|parcel|khana|food|saman|samaan|delivery|product)\s+(?:abhi\s+tak\s+)?{HINEG}\s+(?:aaya|aya|mila|aayi|ayi|aaye|pahucha|pahuncha|hua|hui|huyi)\b'
+      - '\babhi\s+tak\s+{HINEG}\b'
+      - '\b(?:kab|kb)\s+(?:aayega|ayega|aaega|aega|milega|ayegi|aayegi)\b'
+      - '\b(?:order|parcel|khana|delivery|rider)\s+(?:\w+\s+)?(?:kaha|kahan|kha|kidhar)\b'
+      - '\b{RIDER}\s+{HINEG}\s+(?:aaya|aya|aata|pahucha)\b'
+      - '\b(?:undelivered|non[- ]?delivery)\b'
+      - '\b(?:{ORDER}|it|parcel)\s+(?:that\s+|which\s+)?(?:\w+\s+)?never\s+(?:arrived|came|got delivered|showed up|turned up|reached|delivered)\b'
+      - '\b{ORDER}\s+(?:that|which)\s+(?:was|is|has|were)\s+(?:still\s+)?(?:not|never)\s+(?:been\s+)?(?:delivered|received|arrived)\b'
+      - '\b(?:they|he|zomato|swish|smytten|you|rider|courier)\s+(?:\w+\s+)?(?:didnt|did not|never|havent|hasnt|have not|has not)\s+(?:even\s+)?deliver(?:ed)?\s+(?:my|the|our|it|any|me|to me)\b'
+      - '\b(?:unable|failed|not able)\s+to\s+deliver\b'
+    exclude:
+      - '\b(?:not|dont|doesnt|does not|do not|never|cant|cannot)\s+(?:\w+\s+)?deliver(?:ing|s|y)?\s+(?:\w+\s+){0,2}(?:to|in|at)\s+(?:my|our|this|the|your)\s+(?:area|location|pincode|pin code|city|place|locality|region)\b'
+      - '\b(?:not|never|didnt|havent)\s+(?:\w+\s+)?(?:received|got|get)\s+(?:my\s+|the\s+|any\s+)?(?:refund|money|cashback|coupon|reward|points|otp|code|reply|response|call)\b'
+      - '\b(?:receive|received|get|got)\s+(?:the\s+|my\s+|our\s+)?(?:full|complete|entire|whole|all|all the|correct|right)\s+(?:\w+\s+)?(?:order|items?|products?|food)\b'
+      - '\b(?:receive|received|get|got)\s+(?:an?|one|1|two|2|some|few|one of the|any of the)\s+(?:\w+\s+)?(?:item|items|product|products|dish|dishes|sample|samples)\b'
+      - '\b(?:get|got|receive|received)\s+(?:the\s+|my\s+)?(?:food|order)\s+(?:in|within|on)\s+(?:\d+|ten|time)\b'
+      - '\bgot\s+the\s+same\b'
+      - '\b(?:free|gift|promo|complimentary|bonus|reward)\s+(?:\w+\s+)?(?:item|items|product|gift)\b'
+      - '\bdelivered\s+only\s+(?:a\s+)?(?:few|some|one|two|half|part)\b[^.!?]{0,60}'
+
+  # ------------------------------------------------------------ cross-cutting
+  - id: proactive_comms_missing
+    label: No proactive update
+    group: cross_cutting
+    wismo: false
+    hypothesis: '(cross-cutting) proactive communication missing'
+    definition: >-
+      Nobody told the shopper about a delay, cancellation, status change or
+      problem: no update, notification, call or explanation; they found out by
+      chasing.
+    patterns:
+      - '\bno\s+(?:proper\s+|prior\s+|further\s+|any\s+|single\s+)?(?:update|updates|information|info|notification|notifications|intimation|communication|notice|heads[- ]?up|explanation)\b'
+      - '\b(?:didnt|did not|never|not|without|dont|do not|doesnt|does not|wont|no one|nobody|noone)\s+(?:even\s+|bother(?:ed)?\s+to\s+|care\s+to\s+|bothered\s+|properly\s+)?(?:inform|informed|informing|notify|notified|notifying|intimate|intimated|intimating|tell|told|telling|let\s+(?:me|us)\s+know)\b'
+      - '\b(?:didnt|did not|never|not|no one|nobody)\s+(?:even\s+)?update(?:d)?\s+(?:me|us|the customer)\b'
+      - '\bwithout\s+(?:any\s+)?(?:prior\s+)?(?:notice|information|intimation|notification|update|warning|explanation|informing|notifying|telling)\b'
+      - '\bkept\s+(?:me\s+|us\s+)?(?:in\s+the\s+dark|guessing)\b'
+      - '\bno\s+(?:call|calls)\s+(?:or|and|nor)\s+(?:sms|message|msg|update|email|mail|text)\b'
+      - '\b(?:bataya|batya|inform)\s+(?:bhi\s+)?{HINEG}\b'
+      - '\b(?:koi|kuch)\s+(?:update|information|info|message|msg)\s+{HINEG}\b'
+      - '\b(?:inform\w*|tell|told|notif\w*|message\w*)\s+(?:you|me|us)\s+(?:only\s+)?after\s+(?:\d+|an?|one)\s*(?:min|hr)\b'
+      - '\b(?:takes?|took|taking)\s+(?:\d+|an?|one)\s*(?:min|hr)\s+to\s+(?:tell|inform|notify|update)\b'
+    exclude:
+      - '\b(?:app|new|latest|recent)\s+update\b'
+      - '\bafter\s+(?:the\s+)?(?:\w+\s+)?update\b'
+
+  - id: support_unreachable_loop
+    label: Support unreachable / bot loop
+    group: cross_cutting
+    wismo: false
+    hypothesis: support loops
+    definition: >-
+      Support fails the shopper: no human reachable, no response, bot or ticket
+      loops, repeated contacts, no phone number, tickets closed without a fix, or
+      support explicitly described as useless.
+    patterns:
+      - '\b(?:no|zero|without|not\s+(?:a\s+)?single|nobody|no\s+one|noone)\s+(?:proper\s+)?(?:response|reply|replies|responses|help|support|assistance|resolution|solution)\b'
+      - '{SUPPORT}\b[^.!?]{0,40}\b(?:not|never|doesnt|does not|didnt|did not|dont|do not|wont|isnt|wasnt|arent)\s+(?:even\s+|properly\s+)?(?:respond|responding|reply|replying|answer|answering|pick|picking|reachable|available|contactable|help|helping|helpful|resolve|resolving|connect|connecting|exist|working)\b'
+      - '\b(?:cant|cannot|couldnt|could not|unable to|not able to|no way to|impossible to|hard to|difficult to)\s+(?:even\s+)?(?:reach|contact|talk to|speak to|speak with|talk with|connect (?:to|with)|call|get (?:in )?touch with|get hold of|raise)\s+(?:the\s+|a\s+|any\s+|their\s+|them|anyone|someone|anybody|customer|support|care|agent|human|executive|person|team|zomato|swish|smytten|a ticket|ticket|complaint)'
+      - '\b(?:chat\s*bot|chatbot|bot|bots|automated\s+(?:reply|replies|response|responses|message|messages|chat|system)|auto[- ]?(?:reply|replies|generated))\b'
+      - '\bai\s+(?:chat|bot|support|assistant|agent|chatbot)\b'
+      - '\bno\s+(?:human|real person|real human|live agent|live person)\b'
+      - '\b(?:no|without|there is no|theres no|dont have|doesnt have|does not have|not have|no any)\s+(?:any\s+)?(?:contact|phone|customer care|customer support|helpline|call|calling|mobile)\s+(?:number|no|option|facility|support)\b'
+      - '\b(?:bot|chat|support|ticket|same|endless|infinite|circular|automated)\s+loop\b|\bloop\s+(?:of|with)\s+(?:the\s+)?(?:bot|chat|support|agents?|tickets?|questions)\b|\bloop\b[^.!?]{0,30}\b(?:support|agent|bot|chat|ticket|help)\b'
+      - '\bgoing\s+(?:round\s+and\s+round|in\s+circles)\b'
+      - '\b(?:ticket|complaint|issue|query)\s+(?:was\s+|got\s+|is\s+|has been\s+)?(?:closed|resolved|marked resolved|marked as resolved)\s+(?:without|automatically|but|even)\b'
+      - '\b(?:call|mail|email|contact|raise|raising|complain|messag|chat|reach|follow|ping|escalat|wrote|writ|lodg|regist|filed)\w*\s+(?:\w+\s+){0,4}(?:\d+|many|multiple|several|countless|numerous|so many|ten|five|three|four|dozens? of)\s+(?:times|tickets|complaints|emails|mails|calls|messages)\b'
+      - '\b(?:\d+|many|multiple|several|countless|numerous|so many)\s+(?:tickets|complaints|emails|mails|chats|follow[- ]?ups)\b[^.!?]{0,40}\b(?:no|not|never|nobody|nothing|still|but)\b'
+      - '\b(?:customer\s+(?:support|care|service|services)|support(?:\s+team)?|helpline|help ?desk|chat support|care)\s+(?:is\s+|was\s+|are\s+|team\s+is\s+)?(?:totally\s+|very\s+|so\s+|completely\s+|extremely\s+)?(?:useless|pathetic|worst|horrible|terrible|non[- ]?existent|non[- ]?responsive|unresponsive|unreachable|not responsive|a joke|trash|zero|nil|very poor|clueless|helpless|of no use|no use|dead|bakwas)\b'
+      - '\b(?:useless|pathetic|worst|horrible|terrible|unresponsive|non[- ]?responsive|zero|no|nonexistent|non[- ]?existent|bakwas|rubbish)\s+(?:customer\s+(?:support|care|service|services)|support|helpline|help ?desk|chat support|customer care)\b'
+      - '\b(?:koi|kisi\s+ne)\s+(?:bhi\s+)?(?:jawab|reply|response|call)\s+{HINEG}\b'
+      - '\b(?:customer care|support)\s+(?:wale\s+)?(?:\w+\s+)?{HINEG}\s+(?:sunte|uthate|utha|dete|karte|milta)\b'
+      - '\bcall\s+{HINEG}\s+(?:uthate|utha|uthaya|lag|lagta|lagti)\b'
+      - '\bno\s*one\s+(?:has\s+|is\s+|was\s+)?(?:listen\w*|help\w*|respond\w*|repl\w*|answer\w*|attend\w*|pick\w*)\b'
+      - '\b(?:cant|cannot|couldnt|could not|unable to|not able to)\s+(?:even\s+)?(?:reach|contact|call|connect (?:to|with))\s+(?:the\s+)?(?:helpline|help line|customer care|support)'
+      - '\b(?:help ?line|customer care|contact|support)\s+(?:number|no)\s+(?:bhi\s+)?{HINEG}\b'
+      - '\b(?:not|no|never)\s+(?:giving|given|gave|getting|got)\s+(?:any\s+)?(?:kind\s+of\s+)?(?:response|reply|help|update|resolution)\b'
+      - '\b(?:not|never|dont|doesnt|wont|didnt)\s+(?:\w+\s+)?(?:receive|recieve|pick|answer|attend|respond to)\w*\s+(?:your\s+|my\s+|the\s+|our\s+)?(?:calls?|messages?|mails?|emails?|chats?)\b'
+      - '\bno\s+(?:proper\s+|real\s+|good\s+)(?:customer\s+(?:care|support|service)|helpline|support)\b'
+      - '\b(?:worst|pathetic|useless|terrible|horrible|bad)\s+(?:in|at)\s+(?:customer\s+)?(?:support|care|customer service)\b'
+      - '\bvirtual\s+assistant\b'
+      - '\b(?:agent|executive|support|customer care|team)\w*\s+(?:\w+\s+){0,2}wast\w*\s+(?:your|my|our)\s+time\b'
+      - '\b(?:didnt|did not|never|not)\s+(?:even\s+)?(?:assist|help)\w*\s+(?:me|us)\b'
+      - '\bdisabled\s+(?:the\s+)?chat\b|\bchat\s+(?:option\s+)?(?:is\s+|was\s+)?(?:disabled|removed|not available)\b'
+      - '\b(?:agent|executive|support|customer care|team)\w*\s+(?:\w+\s+){0,2}refus\w*\s+to\s+help\b'
+      - '\bsupport\s+chat\s+(?:is\s+|was\s+)?(?:useless|pathetic|worst|a joke|no use|of no use|trash)\b'
+    exclude:
+      - '\b(?:good|great|helpful|quick|fast|excellent|amazing|nice|responsive|best|prompt|awesome|friendly|supportive)\s+(?:customer\s+)?(?:support|care|service)\b'
+      - '\bno\s+(?:help|support)\s+(?:needed|required)\b'
+      - '\b{RIDER}[^.!?]{0,30}\b(?:not|never|didnt|dont|doesnt)\s+(?:\w+\s+)?(?:pick|answer|receive|recieve|attend)\w*\s+(?:\w+\s+)?calls?\b'
+
+  - id: vague_support_answer
+    label: Vague / scripted answer
+    group: cross_cutting
+    wismo: false
+    hypothesis: poor or vague "where is my order" answers
+    definition: >-
+      Support did respond, but with a non-answer: copy-paste or scripted replies,
+      "please wait", "it will be delivered soon", "escalated", apologies without a
+      fix, or no clear ETA or explanation.
+    patterns:
+      - '\b(?:same|repeated|repetitive|copy[- ]?paste(?:d)?|generic|scripted|template|templated|standard|canned|robotic|pre[- ]?written|pre[- ]?rehearsed|rehearsed|automated|stock|irrelevant)\s+(?:reply|replies|response|responses|message|messages|answer|answers|mail|mails|email|emails|excuse|excuses|lines?)\b'
+      - '\b(?:no|without\s+(?:a|any)|not\s+(?:a|any)|never\s+(?:got|get|gave|give)\s+(?:a|any))\s+(?:proper|clear|satisfactory|straight|valid|real|concrete|definite|correct|specific|exact|solid|convincing|genuine|reasonable|clear cut)\s+(?:answer|answers|explanation|information|info|update|timeline|eta|reason)\b'
+      - '\b(?:just|only|simply|always)\s+(?:keep\s+|kept\s+)?(?:say|says|said|saying|tell|tells|told|telling|reply|replies|replied|ask|asks|asked|asking|give|giving)\b[^.!?]{0,50}\b(?:wait|sorry|apolog|soon|shortly|will be|escalat|inconvenience|patience|patient|24|48|hr|investigat|excuse|excuses|delay|coupon|voucher)'
+      - '\b(?:keep|keeps|kept|keeps on|kept on|keep on)\s+(?:saying|telling|asking\s+(?:me\s+|us\s+)?to\s+wait|giving\s+(?:excuses|dates|false|same|new dates))\b'
+      - '\b(?:asked|asking|asks|told|tell|telling|tells)\s+(?:me\s+|us\s+)?to\s+(?:wait|be patient|keep patience)\b'
+      - '\b(?:support|agent|agents|executive|executives|customer care|care|team|bot|chatbot)\s+(?:\w+\s+){0,3}(?:said|says|told|tells|replied|assured|keeps? saying|kept saying|saying)\b[^.!?]{0,30}\b(?:will|would|shall)\s+(?:be\s+)?(?:delivered|resolved|refunded|processed|shipped|reach(?:ed)?|arrive|get it)\b'
+      - '\b(?:false|fake|empty|hollow|baseless|vague)\s+(?:assurance|assurances|excuse|excuses|answer|answers|response|responses)\b'
+      - '\bsorry\s+for\s+the\s+inconvenience\b'
+      - '\bapolog(?:y|ies|ise|ize|ised|ized|ising|izing)\b[^.!?]{0,30}\b(?:but|no|nothing|only|just|without)\b'
+      - '\b(?:said|says|told|telling|saying)\b[^.!?]{0,30}\bescalat'
+      - '\b(?:escalated|escalating|escalation)\b[^.!?]{0,40}\b(?:but|no|nothing|never|still|yet)\b'
+      - '\b(?:bas|sirf)\s+(?:wait|intezaar|sorry)\b'
+      - '\b(?:wait|intezaar)\s+(?:karo|karne|kijiye|karein|karna)\b'
+      - '\brepeat\w*\s+(?:the\s+same\s+|same\s+|his\s+|her\s+|their\s+)?(?:\w+\s+)?(?:response|reply|answer|message|script|lines?)\b'
+      - '\b(?:promised|assured)\s+(?:a\s+|me\s+a\s+)?(?:\w+\s+)?call\s*back\b[^.!?]{0,30}\b(?:never|not|didnt)\b'
+
+  # ------------------------------------------------------------ adjacent (not WISMO)
+  - id: partial_missing_item
+    label: Partial / missing item
+    group: adjacent
+    wismo: false
+    hypothesis: '(adjacent) fulfilment'
+    definition: >-
+      The order arrived but items were missing or only part of it came
+      (a missing parcel as a whole is order_not_delivered).
+    patterns:
+      - '\bmissing\s+(?:\w+\s+)?(?:item|items|product|products|dish|dishes|food|sample|samples|piece|pieces|thing|things|stuff|sauce|drink|drinks|beverage|add[- ]?on|part|parts|quantity)\b'
+      - '\b(?:item|items|product|products|dish|dishes|sample|samples|one|two|\d+|some|few|rest|half|drink|dessert|sauce|curry|roti|rice|bread)\s+(?:\w+\s+){0,3}(?:was|were|is|are|went|got)?\s*missing\b'
+      - '\b(?:only|just)\s+(?:received|got|get|delivered|came|sent|send|gave)\s+(?:\w+\s+){0,2}(?:one|two|three|half|\d+|part|few|some)\b'
+      - '\b(?:incomplete|partial|half)\s+(?:order|package|parcel|box|delivery|shipment|kit|food)\b'
+      - '\b(?:not|didnt|did not|never|havent|have not)\s+(?:receive|received|get|got)\s+(?:all|one of|some of|the rest|the other|remaining|any of the|half)\b'
+      - '\b(?:less|fewer|short)\s+(?:quantity|items|products|samples|pieces)\b'
+      - '\b(?:not|didnt|did not|never|havent)\s+(?:receive|received|get|got)\s+(?:the\s+|my\s+)?(?:full|complete|entire|whole)\s+(?:order|package|parcel|box|kit)\b'
+      - '\b(?:item|saman|samaan|product)\s+(?:kam|missing)\b'
+      - '\bmiss(?:ed|es|ing)?\s+(?:the\s+|some\s+|my\s+|few\s+)?(?:products?|items?)\b'
+      - '\b(?:didnt|did not|not)\s+(?:get|receive)\w*\s+(?:an?|one)\s+(?:item|product|dish)\b'
+      - '\b(?:delivered|sent|received|got)\s+only\s+(?:a\s+)?(?:few|some|one|two|half|part)\b'
+
+  - id: rider_behaviour
+    label: Rider behaviour / asked to pick up
+    group: adjacent
+    wismo: false
+    hypothesis: '(adjacent) last-mile experience'
+    definition: >-
+      Rider rude or abusive, demanded extra money or a tip, refused doorstep
+      delivery, asked the shopper to come down or collect it, tampered with or
+      opened the food, or cancelled on the shopper.
+    patterns:
+      - '\b{RIDER}\b[^.!?]{0,70}\b(?:rude|rudely|misbehav\w*|abusive|abused|arrogant|drunk|shouted|shouting|yelled|threatened|harass\w*|attitude|unprofessional|disrespectful|argued|arguing|fight|fought)'
+      - '\b(?:rude|misbehaving|abusive|arrogant|unprofessional)\s+{RIDER}\b'
+      - '\b(?:asked|asking|asks|told|tells|forced|forcing|made|wants|wanted|insisted|insisting)\s+(?:me|us)\s+to\s+(?:come\s+(?:down|out|outside|to\s+the\s+(?:gate|road|main))|pick\s+(?:it\s+|the\s+order\s+)?up|collect|come\s+and\s+(?:pick|collect|take))'
+      - '\bcome\s+(?:down|downstairs)\s+(?:to|and)\s+(?:pick|collect|take|get)\b'
+      - '\b(?:refus\w*|wont|wouldnt|didnt want|not ready|not willing)\s+to\s+(?:come|climb|deliver|give)\s+(?:it\s+)?(?:up|upstairs|inside|to\s+(?:my|the|our)\s+(?:door|doorstep|flat|house|gate|apartment|floor|home))'
+      - '\b(?:refus\w*|no|not)\s+(?:to\s+)?(?:door|doorstep)\s*(?:step\s+)?deliver'
+      - '\b(?:asked|asking|asks|demanded|demanding|demands|charged|wanted|forc\w*)\s+(?:me\s+|us\s+)?(?:for\s+)?(?:extra|more|additional)\s+(?:money|cash|amount|charges|rs|tips?)\b'
+      - '\b(?:asked|demanded|demanding|asking)\s+(?:for\s+)?(?:a\s+)?tip\b'
+      - '\b{RIDER}\b[^.!?]{0,40}\b(?:ate|eaten|enjoyed|opened|tampered|stole|stolen|spilled|spilt|threw|dropped)\b'
+      - '\b{RIDER}\b[^.!?]{0,30}\b(?:cancel\w*|refused)\b'
+      - '\b(?:neeche|niche)\s+(?:aa|aao|aane|aake|aakar|bula|bulaya)\b'
+      - '\bself[- ]?(?:collect|pick\s*up|pickup)\b'
+      - '\b{RIDER}\b[^.!?]{0,80}\b(?:disconnect\w*|hung up|cut the call)\b'
+      - '\b{RIDER}\b[^.!?]{0,40}\b(?:turned back|went back|blamed|shouted)\b'
+
+  - id: cancelled_by_platform
+    label: Cancelled by platform / restaurant
+    group: adjacent
+    wismo: false
+    hypothesis: '(adjacent) cancellation'
+    definition: >-
+      The order was cancelled by the platform, restaurant, courier or system,
+      often after a long wait; not a cancellation the shopper chose.
+    patterns:
+      - '\b(?:order|orders)\s+(?:was|were|got|gets|get|has been|have been|is|had been|been|automatically|auto)\s+(?:\w+\s+)?(?:auto[- ]?)?cancel+ed\b'
+      - '\b(?:they|you|zomato|swish|smytten|restaurant|restaurants|seller|merchant|app|system|platform|store|kitchen|courier|company|outlet|{RIDER})\s+(?:\w+\s+){0,3}cancel\w*\s+(?:my|the|our|an?)?\s*(?:\w+\s+)?(?:order|orders)\b'
+      - '\bcancel+ed\s+(?:by|from)\s+(?:the\s+)?(?:restaurant|zomato|swish|smytten|them|seller|merchant|system|app|store|platform|courier|company|kitchen|outlet)\b'
+      - '\b(?:auto|automatic|automatically)[- ]?cancel'
+      - '\bcancel+ed\s+(?:my\s+|the\s+)?order\s+(?:without|on their own|by itself|themselves)\b'
+      - '\bcancel+ed\s+(?:it\s+)?(?:without\s+(?:my|any|asking|informing|consent|permission|reason)|after\s+{TIMEAMT}\s+(?:min|hr|day|days))\b'
+      - '\bcancel\s+(?:kar|kr)\s+(?:diya|dia|di)\b'
+      - '\bcancel\s+ho\s+(?:gaya|gya|gyi|gayi)\b'
+      - '\bcancel+ed\s+(?:my\s+|the\s+)?order\s+by\s+(?:the\s+)?(?:restaurant|zomato|swish|smytten|seller|system|app|store|platform|courier|company|kitchen|outlet)\b'
+    exclude:
+      - '\bi\s+(?:\w+\s+){0,3}cancel+(?:ed)?\b[^.!?]{0,40}'
+      - '\b(?:had|have|forced|wanted|tried|want)\s+to\s+cancel\b'
+      - '\b(?:cant|cannot|couldnt|could not|unable to|not able to|not allowed to|no option to|didnt let (?:me|us)|dont let (?:me|us)|wont let (?:me|us))\s+(?:\w+\s+){0,2}cancel\w*'
+
+  - id: refund_stuck
+    label: Refund stuck / not received
+    group: adjacent
+    wismo: false
+    hypothesis: '(adjacent) refund'
+    definition: >-
+      A refund is missing, delayed, pending, denied or only promised.
+    patterns:
+      - '\brefund\w*\b[^.!?]{0,40}\b(?:not|never|still|yet|pending|stuck|delayed|delay|awaited|waiting|no sign|didnt|did not|havent|hasnt|isnt|denied|rejected|refused)\b'
+      - '\b(?:not|never|didnt|did not|havent|have not|hasnt|has not|yet to|still not|no)\s+(?:yet\s+)?(?:been\s+)?(?:received|receive|got|get|gotten|given|processed|initiated|credited|issued)?\s*(?:my\s+|the\s+|any\s+|a\s+)?(?:full\s+)?refund\b'
+      - '\b(?:money|amount|payment|paisa|paise)\b[^.!?]{0,30}\b(?:not|never|yet to be|still not)\s+(?:\w+\s+)?(?:refunded|returned|credited|reversed|received|back)\b'
+      - '\bwaiting\s+for\s+(?:my\s+|the\s+|a\s+)?refund\b'
+      - '\b(?:refund|money|paise|paisa)\s+(?:bhi\s+)?{HINEG}\s+(?:mila|aaya|aya|diya|dia|mile|aaye)\b'
+      - '\bpaise\s+(?:wapas\s+)?{HINEG}\b'
+      - '\brefund\s+(?:initiated|processed|approved)\b[^.!?]{0,40}\b(?:but|not|never|still)\b'
+      - '\b(?:na|naa|nahi|nhi)\s+(?:hi\s+)?(?:\w+\s+){0,2}refund\s+(?:aya|aaya|mila|hua)\b'
+      - '\b(?:money|amount|payment)\s+(?:is\s+|was\s+|got\s+|has been\s+)?stuck\b'
+      - '\b(?:didnt|did not|not|never)\s+(?:get|got|receive\w*)\s+(?:my\s+)?(?:order|product|parcel)\s+(?:and|nor|or)\s+(?:my\s+)?money\b'
+      - '\b(?:no|without)\s+(?:\w+\s+){0,2}(?:or|and|nor)\s+refund\b'
+    exclude:
+      - '(?<!nt )(?<!not )(?<!never )\b(?:got|received|gave|given|processed)\s+(?:my\s+|a\s+|the\s+|full\s+|instant\s+)*refund\b(?![^.!?]{0,20}\b(?:not|yet|pending|but)\b)'
+      - '\brefund\s+(?:was\s+|is\s+)?(?:quick|fast|instant|immediate|prompt|processed quickly|smooth)\b'
+      - '\b(?:ended up|end up|ending up)\s+refund\w*\b[^.!?]{0,40}'
+
+  - id: other_non_wismo
+    label: Other / non-WISMO
+    group: derived
+    wismo: false
+    derived: true
+    definition: >-
+      Everything that is not WISMO-related: praise, pricing, food quality, app
+      bugs, serviceability, or support/refund complaints with no order-status angle.
+    patterns: []
+
+# The user's hypotheses, mapped to the categories that measure them. The report
+# prints a scorecard in this order.
+hypotheses:
+  - name: Poor or vague "where is my order" answers
+    categories: [vague_support_answer]
+    within: wismo
+  - name: Trackers stale, vague or wrong
+    categories: [tracking_stale_wrong]
+  - name: Rider stuck / not moving
+    categories: [rider_stuck]
+  - name: Traffic delays and ETA slips
+    categories: [eta_slip_late, traffic_weather_excuse]
+  - name: Multiple / batched orders
+    categories: [multiple_batched_orders]
+  - name: Bad address resolution
+    categories: [address_location]
+  - name: '"Delivered" but not received'
+    categories: [delivered_not_received]
+  - name: Support loops / unreachable
+    categories: [support_unreachable_loop]
+    within: wismo

@@ -1,0 +1,40 @@
+{"id": "gp:24ef7ee1-9cd5-4acf-b112-79d53d6a4484", "wismo": true, "categories": ["eta_slip_late", "tracking_stale_wrong"], "note": "'zomato honestly shows exact time' = Swish's shown ETA is wrong"}
+{"id": "as:13930848020", "wismo": true, "categories": ["eta_slip_late", "rider_stuck"], "note": ""}
+{"id": "gp:a405fedb-1c58-4528-a30c-bd6a7d278077", "wismo": true, "categories": ["eta_slip_late", "rider_stuck"], "note": "cancellation was at the shopper's request"}
+{"id": "gp:e72fbcfc-82c4-436b-8425-11fd04c9f718", "wismo": false, "categories": [], "note": "5-star praise that mentions it is not 10 minutes; not a complaint"}
+{"id": "gp:d5b90aef-3909-4cf3-87b3-a67889cd7c6f", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:13795144846", "wismo": true, "categories": ["eta_slip_late", "support_unreachable_loop"], "note": ""}
+{"id": "as:12221031023", "wismo": true, "categories": ["delivered_not_received"], "note": ""}
+{"id": "as:13991151828", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:12831474568", "wismo": false, "categories": [], "note": "address-selection app bug, not delivery resolution"}
+{"id": "gp:faee767f-8db1-4d6c-93b2-742a4ff2cf51", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:68b8b564-d397-4e13-befe-0529e08d3da0", "wismo": false, "categories": [], "note": "5-star: 'within 20 mins, it's good'; not a complaint"}
+{"id": "gp:386bf8bd-65b0-4bb6-ad02-cf74a268680a", "wismo": true, "categories": ["eta_slip_late", "tracking_stale_wrong"], "note": ""}
+{"id": "gp:da32e64b-9267-4ffe-969b-d9e3ec600faa", "wismo": true, "categories": ["delivered_not_received", "support_unreachable_loop"], "note": "'never arrived. It is showing delivered' = marked delivered"}
+{"id": "as:13803608684", "wismo": true, "categories": ["eta_slip_late", "tracking_stale_wrong"], "note": ""}
+{"id": "as:13980796984", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:0f1a85ec-cb32-4a7d-a084-513b291935d6", "wismo": true, "categories": ["rider_stuck"], "note": ""}
+{"id": "as:13973417735", "wismo": true, "categories": ["rider_stuck", "support_unreachable_loop"], "note": ""}
+{"id": "gp:bb1d8ead-ea20-4903-b7da-2bb0de0de188", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:14063828528", "wismo": true, "categories": ["rider_stuck", "support_unreachable_loop", "vague_support_answer", "eta_slip_late"], "note": ""}
+{"id": "gp:2b729179-56ac-43c4-a7de-0f4a080aa41a", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:51740be4-c0b3-41da-8964-9e6f7b63560b", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "gp:888f54f4-17f8-4dc7-9da7-f92cd7db7c22", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:12498803822", "wismo": true, "categories": ["address_location", "rider_behaviour"], "note": ""}
+{"id": "as:12953396912", "wismo": true, "categories": ["eta_slip_late", "rider_stuck"], "note": ""}
+{"id": "gp:a2d24a9b-7a14-4a83-87f9-5e68c3067b59", "wismo": true, "categories": ["order_not_delivered", "support_unreachable_loop", "eta_slip_late"], "note": ""}
+{"id": "gp:60f07994-2049-4653-b72b-fc3e4d27c59e", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:13319550363", "wismo": false, "categories": ["refund_stuck"], "note": "'took forever to process a refund' is a refund delay, not a delivery delay"}
+{"id": "gp:0e6011c4-2a6d-46ff-8ac8-bbd5082b464a", "wismo": true, "categories": ["eta_slip_late", "partial_missing_item"], "note": "5-star: one item unavailable and substituted, with a delay, handled well"}
+{"id": "as:12745569528", "wismo": true, "categories": ["eta_slip_late"], "note": ""}
+{"id": "as:14333991000", "wismo": true, "categories": ["delivered_not_received"], "note": ""}
+{"id": "gp:ef0577e7-3800-4ddb-9cc1-682d2ed48cbf", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:e79bb740-3e00-492f-98f5-4e250994dcbe", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:082519b7-5ad9-4eaa-a845-4b1f269399ae", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:8fd348e2-f0f2-41be-b220-ccb31a5464eb", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:b08edd9b-a474-4403-9d47-21b1f08cb08c", "wismo": false, "categories": [], "note": ""}
+{"id": "as:14426937808", "wismo": false, "categories": ["support_unreachable_loop"], "note": ""}
+{"id": "gp:4ae446e7-9ed9-42cf-b87d-4577c27e4e6a", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:cb546187-79b2-47e1-9055-9dfb38b28065", "wismo": false, "categories": [], "note": ""}
+{"id": "gp:b0e7c2ad-0b2a-4734-b025-c078d946d9e2", "wismo": false, "categories": [], "note": "'worst time policy' too vague to call"}
+{"id": "as:12241937823", "wismo": false, "categories": [], "note": ""}

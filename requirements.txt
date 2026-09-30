@@ -1,0 +1,5 @@
+# Runtime dependencies of the Vercel function (app.py). The engine's own list lives in engine/pyproject.toml.
+fastapi>=0.141,<1
+pydantic>=2.13,<3
+httpx>=0.28,<1
+redis>=5

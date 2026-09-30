@@ -1,0 +1,11 @@
+{
+ "brand": "zomato",
+ "tag": "B",
+ "seed": 20260930,
+ "n": 40,
+ "neg_pool": "low",
+ "pos_pool": 532,
+ "neg_pool_size": 2854,
+ "k_pos": 30,
+ "k_neg": 10
+}

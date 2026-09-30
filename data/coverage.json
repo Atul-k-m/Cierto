@@ -1,0 +1,2081 @@
+{
+ "summary": {
+  "complaints": 93,
+  "detectable": 80,
+  "caught": 79,
+  "needs_customer_report": 13,
+  "coverage_of_detectable": 0.988,
+  "by_mode": {
+   "proactive": 48,
+   "after_contact": 1,
+   "via_prompt": 30
+  },
+  "lead_time_basis": "31 caught complaints with stated dates or durations",
+  "lead_time_hours": {
+   "median": 104.0,
+   "p25": 52.0,
+   "min": 4.0,
+   "max": 560.0
+  },
+  "proactive_median_lead_hours": 123.0,
+  "by_category": {
+   "1. Delivery delay": {
+    "caught": 11
+   },
+   "2. Order not received": {
+    "caught": 6
+   },
+   "3. Marked delivered but not received": {
+    "caught": 35
+   },
+   "4. Tracking/status issue": {
+    "caught": 4
+   },
+   "5. Courier/delivery attempt issue": {
+    "caught": 6
+   },
+   "7. Missing item": {
+    "needs_customer_report": 3
+   },
+   "8. Partial shipment": {
+    "needs_customer_report": 2
+   },
+   "9. Wrong item": {
+    "needs_customer_report": 7
+   },
+   "11. Leaking/empty/tampered product": {
+    "needs_customer_report": 1
+   },
+   "13. Cancellation": {
+    "caught": 2
+   },
+   "14. Refund delay": {
+    "caught": 1,
+    "missed": 1
+   },
+   "16. Refund not received": {
+    "caught": 10
+   },
+   "19. Customer-support resolution failure": {
+    "caught": 2
+   },
+   "20. Other order/fulfillment issue": {
+    "caught": 2
+   }
+  },
+  "healthy": {
+   "per_vertical": {
+    "parcel": {
+     "orders": 300,
+     "with_false_alarm": 0,
+     "prompted": 117
+    },
+    "quick": {
+     "orders": 100,
+     "with_false_alarm": 0,
+     "prompted": 35
+    }
+   },
+   "false_alarm_rules": {}
+  },
+  "false_alarm_rate": 0.0,
+  "stress": {
+   "max_scan_gap_hours": 96,
+   "per_vertical": {
+    "parcel": {
+     "orders": 300,
+     "with_false_alarm": 70,
+     "prompted": 116
+    }
+   },
+   "false_alarm_rules": {
+    "tracking_stalled": 70
+   }
+  }
+ },
+ "results": [
+  {
+   "complaint_id": "TP-01",
+   "category_id": 2,
+   "category": "Order not received",
+   "group": "WISMO core",
+   "date": "2026-09-10",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 06 Sep; not delivered.",
+   "lead_time_hours": 80.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-02",
+   "category_id": 19,
+   "category": "Customer-support resolution failure",
+   "group": "Support",
+   "date": "2026-08-29",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "after_contact",
+   "caught_by": "repeat_contact",
+   "caught_message": "The customer has asked 2 times without an answer.",
+   "lead_time_hours": 48.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-03",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2026-08-22",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 13 Aug; not delivered.",
+   "lead_time_hours": 200.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-04",
+   "category_id": 2,
+   "category": "Order not received",
+   "group": "WISMO core",
+   "date": "2026-07-19",
+   "template": "in_transit",
+   "stated_facts": [
+    "many_contacts",
+    "refund_initiated"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 25 Jun; not delivered.",
+   "lead_time_hours": 560.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-05",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2026-04-03",
+   "template": "item_issue",
+   "stated_facts": [
+    "many_contacts",
+    "ticket_closed"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-06",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2026-03-11",
+   "template": "item_issue",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-07",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2026-03-07",
+   "template": "item_issue",
+   "stated_facts": [
+    "bot_loop",
+    "support_unanswered",
+    "ticket_closed"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-08",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2026-01-24",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-09",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-26",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-10",
+   "category_id": 13,
+   "category": "Cancellation",
+   "group": "Cancellation/refund",
+   "date": "2025-12-26",
+   "template": "cancelled",
+   "stated_facts": [
+    "system_cancelled"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 126.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-11",
+   "category_id": 8,
+   "category": "Partial shipment",
+   "group": "Item issue",
+   "date": "2025-11-03",
+   "template": "item_issue",
+   "stated_facts": [
+    "ticket_closed"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-12",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-06-04",
+   "template": "payment",
+   "stated_facts": [
+    "payment_no_order",
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "payment_without_order",
+   "caught_message": "Money was taken but no order was created. RBI rules require automatic reversal by T+5.",
+   "lead_time_hours": 71.5,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "payment_without_order",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "TP-13",
+   "category_id": 11,
+   "category": "Leaking/empty/tampered product",
+   "group": "Item issue",
+   "date": "2025-04-23",
+   "template": "item_issue",
+   "stated_facts": [
+    "support_unanswered",
+    "ticket_closed"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-14",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2025-04-14",
+   "template": "item_issue",
+   "stated_facts": [
+    "ticket_closed"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "TP-15",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-03-22",
+   "template": "in_transit",
+   "stated_facts": [
+    "bot_loop",
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 19 Mar; not delivered.",
+   "lead_time_hours": 56.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "repeat_contact"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-01",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-23",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call",
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-02",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-10-28",
+   "template": "in_transit",
+   "stated_facts": [
+    "eta_slipping"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_slipping",
+   "caught_message": "Delivery date moved 2 times.",
+   "lead_time_hours": 80.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_slipping"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-03",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-04",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-25",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-06",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-12-29",
+   "template": "refund",
+   "stated_facts": [
+    "refund_initiated",
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_overdue",
+   "caught_message": "Refund started 16 Dec but hasn't reached the customer.",
+   "lead_time_hours": 96.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence",
+    "refund_overdue"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-07",
+   "category_id": 4,
+   "category": "Tracking/status issue",
+   "group": "WISMO core",
+   "date": "2026-01-06",
+   "template": "doorstep_cancel",
+   "stated_facts": [
+    "bot_loop",
+    "doorstep_cancel"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 31 Dec; not delivered.",
+   "lead_time_hours": 128.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "status_conflict",
+    "refund_not_started",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-08",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2026-01-16",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "VX-09",
+   "category_id": 8,
+   "category": "Partial shipment",
+   "group": "Item issue",
+   "date": "2026-01-24",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "VX-10",
+   "category_id": 7,
+   "category": "Missing item",
+   "group": "Item issue",
+   "date": "2026-07-17",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "AP-01",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2026-04-04",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "AP-02",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-12-23",
+   "template": "in_transit",
+   "stated_facts": [
+    "undispatched"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "tracking_stalled",
+   "caught_message": "Packed 48.0 h ago and not yet picked up by the courier.",
+   "lead_time_hours": 253.5,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "tracking_stalled",
+    "eta_breached",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "AP-03",
+   "category_id": 19,
+   "category": "Customer-support resolution failure",
+   "group": "Support",
+   "date": "2025-05-05",
+   "template": "in_transit",
+   "stated_facts": [
+    "ticket_closed",
+    "tracking_frozen"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "tracking_stalled",
+   "caught_message": "No tracking update for 72.0 h.",
+   "lead_time_hours": 46.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "tracking_stalled",
+    "eta_breached",
+    "repeat_contact"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "AP-04",
+   "category_id": 5,
+   "category": "Courier/delivery attempt issue",
+   "group": "WISMO core",
+   "date": "2026-08-20",
+   "template": "delivery_attempt",
+   "stated_facts": [
+    "no_partner",
+    "returned"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "failed_attempt",
+   "caught_message": "The courier reported a failed delivery attempt. Confirm with the customer before it is returned.",
+   "lead_time_hours": 123.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "failed_attempt",
+    "eta_breached",
+    "status_conflict",
+    "returned_to_origin"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "AP-05",
+   "category_id": 7,
+   "category": "Missing item",
+   "group": "Item issue",
+   "date": "2026-07-23",
+   "template": "item_issue",
+   "stated_facts": [
+    "bot_loop"
+   ],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "MS-01",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-23",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-214806",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-03-23",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213885",
+   "category_id": 2,
+   "category": "Order not received",
+   "group": "WISMO core",
+   "date": "2026-01-22",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 02 Jan; not delivered.",
+   "lead_time_hours": 464.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213773",
+   "category_id": 4,
+   "category": "Tracking/status issue",
+   "group": "WISMO core",
+   "date": "2026-01-17",
+   "template": "in_transit",
+   "stated_facts": [
+    "eta_slipping",
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_slipping",
+   "caught_message": "Delivery date moved 2 times.",
+   "lead_time_hours": 128.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_slipping",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213755",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-01-16",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213684",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-01-13",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "many_contacts"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 436.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213681",
+   "category_id": 5,
+   "category": "Courier/delivery attempt issue",
+   "group": "WISMO core",
+   "date": "2026-01-13",
+   "template": "delivery_attempt",
+   "stated_facts": [
+    "support_unanswered",
+    "wrong_phone"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "phone_mismatch",
+   "caught_message": "The phone number on the parcel is not the customer's; the courier can't call or send the OTP.",
+   "lead_time_hours": 172.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "phone_mismatch",
+    "failed_attempt",
+    "repeat_contact",
+    "eta_breached",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213546",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-01-08",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-214709",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-03-17",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213482",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-01-06",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213449",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-01-03",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213418",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2026-01-01",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213395",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-31",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213375",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "delivered_early"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 28.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213370",
+   "category_id": 5,
+   "category": "Courier/delivery attempt issue",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "delivery_attempt",
+   "stated_facts": [
+    "wrong_phone"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "phone_mismatch",
+   "caught_message": "The phone number on the parcel is not the customer's; the courier can't call or send the OTP.",
+   "lead_time_hours": 172.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "phone_mismatch",
+    "failed_attempt",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213367",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 4.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213366",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "ticket_closed"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 52.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213361",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213360",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-30",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "support_unanswered",
+    "wrong_phone"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "phone_mismatch",
+   "caught_message": "The phone number on the parcel is not the customer's; the courier can't call or send the OTP.",
+   "lead_time_hours": 229.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "phone_mismatch",
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213349",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_otp"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213347",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213345",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "bot_loop",
+    "many_contacts"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213344",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213343",
+   "category_id": 5,
+   "category": "Courier/delivery attempt issue",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "delivery_attempt",
+   "stated_facts": [
+    "no_call",
+    "still_out_for_delivery"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 27 Dec; not delivered.",
+   "lead_time_hours": 32.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "out_for_delivery_overdue"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213342",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213339",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "many_contacts",
+    "no_call",
+    "no_otp",
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "suspicious_delivery",
+   "caught_message": "Marked delivered, but no OTP used and no call to the customer.",
+   "lead_time_hours": 126.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "suspicious_delivery",
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213337",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 52.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213309",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-27",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call",
+    "no_otp"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "suspicious_delivery",
+   "caught_message": "Marked delivered, but no OTP used and no call to the customer.",
+   "lead_time_hours": 78.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "suspicious_delivery",
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213295",
+   "category_id": 5,
+   "category": "Courier/delivery attempt issue",
+   "group": "WISMO core",
+   "date": "2025-12-26",
+   "template": "delivery_attempt",
+   "stated_facts": [
+    "address_blamed",
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "failed_attempt",
+   "caught_message": "The courier reported a failed delivery attempt. Confirm with the customer before it is returned.",
+   "lead_time_hours": 51.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "failed_attempt",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213289",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-26",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 52.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213350",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call",
+    "no_otp"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "suspicious_delivery",
+   "caught_message": "Marked delivered, but no OTP used and no call to the customer.",
+   "lead_time_hours": 6.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "suspicious_delivery",
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213283",
+   "category_id": 5,
+   "category": "Courier/delivery attempt issue",
+   "group": "WISMO core",
+   "date": "2025-12-25",
+   "template": "delivery_attempt",
+   "stated_facts": [
+    "failed_attempt_msg"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "failed_attempt",
+   "caught_message": "The courier reported a failed delivery attempt. Confirm with the customer before it is returned.",
+   "lead_time_hours": 51.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "failed_attempt",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213454",
+   "category_id": 2,
+   "category": "Order not received",
+   "group": "WISMO core",
+   "date": "2026-01-04",
+   "template": "in_transit",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 16 Dec; not delivered.",
+   "lead_time_hours": 440.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213304",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-27",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213268",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-24",
+   "template": "claimed_delivered",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 76.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-214760",
+   "category_id": 2,
+   "category": "Order not received",
+   "group": "WISMO core",
+   "date": "2026-03-20",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 01 Mar; not delivered.",
+   "lead_time_hours": 440.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213348",
+   "category_id": 4,
+   "category": "Tracking/status issue",
+   "group": "WISMO core",
+   "date": "2025-12-29",
+   "template": "in_transit",
+   "stated_facts": [
+    "tracking_frozen"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "tracking_stalled",
+   "caught_message": "No tracking update for 72.0 h.",
+   "lead_time_hours": 175.5,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "tracking_stalled",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213252",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-23",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213251",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-23",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213249",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-23",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "via_prompt",
+   "caught_by": "delivery_disputed",
+   "caught_message": "The customer says the order did not arrive, though it was marked delivered.",
+   "lead_time_hours": 124.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "delivery_disputed",
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213231",
+   "category_id": 3,
+   "category": "Marked delivered but not received",
+   "group": "WISMO core",
+   "date": "2025-12-21",
+   "template": "claimed_delivered",
+   "stated_facts": [
+    "no_call",
+    "no_otp"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "suspicious_delivery",
+   "caught_message": "Marked delivered, but no OTP used and no call to the customer.",
+   "lead_time_hours": 78.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "suspicious_delivery",
+    "delivery_disputed"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213024",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-12-06",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 01 Dec; not delivered.",
+   "lead_time_hours": 104.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-214816",
+   "category_id": 4,
+   "category": "Tracking/status issue",
+   "group": "WISMO core",
+   "date": "2026-03-24",
+   "template": "in_transit",
+   "stated_facts": [
+    "tracking_frozen"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "tracking_stalled",
+   "caught_message": "No tracking update for 72.0 h.",
+   "lead_time_hours": 166.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "tracking_stalled",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213013",
+   "category_id": 13,
+   "category": "Cancellation",
+   "group": "Cancellation/refund",
+   "date": "2025-12-05",
+   "template": "cancelled",
+   "stated_facts": [
+    "eta_slipping",
+    "refund_initiated",
+    "system_cancelled"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_slipping",
+   "caught_message": "Delivery date moved 2 times.",
+   "lead_time_hours": 128.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_slipping"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-212976",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-12-02",
+   "template": "refund",
+   "stated_facts": [
+    "doorstep_cancel"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "status_conflict",
+   "caught_message": "The courier and the store disagree about this order's status.",
+   "lead_time_hours": 336.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "status_conflict",
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-212696",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-11-14",
+   "template": "in_transit",
+   "stated_facts": [
+    "failed_attempt_msg"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "failed_attempt",
+   "caught_message": "The courier reported a failed delivery attempt. Confirm with the customer before it is returned.",
+   "lead_time_hours": 26.5,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "failed_attempt",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-211778",
+   "category_id": 7,
+   "category": "Missing item",
+   "group": "Item issue",
+   "date": "2025-09-12",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "repeat_contact",
+    "support_silence"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "IC-211314",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-08-19",
+   "template": "in_transit",
+   "stated_facts": [
+    "support_unanswered"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 17 Aug; not delivered.",
+   "lead_time_hours": 32.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached",
+    "repeat_contact"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-210937",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-07-30",
+   "template": "in_transit",
+   "stated_facts": [
+    "tracking_frozen"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "tracking_stalled",
+   "caught_message": "No tracking update for 72.0 h.",
+   "lead_time_hours": 247.5,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "tracking_stalled",
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-209499",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2025-05-13",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "partial_refund"
+   ],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "IC-208769",
+   "category_id": 9,
+   "category": "Wrong item",
+   "group": "Item issue",
+   "date": "2025-04-20",
+   "template": "item_issue",
+   "stated_facts": [],
+   "status": "needs_customer_report",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [],
+   "note": "Item-level problem (wrong, missing, damaged). No delivery signal reveals it; the engine's job starts at the customer's report."
+  },
+  {
+   "complaint_id": "IC-208600",
+   "category_id": 2,
+   "category": "Order not received",
+   "group": "WISMO core",
+   "date": "2025-04-16",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 28 Mar; not delivered.",
+   "lead_time_hours": 440.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-208026",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2025-03-29",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 24 Mar; not delivered.",
+   "lead_time_hours": 104.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-207829",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-03-19",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-207000",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-01-27",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-209833",
+   "category_id": 14,
+   "category": "Refund delay",
+   "group": "Cancellation/refund",
+   "date": "2025-06-01",
+   "template": "refund",
+   "stated_facts": [
+    "refund_initiated"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_overdue",
+   "caught_message": "Refund started 18 May but hasn't reached the customer.",
+   "lead_time_hours": 129.0,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "refund_overdue"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-206775",
+   "category_id": 20,
+   "category": "Other order/fulfillment issue",
+   "group": "Payment",
+   "date": "2025-01-13",
+   "template": "payment",
+   "stated_facts": [
+    "payment_no_order"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "payment_without_order",
+   "caught_message": "Money was taken but no order was created. RBI rules require automatic reversal by T+5.",
+   "lead_time_hours": 71.5,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "payment_without_order"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213221",
+   "category_id": 20,
+   "category": "Other order/fulfillment issue",
+   "group": "Payment",
+   "date": "2025-12-21",
+   "template": "payment",
+   "stated_facts": [
+    "payment_no_order"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "payment_without_order",
+   "caught_message": "Money was taken but no order was created. RBI rules require automatic reversal by T+5.",
+   "lead_time_hours": 71.5,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "payment_without_order"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-213752",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2026-01-16",
+   "template": "in_transit",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "eta_breached",
+   "caught_message": "Promised by 12 Jan; not delivered.",
+   "lead_time_hours": 80.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "eta_breached"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-206599",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-01-02",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-207446",
+   "category_id": 14,
+   "category": "Refund delay",
+   "group": "Cancellation/refund",
+   "date": "2025-02-25",
+   "template": "return_not_modelled",
+   "stated_facts": [],
+   "status": "missed",
+   "mode": null,
+   "caught_by": null,
+   "caught_message": null,
+   "lead_time_hours": null,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [],
+   "note": "A return after delivery; returns and reverse pickups aren't modelled in Phase 1."
+  },
+  {
+   "complaint_id": "IC-207164",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-02-06",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-206962",
+   "category_id": 16,
+   "category": "Refund not received",
+   "group": "Cancellation/refund",
+   "date": "2025-01-25",
+   "template": "refund",
+   "stated_facts": [],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "refund_not_started",
+   "caught_message": "The order ended without delivery and no refund has started.",
+   "lead_time_hours": 288.0,
+   "timing_stated": false,
+   "all_exceptions_before_complaint": [
+    "refund_not_started"
+   ],
+   "note": ""
+  },
+  {
+   "complaint_id": "IC-214317",
+   "category_id": 1,
+   "category": "Delivery delay",
+   "group": "WISMO core",
+   "date": "2026-02-23",
+   "template": "in_transit",
+   "stated_facts": [
+    "still_out_for_delivery"
+   ],
+   "status": "caught",
+   "mode": "proactive",
+   "caught_by": "out_for_delivery_overdue",
+   "caught_message": "Out for delivery 1 time(s), no delivery or attempt reported.",
+   "lead_time_hours": 82.5,
+   "timing_stated": true,
+   "all_exceptions_before_complaint": [
+    "out_for_delivery_overdue",
+    "eta_breached"
+   ],
+   "note": ""
+  }
+ ]
+}

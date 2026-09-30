@@ -1,0 +1,102 @@
+{
+ "brand": "swish",
+ "tag": "B",
+ "taxonomy_version": 2,
+ "n_labelled": 40,
+ "wismo_flag": {
+  "precision": 0.867,
+  "predicted": 30,
+  "correct": 26,
+  "false_negatives_all": 0,
+  "in_sample_recall": 1.0,
+  "missed_in_negative_stratum": 0,
+  "negative_stratum_n": 10,
+  "negative_stratum_miss_rate": 0.0
+ },
+ "categories": {
+  "eta_slip_late": {
+   "predicted": 21,
+   "correct": 18,
+   "precision": 0.857,
+   "gold": 20,
+   "in_sample_recall": 0.9
+  },
+  "rider_stuck": {
+   "predicted": 5,
+   "correct": 5,
+   "precision": 1.0,
+   "gold": 6,
+   "in_sample_recall": 0.833
+  },
+  "support_unreachable_loop": {
+   "predicted": 5,
+   "correct": 5,
+   "precision": 1.0,
+   "gold": 6,
+   "in_sample_recall": 0.833
+  },
+  "order_not_delivered": {
+   "predicted": 3,
+   "correct": 1,
+   "precision": 0.333,
+   "gold": 1,
+   "in_sample_recall": 1.0
+  },
+  "address_location": {
+   "predicted": 2,
+   "correct": 1,
+   "precision": 0.5,
+   "gold": 1,
+   "in_sample_recall": 1.0
+  },
+  "delivered_not_received": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 3,
+   "in_sample_recall": 0.667
+  },
+  "cancelled_by_platform": {
+   "predicted": 1,
+   "correct": 0,
+   "precision": 0.0,
+   "gold": 0,
+   "in_sample_recall": null
+  },
+  "refund_stuck": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 1,
+   "in_sample_recall": 1.0
+  },
+  "vague_support_answer": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 1,
+   "in_sample_recall": 1.0
+  },
+  "partial_missing_item": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 1,
+   "in_sample_recall": 0.0
+  },
+  "tracking_stale_wrong": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 3,
+   "in_sample_recall": 0.0
+  },
+  "rider_behaviour": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 1,
+   "in_sample_recall": 0.0
+  }
+ }
+}

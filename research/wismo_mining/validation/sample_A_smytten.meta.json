@@ -1,0 +1,10 @@
+{
+ "brand": "smytten",
+ "tag": "A",
+ "seed": 20260930,
+ "n": 60,
+ "pos_pool": 1246,
+ "neg_pool": 5100,
+ "k_pos": 45,
+ "k_neg": 15
+}

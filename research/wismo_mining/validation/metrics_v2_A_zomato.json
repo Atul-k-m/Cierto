@@ -1,0 +1,102 @@
+{
+ "brand": "zomato",
+ "tag": "A",
+ "taxonomy_version": 2,
+ "n_labelled": 60,
+ "wismo_flag": {
+  "precision": 1.0,
+  "predicted": 46,
+  "correct": 46,
+  "false_negatives_all": 0,
+  "in_sample_recall": 1.0,
+  "missed_in_negative_stratum": 0,
+  "negative_stratum_n": 15,
+  "negative_stratum_miss_rate": 0.0
+ },
+ "categories": {
+  "eta_slip_late": {
+   "predicted": 31,
+   "correct": 30,
+   "precision": 0.968,
+   "gold": 32,
+   "in_sample_recall": 0.938
+  },
+  "support_unreachable_loop": {
+   "predicted": 18,
+   "correct": 18,
+   "precision": 1.0,
+   "gold": 23,
+   "in_sample_recall": 0.783
+  },
+  "delivered_not_received": {
+   "predicted": 8,
+   "correct": 8,
+   "precision": 1.0,
+   "gold": 8,
+   "in_sample_recall": 1.0
+  },
+  "order_not_delivered": {
+   "predicted": 6,
+   "correct": 6,
+   "precision": 1.0,
+   "gold": 7,
+   "in_sample_recall": 0.857
+  },
+  "rider_behaviour": {
+   "predicted": 5,
+   "correct": 5,
+   "precision": 1.0,
+   "gold": 5,
+   "in_sample_recall": 1.0
+  },
+  "refund_stuck": {
+   "predicted": 5,
+   "correct": 5,
+   "precision": 1.0,
+   "gold": 5,
+   "in_sample_recall": 1.0
+  },
+  "cancelled_by_platform": {
+   "predicted": 4,
+   "correct": 4,
+   "precision": 1.0,
+   "gold": 5,
+   "in_sample_recall": 0.8
+  },
+  "multiple_batched_orders": {
+   "predicted": 4,
+   "correct": 4,
+   "precision": 1.0,
+   "gold": 4,
+   "in_sample_recall": 1.0
+  },
+  "address_location": {
+   "predicted": 4,
+   "correct": 4,
+   "precision": 1.0,
+   "gold": 4,
+   "in_sample_recall": 1.0
+  },
+  "vague_support_answer": {
+   "predicted": 3,
+   "correct": 3,
+   "precision": 1.0,
+   "gold": 7,
+   "in_sample_recall": 0.429
+  },
+  "tracking_stale_wrong": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 0.5
+  },
+  "rider_stuck": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 0.5
+  }
+ }
+}

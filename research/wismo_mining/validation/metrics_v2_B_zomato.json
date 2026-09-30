@@ -1,0 +1,116 @@
+{
+ "brand": "zomato",
+ "tag": "B",
+ "taxonomy_version": 2,
+ "n_labelled": 40,
+ "wismo_flag": {
+  "precision": 0.933,
+  "predicted": 30,
+  "correct": 28,
+  "false_negatives_all": 1,
+  "in_sample_recall": 0.966,
+  "missed_in_negative_stratum": 1,
+  "negative_stratum_n": 10,
+  "negative_stratum_miss_rate": 0.1
+ },
+ "categories": {
+  "eta_slip_late": {
+   "predicted": 17,
+   "correct": 16,
+   "precision": 0.941,
+   "gold": 20,
+   "in_sample_recall": 0.8
+  },
+  "delivered_not_received": {
+   "predicted": 6,
+   "correct": 5,
+   "precision": 0.833,
+   "gold": 5,
+   "in_sample_recall": 1.0
+  },
+  "support_unreachable_loop": {
+   "predicted": 5,
+   "correct": 4,
+   "precision": 0.8,
+   "gold": 6,
+   "in_sample_recall": 0.667
+  },
+  "address_location": {
+   "predicted": 3,
+   "correct": 3,
+   "precision": 1.0,
+   "gold": 3,
+   "in_sample_recall": 1.0
+  },
+  "order_not_delivered": {
+   "predicted": 3,
+   "correct": 2,
+   "precision": 0.667,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "cancelled_by_platform": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 4,
+   "in_sample_recall": 0.5
+  },
+  "refund_stuck": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "vague_support_answer": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 3,
+   "in_sample_recall": 0.667
+  },
+  "rider_stuck": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "traffic_weather_excuse": {
+   "predicted": 2,
+   "correct": 0,
+   "precision": 0.0,
+   "gold": 0,
+   "in_sample_recall": null
+  },
+  "multiple_batched_orders": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 0.5
+  },
+  "partial_missing_item": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 2,
+   "in_sample_recall": 0.0
+  },
+  "tracking_stale_wrong": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 2,
+   "in_sample_recall": 0.0
+  },
+  "rider_behaviour": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 2,
+   "in_sample_recall": 0.0
+  }
+ }
+}

@@ -1,0 +1,30 @@
+{
+  "id": "demo-smytten-late",
+  "title": "Delivery date slips every day while tracking stands still",
+  "cause": "eta_slipping",
+  "complaints": ["VX-02", "IC-210937", "IC-213773"],
+  "note": "Demo timeline built from the cited complaints; dates, times and amounts are illustrative.",
+  "tenant": { "id": "smytten-demo", "name": "Smytten (concept demo)", "vertical": "parcel" },
+  "order_ref": "SMY-4817702",
+  "start": "2025-12-16T19:40:00+05:30",
+  "events": [
+    { "at": "+0h", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 344, "payment": "prepaid_card", "account_phone_last4": "2946",
+                "items": ["Cetaphil gentle skin cleanser 118 ml"], "title": "Cetaphil gentle skin cleanser" } },
+    { "at": "+0h", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 344, "method": "card" } },
+    { "at": "+0h1m", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arrives by Mon, 22 Dec", "due_by": "2025-12-22T23:59:00+05:30", "kind": "checkout" } },
+    { "at": "+0d18h", "type": "shipment.status", "status": "packed", "substatus": "packed.packed", "asserted_by": "merchant",
+      "shipment_ref": "AWB-1432890145", "data": { "consignee_phone_last4": "2946" } },
+    { "at": "+1d1h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.picked_up", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432890145", "raw": { "carrier": "Delhivery", "code": "UD", "message": "Shipment picked up" },
+      "location": { "city": "Gurugram" } },
+    { "at": "+2d15h", "type": "shipment.status", "status": "in_transit", "substatus": "in_transit.hub_scan", "asserted_by": "carrier",
+      "shipment_ref": "AWB-1432890145", "raw": { "carrier": "Delhivery", "code": "UD", "message": "In transit" },
+      "location": { "city": "Bareilly" } },
+    { "at": "+5d16h", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arrives by Tue, 23 Dec", "due_by": "2025-12-23T23:59:00+05:30", "kind": "revision" } },
+    { "at": "+6d16h", "type": "eta.promised", "asserted_by": "merchant",
+      "data": { "shown_to_customer": "Arrives by Wed, 24 Dec", "due_by": "2025-12-24T23:59:00+05:30", "kind": "revision" } }
+  ]
+}

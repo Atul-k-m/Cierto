@@ -1,0 +1,56 @@
+# Local production rehearsal: Caddy load-balances round-robin across three stateless app replicas that share
+# sessions, rate limits and the LLM budget through Redis.
+#
+#   docker compose -f deploy/compose.yaml up --build        # then http://localhost:8080
+#   for i in 1 2 3 4 5 6; do curl -s -o /dev/null -D - http://localhost:8080/healthz | grep -i x-served-by; done
+#
+# Secrets (GEMINI_API_KEY) go in deploy/.env (gitignored); without it the app answers from its templates.
+
+x-app: &app
+  build:
+    context: ..
+    dockerfile: Dockerfile
+  image: cierto:local
+  restart: unless-stopped
+  env_file:
+    - path: .env
+      required: false
+  environment:
+    REDIS_URL: redis://redis:6379/0
+    TRUSTED_PROXY_HOPS: "1"            # Caddy appends the client address it saw to X-Forwarded-For
+    FORWARDED_ALLOW_IPS: "*"           # only Caddy can reach the replicas (no published ports)
+    LOG_FORMAT: json
+    # SITE_URL: https://cierto.example # unset: __SITE_URL__ becomes the request's origin
+  expose: ["8080"]
+  depends_on:
+    redis:
+      condition: service_healthy
+
+services:
+  app1:
+    <<: *app
+    hostname: app1                     # shows up as X-Served-By: app1
+  app2:
+    <<: *app
+    hostname: app2
+  app3:
+    <<: *app
+    hostname: app3
+
+  redis:
+    image: redis:7-alpine
+    # Every key the app writes expires (sessions idle out, counters roll over), so volatile-lru is safe.
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "256mb",
+              "--maxmemory-policy", "volatile-lru"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+
+  lb:
+    image: caddy:2-alpine
+    ports: ["8080:8080"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on: [app1, app2, app3]

@@ -1,0 +1,27 @@
+{
+  "$description": "Swish-style skin for <wismo-order>. Sampled from Swish's App Store tracking screenshot (.impeccable/refs).",
+  "font": {
+    "body": { "$type": "fontFamily", "$value": "\"Plus Jakarta Sans\", system-ui, sans-serif" }
+  },
+  "color": {
+    "ink": { "$type": "color", "$value": "#11281b" },
+    "muted": { "$type": "color", "$value": "#51645a" },
+    "surface": { "$type": "color", "$value": "#ffffff" },
+    "surface-2": { "$type": "color", "$value": "#f1f9f4" },
+    "line": { "$type": "color", "$value": "#dcebe1" },
+    "action": { "$type": "color", "$value": "#1c8743" },
+    "action-ink": { "$type": "color", "$value": "#ffffff" },
+    "action-strong": { "$type": "color", "$value": "#146a33" },
+    "ok": { "$type": "color", "$value": "#1c7a3e" },
+    "ok-soft": { "$type": "color", "$value": "#e4f5ea" },
+    "check": { "$type": "color", "$value": "#7a5200" },
+    "check-soft": { "$type": "color", "$value": "#fff7c7" },
+    "alert": { "$type": "color", "$value": "#b53226" },
+    "alert-soft": { "$type": "color", "$value": "#fdecea" },
+    "focus": { "$type": "color", "$value": "#146a33" }
+  },
+  "radius": {
+    "surface": { "$type": "dimension", "$value": "16px" },
+    "control": { "$type": "dimension", "$value": "999px" }
+  }
+}

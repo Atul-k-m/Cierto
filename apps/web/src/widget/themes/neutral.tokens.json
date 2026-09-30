@@ -1,0 +1,27 @@
+{
+  "$description": "Neutral default for <wismo-order> when a host supplies no theme. Deliberately brand-free.",
+  "font": {
+    "body": { "$type": "fontFamily", "$value": "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" }
+  },
+  "color": {
+    "ink": { "$type": "color", "$value": "#1f2328" },
+    "muted": { "$type": "color", "$value": "#57606a" },
+    "surface": { "$type": "color", "$value": "#ffffff" },
+    "surface-2": { "$type": "color", "$value": "#f4f5f7" },
+    "line": { "$type": "color", "$value": "#dfe2e6" },
+    "action": { "$type": "color", "$value": "#1f2328" },
+    "action-ink": { "$type": "color", "$value": "#ffffff" },
+    "action-strong": { "$type": "color", "$value": "#000000" },
+    "ok": { "$type": "color", "$value": "#1a7f37" },
+    "ok-soft": { "$type": "color", "$value": "#e6f4ea" },
+    "check": { "$type": "color", "$value": "#8a5300" },
+    "check-soft": { "$type": "color", "$value": "#fff3dc" },
+    "alert": { "$type": "color", "$value": "#b0241c" },
+    "alert-soft": { "$type": "color", "$value": "#fdebea" },
+    "focus": { "$type": "color", "$value": "#1f2328" }
+  },
+  "radius": {
+    "surface": { "$type": "dimension", "$value": "12px" },
+    "control": { "$type": "dimension", "$value": "10px" }
+  }
+}

@@ -1,0 +1,20 @@
+# What `gcloud builds submit` uploads to Cloud Build (the Dockerfile's .dockerignore then applies on top).
+.git
+.gitignore
+.gcloudignore
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+**/.ruff_cache/
+**/.env
+**/.env.*
+!**/.env.example
+deploy/
+.impeccable/
+data/
+research/
+engine/.pgdata/
+engine/tests/

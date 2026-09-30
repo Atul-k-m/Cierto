@@ -1,0 +1,19 @@
+{
+  "id": "demo-smytten-refund",
+  "title": "Cancelled within minutes; refund shows initiated but never reaches the bank",
+  "cause": "refund_overdue",
+  "complaints": ["VX-06", "IC-207000", "AP-01"],
+  "note": "Demo timeline built from the cited complaints; dates, times, amounts and the bank reference are illustrative.",
+  "tenant": { "id": "smytten-demo", "name": "Smytten (concept demo)", "vertical": "parcel" },
+  "order_ref": "SMY-4809911",
+  "start": "2025-12-09T21:05:00+05:30",
+  "events": [
+    { "at": "+0h", "type": "order.placed", "asserted_by": "merchant",
+      "data": { "amount_inr": 674, "payment": "prepaid_upi", "account_phone_last4": "2946",
+                "items": ["Cetaphil moisturising cream 100 g"], "title": "Cetaphil moisturising cream" } },
+    { "at": "+0h", "type": "payment.captured", "asserted_by": "payment", "data": { "amount_inr": 674, "method": "upi" } },
+    { "at": "+0h8m", "type": "order.cancelled", "asserted_by": "merchant", "data": { "by": "customer", "reason": "wrong address" } },
+    { "at": "+0d16h", "type": "refund.status", "asserted_by": "merchant",
+      "data": { "stage": "initiated", "amount_inr": 674, "method": "upi", "reference": "RRN 535418027766" } }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+ "brand": "swish",
+ "tag": "A",
+ "taxonomy_version": 1,
+ "n_labelled": 60,
+ "wismo_flag": {
+  "precision": 0.733,
+  "predicted": 45,
+  "correct": 33,
+  "false_negatives_all": 0,
+  "in_sample_recall": 1.0,
+  "missed_in_negative_stratum": 0,
+  "negative_stratum_n": 15,
+  "negative_stratum_miss_rate": 0.0
+ },
+ "categories": {
+  "eta_slip_late": {
+   "predicted": 21,
+   "correct": 19,
+   "precision": 0.905,
+   "gold": 26,
+   "in_sample_recall": 0.731
+  },
+  "support_unreachable_loop": {
+   "predicted": 10,
+   "correct": 9,
+   "precision": 0.9,
+   "gold": 13,
+   "in_sample_recall": 0.692
+  },
+  "order_not_delivered": {
+   "predicted": 8,
+   "correct": 3,
+   "precision": 0.375,
+   "gold": 3,
+   "in_sample_recall": 1.0
+  },
+  "traffic_weather_excuse": {
+   "predicted": 7,
+   "correct": 4,
+   "precision": 0.571,
+   "gold": 5,
+   "in_sample_recall": 0.8
+  },
+  "address_location": {
+   "predicted": 7,
+   "correct": 2,
+   "precision": 0.286,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "vague_support_answer": {
+   "predicted": 7,
+   "correct": 2,
+   "precision": 0.286,
+   "gold": 3,
+   "in_sample_recall": 0.667
+  },
+  "rider_stuck": {
+   "predicted": 3,
+   "correct": 1,
+   "precision": 0.333,
+   "gold": 5,
+   "in_sample_recall": 0.2
+  },
+  "refund_stuck": {
+   "predicted": 3,
+   "correct": 2,
+   "precision": 0.667,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "delivered_not_received": {
+   "predicted": 2,
+   "correct": 2,
+   "precision": 1.0,
+   "gold": 2,
+   "in_sample_recall": 1.0
+  },
+  "rider_behaviour": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 4,
+   "in_sample_recall": 0.25
+  },
+  "tracking_stale_wrong": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 3,
+   "in_sample_recall": 0.333
+  },
+  "cancelled_by_platform": {
+   "predicted": 1,
+   "correct": 1,
+   "precision": 1.0,
+   "gold": 4,
+   "in_sample_recall": 0.25
+  },
+  "proactive_comms_missing": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 2,
+   "in_sample_recall": 0.0
+  },
+  "partial_missing_item": {
+   "predicted": 0,
+   "correct": 0,
+   "precision": null,
+   "gold": 2,
+   "in_sample_recall": 0.0
+  }
+ }
+}

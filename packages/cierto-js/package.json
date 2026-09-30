@@ -1,0 +1,41 @@
+{
+  "name": "@cierto/js",
+  "version": "0.1.0",
+  "description": "Cierto browser SDK: the <cierto-order> widget, a headless order client and a React wrapper (proof of concept).",
+  "private": true,
+  "main": "./dist/cierto.js",
+  "module": "./dist/cierto.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/cierto.mjs",
+      "require": "./dist/cierto.js"
+    },
+    "./react": {
+      "import": "./dist/react.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && vite build --config vite.config.mts && vite build --config vite.react.config.mts"
+  },
+  "dependencies": {
+    "lucide": "^1.48.0"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "react": "^19.2.8",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}

@@ -1,0 +1,41 @@
+# Caddy as the load balancer in front of three Cierto replicas (deploy/compose.yaml).
+# Plain HTTP on :8080 locally; in front of a real domain, replace ":8080" with the hostname and Caddy gets TLS.
+{
+	admin off
+	auto_https off
+}
+
+:8080 {
+	reverse_proxy app1:8080 app2:8080 app3:8080 {
+		# Any replica can serve any request (sessions are op logs in Redis), so plain round robin, no stickiness.
+		lb_policy round_robin
+		# Retry another replica while one is down: dial errors always, other failures for GET only.
+		lb_try_duration 5s
+		lb_try_interval 250ms
+		lb_retries 2
+
+		# Active health checks: a replica that stops answering /healthz leaves the pool within ~10 s.
+		health_uri /healthz
+		health_interval 5s
+		health_timeout 2s
+		health_status 2xx
+
+		# Passive health checks: two failures (errors, 5xx or 5 s responses) take a replica out for 30 s.
+		fail_duration 30s
+		max_fails 2
+		unhealthy_status 5xx
+		unhealthy_latency 5s
+
+		# Keep upstream connections shorter-lived than the app's keep-alive (75 s), so Caddy never
+		# reuses a connection the app is closing.
+		transport http {
+			dial_timeout 2s
+			keepalive 30s
+		}
+	}
+	header -Server
+	log {
+		output stdout
+		format json
+	}
+}

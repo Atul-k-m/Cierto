@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "bash deploy/vercel/build.sh",
+  "regions": ["bom1"],
+  "functions": {
+    "app.py": {
+      "maxDuration": 60,
+      "excludeFiles": "{**/node_modules/**,apps/web/src/**,apps/web/public/**,apps/web/hosts/**,apps/web/scripts/**,packages/cierto-js/src/**,engine/tests/**,engine/.venv/**,research/**,data/**,docs/**,deploy/**,.impeccable/**,**/__pycache__/**}"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+# Brand registry for the WISMO complaint-mining framework.
+#
+# Adding a brand is a config change: copy a block, set the ids, run
+#   python -m wismo_mining run --brands <key>
+# A source that is omitted (or set to null) is recorded as "not configured" in
+# the report, so gaps stay visible.
+
+defaults:
+  politeness:
+    user_agent: "wismo-research/0.1 (non-commercial complaint research; polite, low-rate)"
+    sleep_s: 2.5            # between web requests (consumercomplaints, trustpilot, ...)
+    api_sleep_s: 1.5        # between app-store API pages
+  google_play:
+    lang: en
+    country: in
+    newest: 5000            # newest reviews, all ratings (the unbiased-ish sample)
+    low_star:               # extra newest-first pulls filtered by star rating
+      1: 3000
+      2: 1500
+  app_store:
+    country: in
+    pages: 10               # the public RSS feed stops at 10 pages x 50 reviews
+  consumercomplaints:
+    max_pages: 30
+    min_date: "2023-01-01"  # rows older than this are dropped; paging stops after 2 empty pages
+  reddit:
+    subreddits: [india, bangalore, IndianFood]
+
+brands:
+  smytten:
+    name: Smytten
+    vertical: "D2C beauty and lifestyle sample boxes"
+    delivery_model: courier   # courier | hyperlocal (changes how 'late' reads, not the rules)
+    sources:
+      google_play: {app_id: com.app.smytten}
+      app_store: {app_id: 1100171914}
+      consumercomplaints: {slug: smytten-b115980}
+      trustpilot: {domain: smytten.com}
+      mouthshut: {url: "https://www.mouthshut.com/product-reviews/smytten-reviews-925892394"}
+      reddit: {query: smytten}
+      manual_research: {path: data/complaints.json}
+    notes:
+      - "Courier model: 'late' means days, and 'not received' usually means a parcel stuck with the courier, so these two categories overlap more than for food apps."
+
+  swish:
+    name: Swish
+    vertical: "10-minute food delivery (Bengaluru)"
+    delivery_model: hyperlocal
+    sources:
+      google_play: {app_id: com.swishapp}
+      app_store: {app_id: 6504881715}
+      consumercomplaints: null   # no brand page found on consumercomplaints.in (searched 2026-09-30)
+      trustpilot: {domain: justswish.in}
+      mouthshut: null            # no brand page found
+      reddit: {query: "swish food delivery"}
+    notes:
+      - "Many Swish 1–2★ reviews are about price, serviceability and the 'experiencing surge' / 'kitchen on break' can't-order message. That dilutes its WISMO share; 'surge' counts as a delay excuse only when tied to a delay."
+      - "Swish's Play review history is small (~2,300 text reviews since July 2024), so its all-ratings sample is the app's whole life, not a recent window."
+
+  zomato:
+    name: Zomato
+    vertical: "Restaurant food delivery"
+    delivery_model: hyperlocal
+    sources:
+      google_play: {app_id: com.application.zomato}
+      app_store: {app_id: 434613896}
+      consumercomplaints: {slug: zomato-b115724}
+      trustpilot: {domain: zomato.com}
+      mouthshut: {url: "https://www.mouthshut.com/product-reviews/zomato-reviews-925641443"}
+      reddit: {query: zomato delivery}
+    notes:
+      - "consumercomplaints.in lists full complaints first and short posts after them; paging stopped once full complaints fell before 2023, so Zomato's short posts were not reached."
+      - "Zomato's review volume means the capped Play pulls cover ~10 days (all ratings) and ~3 weeks (1★): a snapshot, not a trend."

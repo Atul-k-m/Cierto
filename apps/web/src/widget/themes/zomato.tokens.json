@@ -1,0 +1,27 @@
+{
+  "$description": "Zomato-style skin for <wismo-order>. Sampled from Zomato's App Store tracking screenshot (.impeccable/refs).",
+  "font": {
+    "body": { "$type": "fontFamily", "$value": "\"Metropolis\", system-ui, sans-serif" }
+  },
+  "color": {
+    "ink": { "$type": "color", "$value": "#1c1c1c" },
+    "muted": { "$type": "color", "$value": "#636363" },
+    "surface": { "$type": "color", "$value": "#ffffff" },
+    "surface-2": { "$type": "color", "$value": "#f6f6f6" },
+    "line": { "$type": "color", "$value": "#e8e8e8" },
+    "action": { "$type": "color", "$value": "#cb202d" },
+    "action-ink": { "$type": "color", "$value": "#ffffff" },
+    "action-strong": { "$type": "color", "$value": "#a9161f" },
+    "ok": { "$type": "color", "$value": "#1f7f36" },
+    "ok-soft": { "$type": "color", "$value": "#e7f5ea" },
+    "check": { "$type": "color", "$value": "#8f4a00" },
+    "check-soft": { "$type": "color", "$value": "#fff1e0" },
+    "alert": { "$type": "color", "$value": "#c42430" },
+    "alert-soft": { "$type": "color", "$value": "#fdecec" },
+    "focus": { "$type": "color", "$value": "#c42430" }
+  },
+  "radius": {
+    "surface": { "$type": "dimension", "$value": "16px" },
+    "control": { "$type": "dimension", "$value": "12px" }
+  }
+}
