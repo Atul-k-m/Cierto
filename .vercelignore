@@ -1,15 +1,16 @@
-# What `vercel deploy` uploads: sources plus finished builds; never installs, secrets or raw research.
-.git
+# What Vercel uploads or checks out. Leading slashes anchor a pattern to the repo root: without one, a name like
+# "data" would also drop apps/web/src/site/data (the case-study data the site is built from).
+/.git
 **/node_modules
 **/.venv
 **/__pycache__
 **/.pytest_cache
-apps/web/dist-ssr
-engine/.pgdata
-engine/tests
-.impeccable
-research
-data
+/apps/web/dist-ssr
+/engine/.pgdata
+/engine/tests
+/.impeccable
+/research
+/data
 **/.env
 **/.env.*
 !**/.env.example
