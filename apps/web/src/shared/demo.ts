@@ -40,7 +40,7 @@ export function useOrder(session: string | null, key: string): OrderView | null 
       .then((env: OrderEnvelope | null) => { if (alive && env) setView(env.view) })
       .catch(() => {})
     load()
-    const t = window.setInterval(() => { if (!document.hidden) load() }, 2000)
+    const t = window.setInterval(() => { if (!document.hidden) load() }, 3000)
     return () => { alive = false; window.clearInterval(t) }
   }, [session, key])
   return view

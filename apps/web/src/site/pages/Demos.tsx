@@ -36,10 +36,16 @@ function splitAnswer(text: string) {
 function useDemo() {
   const [summary, setSummary] = useState<Summary | null>(null)
   const [busy, setBusy] = useState(false)
+  const [failed, setFailed] = useState(false)
   const start = useCallback(async () => {
-    setSummary(null)
-    const r = await fetch('/v1/demo/sessions', { method: 'POST' })
-    if (r.ok) setSummary(await r.json())
+    setSummary(null); setFailed(false)
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const r = await fetch('/v1/demo/sessions', { method: 'POST' })
+        if (r.ok) { setSummary(await r.json()); return }
+      } catch { /* network: try once more */ }
+    }
+    setFailed(true)
   }, [])
   useEffect(() => { start().catch(() => {}) }, [start])
   useEffect(() => {
@@ -52,7 +58,7 @@ function useDemo() {
         if (r.status === 404) { start().catch(() => {}); return }
         if (r.ok) r.json().then(setSummary)
       }).catch(() => {})
-    }, 2000)
+    }, 3000)
     return () => window.clearInterval(t)
   }, [summary?.id])
   const advance = async (beat: string) => {
@@ -64,7 +70,7 @@ function useDemo() {
       else if (r.ok) setSummary(await r.json())
     } finally { setBusy(false) }
   }
-  return { summary, busy, advance, restart: start }
+  return { summary, busy, failed, advance, restart: start }
 }
 
 export function Demos() {
@@ -73,7 +79,7 @@ export function Demos() {
     const app = new URLSearchParams(location.search).get('app')
     if (app === 'swish' || app === 'zomato') setHost(app)
   }, [])
-  const { summary, busy, advance, restart } = useDemo()
+  const { summary, busy, failed, advance, restart } = useDemo()
   const orders = (summary?.orders ?? []).filter((o) => o.host === host) as Order[]
   const [key, setKey] = useState<string | null>(null)
   const order = orders.find((o) => o.key === key) ?? orders[0]
@@ -101,7 +107,9 @@ export function Demos() {
         <figure className="d2-phone">
           <AnimatePresence mode="wait">
             <motion.div key={host} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: .45, ease: [.16, 1, .3, 1] }}>
-              <Screen src={summary ? `${a.src}?session=${summary.id}` : null} title={`${a.brand} concept demo with Cierto inside`} />
+              <Screen src={summary ? `${a.src}?session=${summary.id}` : null} title={`${a.brand} concept demo with Cierto inside`}
+                empty={failed ? <><p>The demo server didn't answer.</p><button className="btn sm" onClick={() => restart()}><RotateCcw size={14} aria-hidden="true" />Try again</button></>
+                  : <><span className="who think"><i />CIERTO</span><p>Starting a live session with {a.brand}'s orders…</p></>} />
             </motion.div>
           </AnimatePresence>
           <figcaption>Concept replica · not affiliated with {a.brand}</figcaption>
@@ -111,9 +119,9 @@ export function Demos() {
           <div className="d2-block">
             <p className="d2-label">1 · Pick a problem</p>
             <div className="d2-causes" role="tablist" aria-label="Problem">
-              {orders.map((o) => (
+              {summary ? orders.map((o) => (
                 <button key={o.key} role="tab" aria-selected={order?.key === o.key} onClick={() => setKey(o.key)}>{label(o)}</button>
-              ))}
+              )) : [96, 72, 120, 84].map((w, i) => <span key={i} className="d2-skel" style={{ width: w }} aria-hidden="true" />)}
             </div>
           </div>
 
@@ -124,9 +132,10 @@ export function Demos() {
             </div>
             <div className="d2-track" aria-hidden="true">{summary?.beats.map((b) => <i key={b.id} className={b.reached ? 'on' : ''} />)}</div>
             <div className="d2-clockrow">
-              {next ? <button className="btn sm" disabled={busy} onClick={() => advance(next.id)}>{next.label} · {next.at.slice(0, 10) !== summary!.beats[0].at.slice(0, 10) ? fmtDay(next.at) : fmtTime(next.at)} <ArrowRight size={15} aria-hidden="true" /></button>
+              {!summary ? <span className="d2-muted">{failed ? 'Not started.' : 'Starting…'}</span>
+                : next ? <button className="btn sm" disabled={busy} onClick={() => advance(next.id)}>{next.label} · {next.at.slice(0, 10) !== summary.beats[0].at.slice(0, 10) ? fmtDay(next.at) : fmtTime(next.at)} <ArrowRight size={15} aria-hidden="true" /></button>
                 : <span className="d2-muted">End of the story.</span>}
-              <span className="d2-muted num">{done}/{summary?.beats.length ?? 0}</span>
+              {summary && <span className="d2-muted num">{done}/{summary.beats.length}</span>}
               <button className="text-btn" onClick={() => { setKey(null); restart() }}><RotateCcw size={13} aria-hidden="true" />Restart</button>
             </div>
           </div>
@@ -273,7 +282,7 @@ function Hooks({ session, order }: { session: string; order?: string }) {
   )
 }
 
-function Screen({ src, title }: { src: string | null; title: string }) {
+function Screen({ src, title, empty }: { src: string | null; title: string; empty?: React.ReactNode }) {
   const box = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(0.86)
   useLayoutEffect(() => {
@@ -286,7 +295,7 @@ function Screen({ src, title }: { src: string | null; title: string }) {
   return (
     <div className="device">
       <div className="screen" ref={box} style={{ height: 844 * scale }}>
-        {src && <iframe key={src} title={title} src={src} style={{ transform: `scale(${scale})` }} />}
+        {src ? <iframe key={src} title={title} src={src} style={{ transform: `scale(${scale})` }} /> : <div className="screen-empty" role="status">{empty}</div>}
       </div>
     </div>
   )

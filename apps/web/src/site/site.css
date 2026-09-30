@@ -956,3 +956,13 @@ main, .footer { overflow-x: clip; }
 .a-q p { position: relative; }
 /* The trend SVG scales with its width, so on phones its labels need larger units to stay readable. */
 @media (max-width: 680px) { .trend text { font-size: 30px; } }
+
+/* Demo loading and failure states: never an empty phone. */
+.screen { position: relative; }
+.screen-empty { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 32px; text-align: center; color: var(--soft); font-size: 15px; }
+.screen-empty p { max-width: 22ch; line-height: 1.5; }
+.d2-skel { display: inline-block; height: 38px; background: linear-gradient(90deg, var(--paper-2), var(--paper), var(--paper-2)); background-size: 200% 100%; animation: skel 1.2s linear infinite; }
+@keyframes skel { from { background-position: 200% 0; } to { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .d2-skel { animation: none; } }
+/* The nav stays readable over the big display type that scrolls under it. */
+.nav { background: rgb(243 244 242 / .97); }

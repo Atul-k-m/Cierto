@@ -74,7 +74,8 @@ export class CiertoOrder extends HTMLElement {
     if (!this.isConnected || !this.#root) return
     this.#json = ''
     this.#refresh()
-    this.#timer = window.setInterval(() => this.#refresh(), this.#source?.intervalMs ?? 1000)
+    // Every 3 s like the SDK, and not while the page is hidden: each tick is a request (and, deployed, shared-store reads).
+    this.#timer = window.setInterval(() => { if (!document.hidden) this.#refresh() }, this.#source?.intervalMs ?? 3000)
   }
 
   get #locale(): Locale { return this.getAttribute('locale') === 'hi-Latn-IN' ? 'hi-Latn-IN' : 'en-IN' }
