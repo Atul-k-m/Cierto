@@ -954,3 +954,5 @@ main, .footer { overflow-x: clip; }
 .tw-off { visibility: hidden; }
 .a-q .caret { position: absolute; margin-left: 1px; } /* out of flow, so the caret never nudges the text */
 .a-q p { position: relative; }
+/* The trend SVG scales with its width, so on phones its labels need larger units to stay readable. */
+@media (max-width: 680px) { .trend text { font-size: 30px; } }

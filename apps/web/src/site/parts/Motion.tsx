@@ -26,7 +26,7 @@ export function Reveal({ children, delay = 0, className, kind = 'rise', as = 'di
   const reduce = useReducedMotion()
   const Tag = motion[as]
   return (
-    <Tag className={className} style={style} initial={reduce ? false : FROM[kind]} whileInView={TO[kind]} viewport={{ once: true, margin: '-60px' }}
+    <Tag className={className} style={style} initial={reduce ? false : FROM[kind]} whileInView={TO[kind]} viewport={{ once: true, margin: '-60px 0px' }}
       transition={{ duration: kind === 'wipe' ? 1.1 : 0.9, ease: EASE, delay }}>
       {children}
     </Tag>
@@ -36,7 +36,7 @@ export function Reveal({ children, delay = 0, className, kind = 'rise', as = 'di
 /** A number that counts up the first time it is seen. */
 export function CountUp({ to, decimals = 0, suffix = '' }: { to: number; decimals?: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const seen = useInView(ref, { once: true, margin: '-40px' })
+  const seen = useInView(ref, { once: true, margin: '-40px 0px' })
   const reduce = useReducedMotion()
   const [v, setV] = useState(reduce ? to : 0)
   useEffect(() => {

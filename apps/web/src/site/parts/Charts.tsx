@@ -6,7 +6,8 @@ const EASE = [0.16, 1, 0.3, 1] as const
 
 function useSeen() {
   const ref = useRef<HTMLDivElement>(null)
-  const seen = useInView(ref, { once: true, margin: '-60px' })
+  // Vertical margin only: on phones a chart's wipe starts at its left edge, inside any side margin, and would never fire.
+  const seen = useInView(ref, { once: true, margin: '-60px 0px' })
   const reduce = useReducedMotion()
   return { ref, on: seen || !!reduce }
 }

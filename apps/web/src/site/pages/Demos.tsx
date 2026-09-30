@@ -36,19 +36,33 @@ function splitAnswer(text: string) {
 function useDemo() {
   const [summary, setSummary] = useState<Summary | null>(null)
   const [busy, setBusy] = useState(false)
-  const start = useCallback(async () => { setSummary(null); setSummary(await fetch('/v1/demo/sessions', { method: 'POST' }).then((r) => r.json())) }, [])
+  const start = useCallback(async () => {
+    setSummary(null)
+    const r = await fetch('/v1/demo/sessions', { method: 'POST' })
+    if (r.ok) setSummary(await r.json())
+  }, [])
   useEffect(() => { start().catch(() => {}) }, [start])
   useEffect(() => {
     if (!summary) return
     // The host app in the iframe can change the session too; poll it, but only while this tab is visible.
-    const t = window.setInterval(() => { if (!document.hidden) fetch(`/v1/demo/sessions/${summary.id}`).then((r) => r.json()).then(setSummary).catch(() => {}) }, 2000)
+    // A session that vanished (expired, or a server without shared storage) is replaced, never shown broken.
+    const t = window.setInterval(() => {
+      if (document.hidden) return
+      fetch(`/v1/demo/sessions/${summary.id}`).then((r) => {
+        if (r.status === 404) { start().catch(() => {}); return }
+        if (r.ok) r.json().then(setSummary)
+      }).catch(() => {})
+    }, 2000)
     return () => window.clearInterval(t)
   }, [summary?.id])
   const advance = async (beat: string) => {
     if (!summary) return
     setBusy(true)
-    try { setSummary(await fetch(`/v1/demo/sessions/${summary.id}/advance`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ beat }) }).then((r) => r.json())) }
-    finally { setBusy(false) }
+    try {
+      const r = await fetch(`/v1/demo/sessions/${summary.id}/advance`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ beat }) })
+      if (r.status === 404) await start()
+      else if (r.ok) setSummary(await r.json())
+    } finally { setBusy(false) }
   }
   return { summary, busy, advance, restart: start }
 }

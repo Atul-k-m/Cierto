@@ -315,7 +315,7 @@ function Deck() {
           <div className="deck">
             {cards.map((c, i) => (
               <motion.a key={c.slug} className="case-card" href={`/case-studies/${c.slug}`} initial={{ opacity: 0, y: 40, rotate: i === 0 ? -1.5 : i === 2 ? 1.5 : 0 }}
-                whileInView={{ opacity: 1, y: 0, rotate: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1, ease: EASE, delay: i * .1 }}>
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }} viewport={{ once: true, margin: '-80px 0px' }} transition={{ duration: 1, ease: EASE, delay: i * .1 }}>
                 <Mist className="" cell={3} scale={140} bias={-.1} rise={.5} alpha={.9} />
                 <div className="top"><span className="label">Case {String(i + 1).padStart(2, '0')}</span><span className="label">Read →</span></div>
                 <h3>{c.name}</h3>
